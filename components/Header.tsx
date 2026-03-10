@@ -26,7 +26,7 @@ export default function Header() {
 
             <div>
               <h1 className="text-xl font-black tracking-tight text-gray-900 sm:text-2xl">
-                Electrofy<span className="text-blue-600">.pk</span>
+                Zeko<span className="text-blue-600">.pk</span>
               </h1>
               <p className="hidden text-xs font-medium tracking-wide text-gray-500 sm:block">
                 Fast Electronics Store for Pakistan

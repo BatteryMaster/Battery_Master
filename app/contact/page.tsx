@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact Electrofy.pk for support, product inquiries, and order assistance in Pakistan.",
+    "Contact zeko.pk for support, product inquiries, and order assistance in Pakistan.",
 };
 
 export default function ContactPage() {
@@ -15,7 +15,7 @@ export default function ContactPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
-          Contact Electrofy.pk
+          Contact zeko.pk
         </p>
 
         <h1 className="mt-3 text-4xl font-black md:text-5xl">Get in Touch</h1>
@@ -31,7 +31,7 @@ export default function ContactPage() {
             <div className="mt-4 space-y-3">
               <p>
                 <span className="font-semibold text-gray-900">Website:</span>{" "}
-                Electrofy.pk
+                zeko.pk
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Email:</span>{" "}
@@ -43,7 +43,7 @@ export default function ContactPage() {
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Location:</span>{" "}
-                Pakistan
+                Shop no G 1 A National Radio Tv Market near regal chowk Saddar Karachi, Pakistan
               </p>
             </div>
           </div>

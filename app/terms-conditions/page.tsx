@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "Read the Terms and Conditions for using Electrofy.pk and placing orders.",
+    "Read the Terms and Conditions for using Zeko.pk and placing orders.",
 };
 
 export default function TermsConditionsPage() {
@@ -24,7 +24,7 @@ export default function TermsConditionsPage() {
 
         <div className="mt-8 space-y-6 text-lg leading-8 text-gray-600">
           <p>
-            By using Electrofy.pk, you agree to comply with our website terms,
+            By using Zeko.pk, you agree to comply with our website terms,
             policies, and applicable laws.
           </p>
 
@@ -44,7 +44,7 @@ export default function TermsConditionsPage() {
           </p>
 
           <p>
-            Electrofy.pk reserves the right to update these terms at any time.
+            Zeko.pk reserves the right to update these terms at any time.
           </p>
         </div>
       </section>

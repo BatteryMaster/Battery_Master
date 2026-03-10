@@ -6,7 +6,7 @@ import CategoryCard from "@/components/CategoryCard";
 export const metadata: Metadata = {
   title: "Browse Electronics Categories",
   description:
-    "Explore electronics categories at Electrofy.pk including modules, ICs, transistors, resistors, and tools.",
+    "Explore electronics categories at zeko.pk including modules, ICs, transistors, resistors, and tools.",
 };
 
 const categoryList = [
@@ -40,7 +40,7 @@ export default function CategoriesPage() {
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
         <div className="mb-10">
           <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
-            Electrofy.pk Categories
+            zeko.pk Categories
           </p>
           <h1 className="mt-3 text-3xl font-bold sm:text-4xl md:text-5xl">
             Browse Product Categories

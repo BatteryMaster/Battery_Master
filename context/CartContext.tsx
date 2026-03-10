@@ -22,7 +22,7 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const CART_STORAGE_KEY = "electrofy-cart";
+const CART_STORAGE_KEY = "zeko-cart";
 
 function getInitialCart(): CartItem[] {
   if (typeof window === "undefined") {

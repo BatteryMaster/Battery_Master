@@ -3,13 +3,13 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://electrofy.pk"),
+  metadataBase: new URL("https://zeko.pk"),
   title: {
-    default: "Electrofy.pk - Electronics Components, Modules, ICs & Tools in Pakistan",
-    template: "Electrofy.pk - %s",
+    default: "zeko.pk - Electronics Components, Modules, ICs & Tools in Pakistan",
+    template: "zeko.pk - %s",
   },
   description:
-    "Electrofy.pk is a fast electronics ecommerce website in Pakistan for modules, ICs, transistors, resistors, sensors, and tools.",
+    "zeko.pk is a fast electronics ecommerce website in Pakistan for modules, ICs, transistors, resistors, sensors, and tools.",
   keywords: [
     "electronics store Pakistan",
     "buy ICs in Pakistan",
@@ -17,14 +17,14 @@ export const metadata: Metadata = {
     "transistors Pakistan",
     "resistors Pakistan",
     "electronics tools Pakistan",
-    "Electrofy.pk",
+    "zeko.pk",
   ],
   openGraph: {
-    title: "Electrofy.pk - Electronics Components, Modules, ICs & Tools in Pakistan",
+    title: "zeko.pk - Electronics Components, Modules, ICs & Tools in Pakistan",
     description:
       "Shop modules, ICs, transistors, resistors, sensors, and tools with a fast and professional electronics store in Pakistan.",
-    url: "https://electrofy.pk",
-    siteName: "Electrofy.pk",
+    url: "https://zeko.pk",
+    siteName: "zeko.pk",
     locale: "en_PK",
     type: "website",
   },

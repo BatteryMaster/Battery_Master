@@ -14,11 +14,11 @@ export default function ProductSchema({ product }: ProductSchemaProps) {
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: [`https://electrofy.pk${product.image}`],
+    image: [`https://zeko.pk${product.image}`],
     category: product.category,
     brand: {
       "@type": "Brand",
-      name: "Electrofy.pk",
+      name: "zeko.pk",
     },
     offers: {
       "@type": "Offer",
@@ -28,7 +28,7 @@ export default function ProductSchema({ product }: ProductSchemaProps) {
         product.stock.toLowerCase() === "in stock"
           ? "https://schema.org/InStock"
           : "https://schema.org/LimitedAvailability",
-      url: `https://electrofy.pk/shop/${product.id}`,
+      url: `https://zeko.pk/shop/${product.id}`,
       itemCondition: "https://schema.org/NewCondition",
     },
   };

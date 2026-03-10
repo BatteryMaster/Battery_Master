@@ -7,9 +7,9 @@ import WebsiteSchema from "@/components/WebsiteSchema";
 import { featuredProducts } from "@/data/products";
 
 export const metadata: Metadata = {
-  title: "Electrofy.pk - Electronics Components, Modules, ICs & Tools in Pakistan",
+  title: "zeko.pk - Electronics Components, Modules, ICs & Tools in Pakistan",
   description:
-    "Buy electronics modules, ICs, transistors, resistors, and tools from Electrofy.pk with a fast and professional shopping experience in Pakistan.",
+    "Buy electronics modules, ICs, transistors, resistors, and tools from zeko.pk with a fast and professional shopping experience in Pakistan.",
 };
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-2">
           <div>
             <p className="mb-4 inline-block rounded-full bg-blue-100 px-4 py-2 text-sm font-bold uppercase tracking-widest text-blue-700">
-              Welcome to Electrofy.pk
+              Welcome to zeko.pk
             </p>
 
             <h2 className="text-3xl font-black leading-tight sm:text-4xl md:text-6xl">
@@ -35,7 +35,7 @@ export default function Home() {
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
               Shop modules, ICs, transistors, resistors, sensors, and tools with
-              confidence. Electrofy.pk is built for speed, trust, and smooth
+              confidence. zeko.pk is built for speed, trust, and smooth
               shopping experience.
             </p>
 
@@ -80,7 +80,7 @@ export default function Home() {
           <div className="rounded-4xl border border-blue-100 bg-white p-8 shadow-xl">
             <div className="grid gap-4">
               <div className="rounded-2xl bg-blue-600 p-5 text-white">
-                <h3 className="text-2xl font-bold">Why choose Electrofy.pk?</h3>
+                <h3 className="text-2xl font-bold">Why choose zeko.pk?</h3>
                 <p className="mt-2 text-blue-100">
                   Built specially for electronics buyers in Pakistan.
                 </p>
@@ -206,7 +206,7 @@ export default function Home() {
         <div className="mb-8">
           <h3 className="text-3xl font-black text-gray-900">Why Choose Us</h3>
           <p className="mt-2 text-gray-600">
-            Electrofy.pk is built to make electronics shopping easier, faster,
+            zeko.pk is built to make electronics shopping easier, faster,
             and more reliable.
           </p>
         </div>

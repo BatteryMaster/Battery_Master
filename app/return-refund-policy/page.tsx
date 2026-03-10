@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Return & Refund Policy",
   description:
-    "Read the Return and Refund Policy of Electrofy.pk for order returns and refunds.",
+    "Read the Return and Refund Policy of zeko.pk for order returns and refunds.",
 };
 
 export default function ReturnRefundPolicyPage() {
@@ -24,7 +24,7 @@ export default function ReturnRefundPolicyPage() {
 
         <div className="mt-8 space-y-6 text-lg leading-8 text-gray-600">
           <p>
-            Electrofy.pk aims to provide quality products and a reliable shopping
+            zeko.pk aims to provide quality products and a reliable shopping
             experience.
           </p>
 

@@ -46,7 +46,7 @@ export default function CheckoutPage() {
       )
       .join("\n");
 
-    const message = `Assalam o Alaikum, new order for Electrofy.pk
+    const message = `Assalam o Alaikum, new order for zeko.pk
 
 Customer Details:
 Name: ${fullName}
@@ -79,7 +79,7 @@ Total: Rs. ${total}`;
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
         <div className="mb-10">
           <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
-            Electrofy.pk Checkout
+            zeko.pk Checkout
           </p>
           <h1 className="mt-3 text-3xl font-bold sm:text-4xl md:text-5xl">
             Complete Your Order

@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Read the Privacy Policy of Electrofy.pk to understand how customer information is handled.",
+    "Read the Privacy Policy of zeko.pk to understand how customer information is handled.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
 
         <div className="mt-8 space-y-6 text-lg leading-8 text-gray-600">
           <p>
-            Electrofy.pk respects your privacy and is committed to protecting
+            zeko.pk respects your privacy and is committed to protecting
             your personal information.
           </p>
 
@@ -44,7 +44,7 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <p>
-            By using Electrofy.pk, you agree to the collection and use of
+            By using zeko.pk, you agree to the collection and use of
             information as described in this policy.
           </p>
         </div>

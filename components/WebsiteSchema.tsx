@@ -2,11 +2,11 @@ export default function WebsiteSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Electrofy.pk",
-    url: "https://electrofy.pk",
-    logo: "https://electrofy.pk/logo.png",
+    name: "zeko.pk",
+    url: "https://zeko.pk",
+    logo: "https://zeko.pk/logo.png",
     description:
-      "Electrofy.pk is an electronics ecommerce store in Pakistan for modules, ICs, transistors, resistors, sensors, and tools.",
+      "zeko.pk is an electronics ecommerce store in Pakistan for modules, ICs, transistors, resistors, sensors, and tools.",
     sameAs: [],
     contactPoint: {
       "@type": "ContactPoint",

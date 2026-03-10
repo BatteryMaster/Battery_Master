@@ -21,7 +21,7 @@ export async function generateMetadata({
   if (!product) {
     return {
       title: "Product not found",
-      description: "The requested product could not be found on Electrofy.pk.",
+      description: "The requested product could not be found on Zeko.pk.",
     };
   }
 

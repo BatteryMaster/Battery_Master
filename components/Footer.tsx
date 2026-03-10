@@ -11,7 +11,7 @@ export default function Footer() {
             </div>
             <div>
               <h4 className="text-xl font-black text-gray-900">
-                Electrofy<span className="text-blue-600">.pk</span>
+                Zeko<span className="text-blue-600">.pk</span>
               </h4>
               <p className="text-sm text-gray-500">Smart electronics shopping</p>
             </div>
@@ -77,7 +77,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-gray-200 py-4 text-center text-sm text-gray-500">
-        © 2025 Electrofy.pk. All rights reserved.
+        © 2025 zeko.pk. All rights reserved.
       </div>
     </footer>
   );
