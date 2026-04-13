@@ -3,10 +3,11 @@ import { allProducts } from "@/data/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://zeko.pk";
+  const now = new Date();
 
   const productUrls = allProducts.map((product) => ({
     url: `${baseUrl}/shop/${product.id}`,
-    lastModified: new Date(),
+    lastModified: now,
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
@@ -15,41 +16,59 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const categoryUrls = categorySlugs.map((slug) => ({
     url: `${baseUrl}/categories/${slug}`,
-    lastModified: new Date(),
+    lastModified: now,
     changeFrequency: "weekly" as const,
-    priority: 0.7,
+    priority: 0.75,
   }));
 
   return [
     {
-      url: `${baseUrl}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
+      url: baseUrl,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 1.0,
     },
     {
       url: `${baseUrl}/shop`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: "daily",
-      priority: 0.9,
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/categories`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.85,
     },
     {
-      url: `${baseUrl}/cart`,
-      lastModified: new Date(),
+      url: `${baseUrl}/about`,
+      lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.3,
+      priority: 0.5,
     },
     {
-      url: `${baseUrl}/checkout`,
-      lastModified: new Date(),
+      url: `${baseUrl}/contact`,
+      lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.3,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/privacy-policy`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${baseUrl}/terms-conditions`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${baseUrl}/return-refund-policy`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
     },
     ...categoryUrls,
     ...productUrls,
