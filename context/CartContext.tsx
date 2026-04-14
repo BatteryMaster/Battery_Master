@@ -17,28 +17,20 @@ type CartContextType = {
   removeFromCart: (id: number) => void;
   increaseQuantity: (id: number) => void;
   decreaseQuantity: (id: number) => void;
+  clearCart: () => void;
   cartCount: number;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
-
 const CART_STORAGE_KEY = "zeko-cart";
 
 function getInitialCart(): CartItem[] {
-  if (typeof window === "undefined") {
-    return [];
-  }
-
+  if (typeof window === "undefined") return [];
   const savedCart = window.localStorage.getItem(CART_STORAGE_KEY);
-
-  if (!savedCart) {
-    return [];
-  }
-
+  if (!savedCart) return [];
   try {
     return JSON.parse(savedCart);
-  } catch (error) {
-    console.error("Failed to parse cart data:", error);
+  } catch {
     return [];
   }
 }
@@ -51,36 +43,32 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [cartItems]);
 
   function addToCart(item: Omit<CartItem, "quantity">) {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((cartItem) => cartItem.id === item.id);
-
-      if (existingItem) {
-        return prevItems.map((cartItem) =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
+    setCartItems((prev) => {
+      const existing = prev.find((c) => c.id === item.id);
+      if (existing) {
+        return prev.map((c) =>
+          c.id === item.id ? { ...c, quantity: c.quantity + 1 } : c
         );
       }
-
-      return [...prevItems, { ...item, quantity: 1 }];
+      return [...prev, { ...item, quantity: 1 }];
     });
   }
 
   function removeFromCart(id: number) {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   }
 
   function increaseQuantity(id: number) {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
+    setCartItems((prev) =>
+      prev.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
   }
 
   function decreaseQuantity(id: number) {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
+    setCartItems((prev) =>
+      prev.map((item) =>
         item.id === id
           ? { ...item, quantity: Math.max(1, item.quantity - 1) }
           : item
@@ -88,9 +76,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   }
 
-  const cartCount = useMemo(() => {
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
-  }, [cartItems]);
+  function clearCart() {
+    setCartItems([]);
+  }
+
+  const cartCount = useMemo(
+    () => cartItems.reduce((total, item) => total + item.quantity, 0),
+    [cartItems]
+  );
 
   return (
     <CartContext.Provider
@@ -100,6 +93,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
+        clearCart,
         cartCount,
       }}
     >
@@ -110,10 +104,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-
-  if (!context) {
-    throw new Error("useCart must be used inside CartProvider");
-  }
-
+  if (!context) throw new Error("useCart must be used inside CartProvider");
   return context;
 }

@@ -13,7 +13,7 @@ export const allProducts: Product[] = [
     id: 1,
     name: "Arduino Uno R3",
     category: "Modules",
-    price: "Rs. 1,850",
+    price: "Rs. 1,350",
     stock: "In Stock",
     description:
       "Arduino Uno R3 is a popular development board for electronics projects, learning, and prototyping.",
@@ -33,7 +33,7 @@ export const allProducts: Product[] = [
     id: 3,
     name: "BC547 Transistor",
     category: "Transistors",
-    price: "Rs. 25",
+    price: "Rs. 20",
     stock: "In Stock",
     description:
       "BC547 is a commonly used NPN transistor for switching and amplification circuits.",
@@ -43,7 +43,7 @@ export const allProducts: Product[] = [
     id: 4,
     name: "Digital Multimeter",
     category: "Tools",
-    price: "Rs. 2,450",
+    price: "Rs. 1900",
     stock: "Limited",
     description:
       "Digital multimeter for measuring voltage, current, resistance, and basic electronics troubleshooting.",
@@ -53,7 +53,7 @@ export const allProducts: Product[] = [
     id: 5,
     name: "LM358 IC",
     category: "ICs",
-    price: "Rs. 120",
+    price: "Rs. 99",
     stock: "In Stock",
     description:
       "LM358 is a dual operational amplifier used in signal conditioning and analog projects.",
@@ -73,7 +73,7 @@ export const allProducts: Product[] = [
     id: 7,
     name: "Soldering Iron 60W",
     category: "Tools",
-    price: "Rs. 950",
+    price: "Rs. 390",
     stock: "In Stock",
     description:
       "60W soldering iron suitable for electronics repair, soldering practice, and workshop use.",
@@ -89,6 +89,15 @@ export const allProducts: Product[] = [
       "5V relay module for switching AC/DC loads using microcontrollers and automation projects.",
     image: "/products/relay-module-5v.jpg",
   },
+  {
+  id: 9,                              // ← last ID se +1 karo
+  name: "LM7805 Voltage Regulator",   // ← product ka naam
+  category: "ICs",                    // ← Modules/ICs/Transistors/Resistors/Tools
+  price: "Rs. 45",                    // ← price
+  stock: "In Stock",                  // ← "In Stock" / "Limited" / "Out of Stock"
+  description: "5V voltage regulator IC for power supply circuits.",
+  image: "/products/lm7805.jpg",      // ← public/products/ mein image rakho
+},
 ];
 
 export const featuredProducts: Product[] = allProducts.slice(0, 4);
