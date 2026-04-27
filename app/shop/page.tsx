@@ -2,35 +2,37 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShopPageContent from "@/components/ShopPageContent";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "Shop Electronics Products",
-  description:
-    "Browse all electronics products at zeko.pk including modules, ICs, transistors, resistors, and tools in Pakistan.",
+  description: "Browse all electronics products at zeko.pk including modules, ICs, transistors, resistors, and tools in Pakistan.",
 };
 
 export default function ShopPage() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
       <Header />
+      <WhatsAppButton />
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mb-10">
-          <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+      {/* Page header */}
+      <div style={{ background: "#fff", borderBottom: "1.5px solid var(--border)", padding: "36px 0 32px" }}>
+        <div className="wrap">
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--accent)", marginBottom: 8 }}>
             zeko.pk Shop
-          </p>
-
-          <h1 className="mt-3 text-3xl font-bold sm:text-4xl md:text-5xl">
+          </div>
+          <h1 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 800, letterSpacing: "-.02em", color: "var(--t1)", marginBottom: 10 }}>
             Explore All Products
           </h1>
-
-          <p className="mt-4 max-w-2xl text-lg text-gray-600">
+          <p style={{ fontSize: 15, color: "var(--t2)", maxWidth: 560 }}>
             Browse electronics modules, ICs, transistors, resistors, and tools in one place.
           </p>
         </div>
+      </div>
 
+      <div className="wrap" style={{ padding: "36px 0 80px" }}>
         <ShopPageContent />
-      </section>
+      </div>
 
       <Footer />
     </main>

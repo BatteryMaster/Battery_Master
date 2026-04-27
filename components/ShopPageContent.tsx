@@ -8,74 +8,81 @@ export default function ShopPageContent() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredProducts = allProducts.filter((product) => {
-    const matchesCategory =
-      selectedCategory === "All" || product.category === selectedCategory;
-
-    const matchesSearch = product.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-
-    return matchesCategory && matchesSearch;
+  const filtered = allProducts.filter((p) => {
+    const matchCat = selectedCategory === "All" || p.category === selectedCategory;
+    const matchSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchCat && matchSearch;
   });
 
   return (
     <>
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search products... e.g. Arduino, IC, Multimeter"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full rounded-2xl border border-gray-300 px-5 py-4 text-gray-900 outline-none transition focus:border-blue-600"
-        />
+      {/* Search */}
+      <div style={{ marginBottom: 20 }}>
+        <div style={{ position: "relative" }}>
+          <svg style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", color: "var(--t3)", pointerEvents: "none" }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            type="text"
+            placeholder="Search products... e.g. Arduino, IC, Multimeter"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="inp"
+            style={{ paddingLeft: 44 }}
+          />
+        </div>
       </div>
 
-      <div className="mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-5">
-        <p className="text-sm text-gray-600">
-          Total Products:{" "}
-          <span className="font-semibold text-gray-900">
-            {filteredProducts.length}
-          </span>
-        </p>
+      {/* Stats + Filters row */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12, marginBottom: 24 }}>
+        <div style={{ fontSize: 13, color: "var(--t2)", fontWeight: 500 }}>
+          <span style={{ fontWeight: 700, color: "var(--t1)" }}>{filtered.length}</span> products found
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              style={{
+                padding: "7px 18px",
+                fontSize: 13,
+                fontWeight: 600,
+                border: selectedCategory === cat ? "none" : "1.5px solid var(--border2)",
+                borderRadius: "var(--r-sm)",
+                background: selectedCategory === cat ? "var(--primary)" : "#fff",
+                color: selectedCategory === cat ? "#fff" : "var(--t2)",
+                cursor: "pointer",
+                transition: "all var(--t)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="mb-8 flex flex-wrap gap-3">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-            className={`rounded-xl px-5 py-2 font-semibold transition ${
-              selectedCategory === category
-                ? "bg-blue-600 text-white"
-                : "border border-gray-300 bg-white text-gray-800 hover:bg-gray-100"
-            }`}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-
-      {filteredProducts.length > 0 ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {filteredProducts.map((product) => (
+      {/* Grid */}
+      {filtered.length > 0 ? (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 20 }}>
+          {filtered.map((p) => (
             <ProductCard
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              category={product.category}
-              price={product.price}
-              stock={product.stock}
-              image={product.image}
+              key={p.id}
+              id={p.id}
+              name={p.name}
+              category={p.category}
+              price={p.price}
+              stock={p.stock}
+              image={p.image}
+              badge={p.badge}
             />
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8">
-          <h2 className="text-2xl font-bold">No products found</h2>
-          <p className="mt-3 text-gray-600">
-            Try changing the category or search keyword.
-          </p>
+        <div style={{ background: "#fff", border: "1.5px solid var(--border)", borderRadius: "var(--r-lg)", padding: "52px 32px", textAlign: "center" }}>
+          <div style={{ fontSize: 40, marginBottom: 16 }}>🔍</div>
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: "var(--t1)", marginBottom: 8 }}>No products found</h2>
+          <p style={{ fontSize: 14, color: "var(--t2)" }}>Try changing the category or search keyword.</p>
         </div>
       )}
     </>

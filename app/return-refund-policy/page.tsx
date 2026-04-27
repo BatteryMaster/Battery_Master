@@ -4,53 +4,32 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Return & Refund Policy",
-  description:
-    "Read the Return and Refund Policy of zeko.pk for order returns and refunds.",
+  description: "Read the Return and Refund Policy of zeko.pk for order returns and refunds.",
 };
+
+const PARAS = [
+  "zeko.pk aims to provide quality products and a reliable shopping experience.",
+  "If you receive a damaged, incorrect, or defective product, you may contact us within 7 days of delivery for assistance.",
+  "Returned products should be unused where applicable and in original condition with packaging, unless the issue is related to defect or shipping damage.",
+  "Refunds or replacements may be processed after review and approval according to the product issue and company policy.",
+  "Shipping charges may be non-refundable unless the return is due to our mistake.",
+];
 
 export default function ReturnRefundPolicyPage() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
       <Header />
-
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
-          Return & Refund Policy
-        </p>
-
-        <h1 className="mt-3 text-4xl font-black md:text-5xl">
-          Returns and Refunds
-        </h1>
-
-        <div className="mt-8 space-y-6 text-lg leading-8 text-gray-600">
-          <p>
-            zeko.pk aims to provide quality products and a reliable shopping
-            experience.
-          </p>
-
-          <p>
-            If you receive a damaged, incorrect, or defective product, you may
-            contact us within the allowed return period for assistance.
-          </p>
-
-          <p>
-            Returned products should be unused where applicable and in original
-            condition with packaging, unless the issue is related to defect or
-            shipping damage.
-          </p>
-
-          <p>
-            Refunds or replacements may be processed after review and approval
-            according to the product issue and company policy.
-          </p>
-
-          <p>
-            Shipping charges may be non-refundable unless the return is due to
-            our mistake.
-          </p>
+      <div style={{ background: "#fff", borderBottom: "1.5px solid var(--border)", padding: "36px 0 32px" }}>
+        <div className="wrap">
+          <div className="sec-label">Return & Refund Policy</div>
+          <h1 style={{ fontSize: "clamp(26px,4vw,38px)", fontWeight: 800, letterSpacing: "-.02em", color: "var(--t1)", marginTop: 8 }}>Returns and Refunds</h1>
         </div>
-      </section>
-
+      </div>
+      <div className="wrap" style={{ padding: "40px 0 80px", maxWidth: 760 }}>
+        <div style={{ background: "#fff", border: "1.5px solid var(--border)", borderRadius: "var(--r-lg)", padding: "36px" }}>
+          {PARAS.map((p, i) => <p key={i} style={{ fontSize: 15, color: "var(--t2)", lineHeight: 1.85, marginBottom: i < PARAS.length - 1 ? 18 : 0 }}>{p}</p>)}
+        </div>
+      </div>
       <Footer />
     </main>
   );

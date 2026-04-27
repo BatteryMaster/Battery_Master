@@ -1,127 +1,118 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 
-type ProductCardProps = {
-  id: number;
-  name: string;
-  category: string;
-  price: string;
-  stock: string;
-  image: string;
+type Props = {
+  id: number; name: string; category: string;
+  price: string; stock: string; image: string;
+  badge?: "hot" | "new" | "sale" | null;
+  originalPrice?: string;
 };
 
-export default function ProductCard({
-  id,
-  name,
-  category,
-  price,
-  stock,
-  image,
-}: ProductCardProps) {
+export default function ProductCard({ id, name, category, price, stock, image, badge = null, originalPrice }: Props) {
   const { addToCart } = useCart();
-
-  const isOutOfStock = stock.toLowerCase() === "out of stock";
+  const [hov, setHov] = useState(false);
+  const isLimited = stock.toLowerCase().includes("limited");
+  const isOut     = stock.toLowerCase().includes("out");
 
   return (
-    <div className="group overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <Link href={`/shop/${id}`} className="block">
-        {/* Image container - fixed size, auto crop/fit */}
-        <div className="relative h-48 w-full overflow-hidden bg-gray-100">
-          <Image
-            src={image}
-            alt={`${name} – Buy in Pakistan | ${category}`}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
-            onError={(e) => {
-              // Agar image load na ho to placeholder dikhao
-              const target = e.target as HTMLImageElement;
-              target.style.display = "none";
-            }}
-          />
-          {/* Fallback placeholder agar image nahi */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-gray-300">
-              <svg
-                className="mx-auto h-12 w-12"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              <p className="mt-1 text-xs">No Image</p>
-            </div>
-          </div>
-
-          {/* Out of Stock badge */}
-          {isOutOfStock && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/70">
-              <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-bold text-red-600">
-                Out of Stock
-              </span>
-            </div>
-          )}
-
-          {/* Category badge */}
-          <div className="absolute left-3 top-3">
-            <span className="rounded-full bg-blue-600 px-2 py-1 text-xs font-semibold text-white">
-              {category}
-            </span>
-          </div>
-        </div>
-
-        <div className="p-4">
-          <h3 className="line-clamp-2 min-h-[48px] text-base font-bold text-gray-900">
-            {name}
-          </h3>
-        </div>
+    <div
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        background: "#fff",
+        border: `1.5px solid ${hov ? "var(--primary-bdr)" : "var(--border)"}`,
+        borderRadius: "var(--r-lg)",
+        overflow: "hidden",
+        transition: "all var(--t)",
+        transform: hov ? "translateY(-4px)" : "none",
+        boxShadow: hov ? "var(--shadow2)" : "var(--shadow)",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
+      {/* Image */}
+      <Link href={`/shop/${id}`} style={{ position:"relative", display:"block", height:190, background:"var(--bg2)", flexShrink:0, overflow:"hidden" }}>
+        <Image
+          src={image}
+          alt={`${name} — ${category} | zeko.pk`}
+          fill
+          sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw"
+          style={{ objectFit:"contain", padding:14 }}
+        />
+        {badge === "hot"  && <span className="bdg bdg-hot"  style={{ position:"absolute", top:10, left:10 }}>HOT</span>}
+        {badge === "new"  && <span className="bdg bdg-new"  style={{ position:"absolute", top:10, left:10 }}>NEW</span>}
+        {badge === "sale" && <span className="bdg bdg-sale" style={{ position:"absolute", top:10, left:10 }}>SALE</span>}
+        {isLimited && (
+          <span style={{ position:"absolute", top:10, right:10, background:"var(--accent-dim)", border:"1.5px solid var(--accent-bdr)", color:"var(--accent)", fontSize:10, fontWeight:700, padding:"3px 9px", borderRadius:"var(--r-xs)" }}>
+            Limited
+          </span>
+        )}
       </Link>
 
-      <div className="px-4 pb-4">
-        <div className="flex items-center justify-between gap-2">
-          <p className="text-xl font-black text-gray-900">{price}</p>
-          <span
-            className={`shrink-0 rounded-full px-2 py-1 text-xs font-bold ${
-              isOutOfStock
-                ? "bg-red-100 text-red-700"
-                : stock.toLowerCase() === "limited"
-                ? "bg-yellow-100 text-yellow-700"
-                : "bg-green-100 text-green-700"
-            }`}
-          >
-            {stock}
-          </span>
+      {/* Body */}
+      <div style={{ padding:"16px", flex:1, display:"flex", flexDirection:"column", gap:8 }}>
+        <div style={{ fontSize:10, fontWeight:700, letterSpacing:".08em", textTransform:"uppercase", color:"var(--primary)" }}>
+          {category}
         </div>
 
-        <div className="mt-4 grid gap-2">
+        <Link href={`/shop/${id}`}>
+          <h3 style={{
+            fontSize:14, fontWeight:600, color:"var(--t1)", lineHeight:1.45,
+            display:"-webkit-box", WebkitLineClamp:2, WebkitBoxOrient:"vertical",
+            overflow:"hidden", minHeight:40,
+          }}>{name}</h3>
+        </Link>
+
+        <div style={{ fontSize:11, fontWeight:600, color:isOut?"var(--red)":isLimited?"var(--yellow)":"var(--green)" }}>
+          {isOut ? "● Out of stock" : isLimited ? "● Limited stock" : "● In stock"}
+        </div>
+
+        <div style={{ display:"flex", alignItems:"baseline", gap:8, marginTop:2 }}>
+          <span style={{ fontSize:19, fontWeight:800, color:"var(--primary)" }}>{price}</span>
+          {originalPrice && (
+            <span style={{ fontSize:12, color:"var(--t3)", textDecoration:"line-through" }}>{originalPrice}</span>
+          )}
+        </div>
+
+        {/* Buttons */}
+        <div style={{ display:"flex", gap:8, marginTop:"auto", paddingTop:8 }}>
           <button
-            onClick={() =>
-              !isOutOfStock && addToCart({ id, name, category, price, stock })
-            }
-            disabled={isOutOfStock}
-            className={`w-full rounded-2xl px-4 py-2.5 font-semibold transition ${
-              isOutOfStock
-                ? "cursor-not-allowed bg-gray-200 text-gray-400"
-                : "bg-blue-600 text-white hover:bg-blue-700"
-            }`}
+            onClick={() => !isOut && addToCart({ id, name, category, price, stock })}
+            disabled={isOut}
+            style={{
+              flex:1, padding:"10px 12px", fontSize:13, fontWeight:700,
+              border:"none", borderRadius:"var(--r-sm)",
+              cursor:isOut?"not-allowed":"pointer",
+              background:isOut?"var(--bg2)":"var(--primary)",
+              color:isOut?"var(--t3)":"#fff",
+              transition:"background var(--t)",
+              whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis",
+            }}
           >
-            {isOutOfStock ? "Out of Stock" : "Add to Cart"}
+            {isOut ? "Out of Stock" : "Add to Cart"}
           </button>
 
           <Link
             href={`/shop/${id}`}
-            className="w-full rounded-2xl border border-gray-300 px-4 py-2.5 text-center font-semibold text-gray-800 transition hover:bg-gray-100"
+            style={{
+              display:"flex", alignItems:"center", justifyContent:"center",
+              width:40, height:40,
+              background:"var(--bg2)",
+              border:"1.5px solid var(--border)",
+              borderRadius:"var(--r-sm)",
+              color:"var(--t2)",
+              flexShrink:0,
+              transition:"all var(--t)",
+            }}
           >
-            View Details
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
           </Link>
         </div>
       </div>

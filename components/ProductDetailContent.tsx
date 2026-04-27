@@ -5,83 +5,89 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import type { Product } from "@/data/products";
 
-type ProductDetailContentProps = {
-  product: Product;
-};
-
-export default function ProductDetailContent({
-  product,
-}: ProductDetailContentProps) {
+export default function ProductDetailContent({ product }: { product: Product }) {
   const { addToCart } = useCart();
+  const isOut = product.stock.toLowerCase().includes("out");
+  const isLimited = product.stock.toLowerCase().includes("limited");
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16">
-      <div className="mb-8">
-        <Link href="/shop" className="text-sm font-medium text-blue-600 hover:underline">
-          ← Back to Shop
-        </Link>
-      </div>
+    <div className="wrap" style={{ padding: "36px 0 80px" }}>
+      <Link href="/shop" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: "var(--primary)", marginBottom: 28 }}>
+        ← Back to Shop
+      </Link>
 
-      <div className="grid gap-10 md:grid-cols-2">
-        <div className="relative min-h-[280px] overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 sm:min-h-[420px]">
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "start" }} className="hero-grid">
+
+        {/* Image */}
+        <div style={{ position: "relative", minHeight: 380, background: "var(--bg2)", borderRadius: "var(--r-xl)", border: "1.5px solid var(--border)", overflow: "hidden" }}>
           <Image
             src={product.image}
-            alt={product.name}
+            alt={`${product.name} — ${product.category} | zeko.pk`}
             fill
-            className="object-cover"
+            style={{ objectFit: "contain", padding: 32 }}
+            sizes="(max-width:768px) 100vw, 50vw"
           />
+          {product.badge === "hot"  && <span className="bdg bdg-hot"  style={{ position: "absolute", top: 16, left: 16 }}>HOT</span>}
+          {product.badge === "new"  && <span className="bdg bdg-new"  style={{ position: "absolute", top: 16, left: 16 }}>NEW</span>}
+          {product.badge === "sale" && <span className="bdg bdg-sale" style={{ position: "absolute", top: 16, left: 16 }}>SALE</span>}
         </div>
 
+        {/* Info */}
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--primary)", marginBottom: 8 }}>
             {product.category}
-          </p>
+          </div>
+          <h1 style={{ fontSize: "clamp(22px,3vw,32px)", fontWeight: 800, letterSpacing: "-.02em", color: "var(--t1)", marginBottom: 14 }}>
+            {product.name}
+          </h1>
 
-          <h1 className="mt-3 text-3xl font-bold sm:text-4xl">{product.name}</h1>
+          <div style={{ fontSize: 32, fontWeight: 800, color: "var(--primary)", marginBottom: 12 }}>{product.price}</div>
 
-          <p className="mt-5 text-3xl font-bold text-gray-900">{product.price}</p>
-
-          <div className="mt-4">
-            <span className="rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
-              {product.stock}
-            </span>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600,
+            color: isOut ? "var(--red)" : isLimited ? "var(--yellow)" : "var(--green)",
+            background: isOut ? "var(--red-dim)" : isLimited ? "rgba(217,119,6,0.1)" : "rgba(22,163,74,0.1)",
+            padding: "6px 14px", borderRadius: 100, marginBottom: 22 }}>
+            ● {isOut ? "Out of Stock" : isLimited ? "Limited Stock" : "In Stock"}
           </div>
 
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-gray-600">
-            {product.description}
-          </p>
+          {product.description && (
+            <p style={{ fontSize: 15, color: "var(--t2)", lineHeight: 1.8, marginBottom: 26 }}>
+              {product.description}
+            </p>
+          )}
 
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div style={{ display: "flex", gap: 12, marginBottom: 28, flexWrap: "wrap" }}>
             <button
-              onClick={() =>
-                addToCart({
-                  id: product.id,
-                  name: product.name,
-                  category: product.category,
-                  price: product.price,
-                  stock: product.stock,
-                })
-              }
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
+              onClick={() => !isOut && addToCart({ id: product.id, name: product.name, category: product.category, price: product.price, stock: product.stock })}
+              disabled={isOut}
+              className={`btn btn-md ${isOut ? "" : "btn-primary"}`}
+              style={isOut ? { background: "var(--bg2)", color: "var(--t3)", cursor: "not-allowed", border: "none", padding: "11px 26px", fontSize: 14, fontWeight: 700, borderRadius: "var(--r-sm)" } : {}}
             >
-              Add to Cart
+              {isOut ? "Out of Stock" : "Add to Cart"}
             </button>
-
-            <button className="rounded-xl border border-gray-300 px-6 py-3 font-semibold text-gray-800 hover:bg-gray-100">
-              WhatsApp Order
-            </button>
+            <a
+              href={`https://wa.me/923150220243?text=Assalam%20alaikum%2C%20I%20want%20to%20order%20${encodeURIComponent(product.name)}%20(Rs.${product.price})`}
+              target="_blank" rel="noopener noreferrer"
+              className="btn btn-green btn-md"
+            >
+              📱 WhatsApp Order
+            </a>
           </div>
 
-          <div className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-5">
-            <h3 className="text-lg font-semibold">Product Highlights</h3>
-            <ul className="mt-4 space-y-2 text-gray-600">
-              <li>• Quality checked product</li>
-              <li>• Suitable for electronics projects and repair work</li>
-              <li>• Fast and simple ordering experience</li>
-            </ul>
+          {/* Highlights */}
+          <div style={{ background: "var(--bg)", border: "1.5px solid var(--border)", borderRadius: "var(--r-lg)", padding: "20px 22px" }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "var(--t1)", marginBottom: 14 }}>Product Highlights</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {["Quality checked product", "Suitable for electronics projects and repair work", "Fast and simple ordering experience", "Cash on delivery — Karachi 1–2 days"].map((h, i) => (
+                <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                  <span style={{ color: "var(--green)", fontWeight: 700, marginTop: 1 }}>✓</span>
+                  <span style={{ fontSize: 13, color: "var(--t2)" }}>{h}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

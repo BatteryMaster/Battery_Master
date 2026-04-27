@@ -1,218 +1,97 @@
 "use client";
-
-import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
+import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
-
-// Slider mein jo products dikhane hain woh yahan add/edit karo
-export const sliderProducts = [
-  {
-    id: 1,
-    badge: "Best Seller",
-    badgeColor: "bg-yellow-400 text-yellow-900",
-  },
-  {
-    id: 2,
-    badge: "Popular",
-    badgeColor: "bg-blue-500 text-white",
-  },
-  {
-    id: 4,
-    badge: "Limited Stock",
-    badgeColor: "bg-red-500 text-white",
-  },
-  {
-    id: 7,
-    badge: "New Arrival",
-    badgeColor: "bg-green-500 text-white",
-  },
-  {
-    id: 8,
-    badge: "Hot Deal",
-    badgeColor: "bg-orange-500 text-white",
-  },
-];
-
 import type { Product } from "@/data/products";
 
-type Props = {
-  products: Product[];
-};
-
-export default function ProductSlider({ products }: Props) {
+export default function ProductSlider({ products }: { products: Product[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [idx, setIdx] = useState(0);
   const { addToCart } = useCart();
-  const [current, setCurrent] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const max = Math.max(0, products.length - 4);
 
-  const sliderData = sliderProducts
-    .map((s) => {
-      const product = products.find((p) => p.id === s.id);
-      if (!product) return null;
-      return { ...product, badge: s.badge, badgeColor: s.badgeColor };
-    })
-    .filter(Boolean) as (Product & { badge: string; badgeColor: string })[];
+  const go = (dir: number) => {
+    const next = Math.max(0, Math.min(idx + dir, max));
+    setIdx(next);
+    if (ref.current) {
+      const w = ref.current.clientWidth / Math.min(4, products.length);
+      ref.current.scrollTo({ left: w * next, behavior: "smooth" });
+    }
+  };
 
-  const goTo = useCallback(
-    (index: number) => {
-      if (isAnimating) return;
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrent(index);
-        setIsAnimating(false);
-      }, 300);
-    },
-    [isAnimating]
-  );
-
-  const next = useCallback(() => {
-    goTo((current + 1) % sliderData.length);
-  }, [current, sliderData.length, goTo]);
-
-  const prev = useCallback(() => {
-    goTo((current - 1 + sliderData.length) % sliderData.length);
-  }, [current, sliderData.length, goTo]);
-
-  // Auto slide every 4 seconds
-  useEffect(() => {
-    const timer = setInterval(next, 4000);
-    return () => clearInterval(timer);
-  }, [next]);
-
-  if (sliderData.length === 0) return null;
-
-  const product = sliderData[current];
+  if (!products.length) return null;
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-black text-gray-900">Featured Products</h2>
-          <p className="mt-1 text-gray-500">Hand-picked electronics for you</p>
-        </div>
-        <Link
-          href="/shop"
-          className="rounded-xl border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
-        >
-          View All →
-        </Link>
+    <div style={{ position: "relative" }}>
+      {idx > 0 && (
+        <button onClick={() => go(-1)} style={{ position:"absolute", left:-16, top:"45%", transform:"translateY(-50%)", zIndex:10, width:38, height:38, borderRadius:"50%", background:"#fff", border:"1.5px solid var(--border2)", color:"var(--primary)", display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"var(--shadow2)", cursor:"pointer" }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      )}
+      {idx < max && (
+        <button onClick={() => go(1)} style={{ position:"absolute", right:-16, top:"45%", transform:"translateY(-50%)", zIndex:10, width:38, height:38, borderRadius:"50%", background:"#fff", border:"1.5px solid var(--border2)", color:"var(--primary)", display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"var(--shadow2)", cursor:"pointer" }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      )}
+
+      <div ref={ref} style={{ display:"flex", gap:16, overflowX:"hidden", padding:"4px 2px 12px" }}>
+        {products.map(p => (
+          <Card
+            key={p.id}
+            p={p}
+            onAdd={() => addToCart({ id:p.id, name:p.name, category:p.category, price:p.price, stock:p.stock })}
+          />
+        ))}
       </div>
 
-      <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-gradient-to-br from-blue-50 to-white shadow-lg">
-        {/* Main slide */}
-        <div
-          className={`grid transition-opacity duration-300 md:grid-cols-2 ${
-            isAnimating ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          {/* Left – Image */}
-          <div className="relative flex items-center justify-center bg-white p-10">
-            <div className="relative h-64 w-64">
-              <Image
-                src={product.image}
-                alt={`${product.name} – Buy in Pakistan`}
-                fill
-                sizes="256px"
-                className="object-contain drop-shadow-xl"
-              />
-            </div>
-            {/* Badge */}
-            <span
-              className={`absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-bold ${product.badgeColor}`}
-            >
-              {product.badge}
-            </span>
-          </div>
-
-          {/* Right – Info */}
-          <div className="flex flex-col justify-center p-8">
-            <span className="text-sm font-semibold uppercase tracking-widest text-blue-600">
-              {product.category}
-            </span>
-            <h3 className="mt-2 text-2xl font-black text-gray-900 sm:text-3xl">
-              {product.name}
-            </h3>
-            <p className="mt-3 leading-7 text-gray-600 line-clamp-3">
-              {product.description}
-            </p>
-
-            <div className="mt-4 flex items-center gap-3">
-              <span className="text-3xl font-black text-gray-900">
-                {product.price}
-              </span>
-              <span
-                className={`rounded-full px-3 py-1 text-sm font-semibold ${
-                  product.stock.toLowerCase() === "in stock"
-                    ? "bg-green-100 text-green-700"
-                    : product.stock.toLowerCase() === "limited"
-                    ? "bg-yellow-100 text-yellow-700"
-                    : "bg-red-100 text-red-700"
-                }`}
-              >
-                {product.stock}
-              </span>
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <button
-                onClick={() =>
-                  addToCart({
-                    id: product.id,
-                    name: product.name,
-                    category: product.category,
-                    price: product.price,
-                    stock: product.stock,
-                  })
-                }
-                disabled={product.stock.toLowerCase() === "out of stock"}
-                className="rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:bg-gray-200 disabled:text-gray-400"
-              >
-                Add to Cart
-              </button>
-              <Link
-                href={`/shop/${product.id}`}
-                className="rounded-2xl border border-gray-300 px-6 py-3 font-semibold text-gray-800 transition hover:bg-gray-100"
-              >
-                View Details
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Prev / Next buttons */}
-        <button
-          onClick={prev}
-          className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white p-2 shadow-md transition hover:bg-gray-100"
-          aria-label="Previous product"
-        >
-          <svg className="h-5 w-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button
-          onClick={next}
-          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white p-2 shadow-md transition hover:bg-gray-100"
-          aria-label="Next product"
-        >
-          <svg className="h-5 w-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-
-        {/* Dots */}
-        <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
-          {sliderData.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === current ? "w-6 bg-blue-600" : "w-2 bg-gray-300"
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
+      {max > 0 && (
+        <div style={{ display:"flex", justifyContent:"center", gap:6, marginTop:12 }}>
+          {Array.from({ length: max + 1 }).map((_, i) => (
+            <button key={i} onClick={() => go(i - idx)} style={{ width:i===idx?24:8, height:8, borderRadius:4, border:"none", padding:0, background:i===idx?"var(--primary)":"var(--border2)", cursor:"pointer", transition:"all .2s" }} />
           ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+function Card({ p, onAdd }: { p: Product; onAdd: () => void }) {
+  const [hov, setHov] = useState(false);
+  const isOut = p.stock.toLowerCase().includes("out");
+  return (
+    <div
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{ minWidth:"calc(25% - 12px)", flexShrink:0, background:"#fff", border:`1.5px solid ${hov?"var(--primary-bdr)":"var(--border)"}`, borderRadius:"var(--r-lg)", overflow:"hidden", transition:"all var(--t)", transform:hov?"translateY(-4px)":"none", boxShadow:hov?"var(--shadow2)":"var(--shadow)", display:"flex", flexDirection:"column" }}
+    >
+      {/* suppressHydrationWarning on the image wrapper fixes srcSet SSR mismatch */}
+      <Link href={`/shop/${p.id}`} style={{ position:"relative", display:"block", height:175, background:"var(--bg2)", flexShrink:0 }}>
+        <Image
+          src={p.image}
+          alt={`${p.name} | zeko.pk`}
+          fill
+          sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw"
+          style={{ objectFit:"contain", padding:12 }}
+          suppressHydrationWarning
+        />
+        {p.badge==="hot"  && <span className="bdg bdg-hot"  style={{ position:"absolute", top:8, left:8 }}>HOT</span>}
+        {p.badge==="new"  && <span className="bdg bdg-new"  style={{ position:"absolute", top:8, left:8 }}>NEW</span>}
+        {p.badge==="sale" && <span className="bdg bdg-sale" style={{ position:"absolute", top:8, left:8 }}>SALE</span>}
+      </Link>
+      <div style={{ padding:"12px 14px 14px", flex:1, display:"flex", flexDirection:"column", gap:6 }}>
+        <div style={{ fontSize:10, fontWeight:700, letterSpacing:".08em", textTransform:"uppercase", color:"var(--primary)" }}>{p.category}</div>
+        <Link href={`/shop/${p.id}`}>
+          <div style={{ fontSize:13, fontWeight:600, color:"var(--t1)", lineHeight:1.4, display:"-webkit-box", WebkitLineClamp:2, WebkitBoxOrient:"vertical", overflow:"hidden", minHeight:36 }}>{p.name}</div>
+        </Link>
+        <div style={{ display:"flex", alignItems:"baseline", gap:6 }}>
+          <span style={{ fontSize:16, fontWeight:800, color:"var(--primary)" }}>{p.price}</span>
+          {p.originalPrice && <span style={{ fontSize:11, color:"var(--t3)", textDecoration:"line-through" }}>{p.originalPrice}</span>}
+        </div>
+        <button onClick={onAdd} disabled={isOut} style={{ padding:"9px 0", fontSize:12, fontWeight:700, width:"100%", border:"none", borderRadius:"var(--r-sm)", cursor:isOut?"not-allowed":"pointer", background:isOut?"var(--bg2)":"var(--primary)", color:isOut?"var(--t3)":"#fff", marginTop:2, transition:"background var(--t)" }}>
+          {isOut ? "Out of Stock" : "+ Add to Cart"}
+        </button>
       </div>
-    </section>
+    </div>
   );
 }

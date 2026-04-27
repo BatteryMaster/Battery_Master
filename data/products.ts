@@ -1,112 +1,47 @@
 export type Product = {
-  id: number;
-  name: string;
-  category: string;
-  price: string;
-  stock: string;
-  description: string;
-  image: string;
+  id: number; name: string; category: string;
+  price: string; stock: string; description: string; image: string;
+  badge?: "hot" | "new" | "sale" | null; originalPrice?: string;
 };
 
 export const allProducts: Product[] = [
-  {
-    id: 1,
-    name: "Arduino Uno R3",
-    category: "Modules",
-    price: "Rs. 1,350",
-    stock: "In Stock",
-    description:
-      "Arduino Uno R3 is a popular development board for electronics projects, learning, and prototyping.",
-    image: "/products/arduino-uno.jpg",
-  },
-  {
-    id: 2,
-    name: "NE555 Timer IC",
-    category: "ICs",
-    price: "Rs. 80",
-    stock: "In Stock",
-    description:
-      "NE555 Timer IC is widely used in timer, pulse generation, and oscillator circuits.",
-    image: "/products/ne555-ic.jpg",
-  },
-  {
-    id: 3,
-    name: "BC547 Transistor",
-    category: "Transistors",
-    price: "Rs. 20",
-    stock: "In Stock",
-    description:
-      "BC547 is a commonly used NPN transistor for switching and amplification circuits.",
-    image: "/products/bc547.jpg",
-  },
-  {
-    id: 4,
-    name: "Digital Multimeter",
-    category: "Tools",
-    price: "Rs. 1900",
-    stock: "Limited",
-    description:
-      "Digital multimeter for measuring voltage, current, resistance, and basic electronics troubleshooting.",
-    image: "/products/digital-multimeter.jpg",
-  },
-  {
-    id: 5,
-    name: "LM358 IC",
-    category: "ICs",
-    price: "Rs. 99",
-    stock: "In Stock",
-    description:
-      "LM358 is a dual operational amplifier used in signal conditioning and analog projects.",
-    image: "/products/lm358-ic.jpg",
-  },
-  {
-    id: 6,
-    name: "10K Resistor Pack",
-    category: "Resistors",
-    price: "Rs. 150",
-    stock: "In Stock",
-    description:
-      "10K resistor pack for breadboard practice, electronics repair, and DIY circuits.",
-    image: "/products/10k-resistor-pack.jpg",
-  },
-  {
-    id: 7,
-    name: "Soldering Iron 60W",
-    category: "Tools",
-    price: "Rs. 390",
-    stock: "In Stock",
-    description:
-      "60W soldering iron suitable for electronics repair, soldering practice, and workshop use.",
-    image: "/products/soldering-iron.jpg",
-  },
-  {
-    id: 8,
-    name: "Relay Module 5V",
-    category: "Modules",
-    price: "Rs. 280",
-    stock: "In Stock",
-    description:
-      "5V relay module for switching AC/DC loads using microcontrollers and automation projects.",
-    image: "/products/relay-module-5v.jpg",
-  },
-  {
-  id: 9,                              // ← last ID se +1 karo
-  name: "LM7805 Voltage Regulator",   // ← product ka naam
-  category: "ICs",                    // ← Modules/ICs/Transistors/Resistors/Tools
-  price: "Rs. 45",                    // ← price
-  stock: "In Stock",                  // ← "In Stock" / "Limited" / "Out of Stock"
-  description: "5V voltage regulator IC for power supply circuits.",
-  image: "/products/lm7805.jpg",      // ← public/products/ mein image rakho
-},
+  { id:1,  name:"Arduino Uno R3",               category:"Modules",     price:"Rs. 1,850", stock:"In Stock", description:"Arduino Uno R3 development board. ATmega328P based, USB programmable.",            image:"/products/arduino-uno.jpg",        badge:"hot"  },
+  { id:2,  name:"Arduino Nano V3",              category:"Modules",     price:"Rs. 950",   stock:"In Stock", description:"Arduino Nano V3 compact board. Breadboard friendly.",                              image:"/products/arduino-nano.jpg",       badge:"new"  },
+  { id:3,  name:"Relay Module 5V (1 Channel)",  category:"Modules",     price:"Rs. 280",   stock:"In Stock", description:"5V single channel relay module. Optocoupler isolated.",                            image:"/products/relay-module-5v.jpg",    badge:null   },
+  { id:4,  name:"Relay Module 5V (4 Channel)",  category:"Modules",     price:"Rs. 550",   stock:"In Stock", description:"4-channel 5V relay module for automation projects.",                               image:"/products/relay-module-4ch.jpg",   badge:null   },
+  { id:5,  name:"HC-SR04 Ultrasonic Sensor",    category:"Modules",     price:"Rs. 320",   stock:"In Stock", description:"Ultrasonic distance sensor. Measures 2cm to 400cm.",                               image:"/products/hcsr04.jpg",             badge:"new"  },
+  { id:6,  name:"DHT11 Temp & Humidity Sensor", category:"Modules",     price:"Rs. 250",   stock:"In Stock", description:"Digital temperature and humidity sensor.",                                         image:"/products/dht11.jpg",              badge:null   },
+  { id:7,  name:"HC-05 Bluetooth Module",       category:"Modules",     price:"Rs. 750",   stock:"In Stock", description:"HC-05 Bluetooth 2.0 serial module. UART interface.",                               image:"/products/hc05.jpg",               badge:null   },
+  { id:8,  name:"NodeMCU ESP8266 WiFi Module",  category:"Modules",     price:"Rs. 680",   stock:"In Stock", description:"NodeMCU ESP8266 with built-in WiFi. Arduino IDE compatible.",                      image:"/products/nodemcu.jpg",            badge:"hot"  },
+  { id:9,  name:"L298N Motor Driver Module",    category:"Modules",     price:"Rs. 380",   stock:"In Stock", description:"L298N dual H-Bridge motor driver. Controls 2 DC motors.",                         image:"/products/l298n.jpg",              badge:null   },
+  { id:10, name:"OLED Display 0.96\" I2C",      category:"Modules",     price:"Rs. 450",   stock:"Limited",  description:"0.96 inch I2C OLED display. 128x64 pixels.",                                      image:"/products/oled-display.jpg",       badge:null   },
+  { id:11, name:"NE555 Timer IC",               category:"ICs",         price:"Rs. 80",    stock:"In Stock", description:"Classic NE555 timer IC for oscillators and pulse generation.",                     image:"/products/ne555-ic.jpg",           badge:"hot"  },
+  { id:12, name:"LM358 Dual Op-Amp IC",         category:"ICs",         price:"Rs. 120",   stock:"In Stock", description:"LM358 dual operational amplifier.",                                                image:"/products/lm358-ic.jpg",           badge:null   },
+  { id:13, name:"LM741 Op-Amp IC",              category:"ICs",         price:"Rs. 100",   stock:"In Stock", description:"LM741 general purpose operational amplifier.",                                     image:"/products/lm741.jpg",              badge:null   },
+  { id:14, name:"LM7805 Voltage Regulator",     category:"ICs",         price:"Rs. 90",    stock:"In Stock", description:"LM7805 +5V positive voltage regulator. TO-220, 1A.",                              image:"/products/lm7805.jpg",             badge:null   },
+  { id:15, name:"LM7812 Voltage Regulator",     category:"ICs",         price:"Rs. 95",    stock:"In Stock", description:"LM7812 +12V positive voltage regulator. TO-220.",                                  image:"/products/lm7812.jpg",             badge:null   },
+  { id:16, name:"CD4017 Decade Counter IC",     category:"ICs",         price:"Rs. 110",   stock:"In Stock", description:"CD4017 CMOS decade counter. 10 decoded outputs.",                                  image:"/products/cd4017.jpg",             badge:null   },
+  { id:17, name:"74HC595 Shift Register IC",    category:"ICs",         price:"Rs. 130",   stock:"In Stock", description:"74HC595 8-bit serial-in parallel-out shift register.",                             image:"/products/74hc595.jpg",            badge:"new"  },
+  { id:18, name:"ATmega328P Microcontroller",   category:"ICs",         price:"Rs. 480",   stock:"In Stock", description:"ATmega328P 8-bit AVR microcontroller. DIP-28, 32KB flash.",                        image:"/products/atmega328p.jpg",         badge:null   },
+  { id:19, name:"L293D Motor Driver IC",        category:"ICs",         price:"Rs. 160",   stock:"In Stock", description:"L293D four channel motor driver. 600mA per channel.",                              image:"/products/l293d.jpg",              badge:null   },
+  { id:20, name:"ULN2003 Darlington Array IC",  category:"ICs",         price:"Rs. 85",    stock:"In Stock", description:"ULN2003 7-channel Darlington transistor array.",                                   image:"/products/uln2003.jpg",            badge:null   },
+  { id:21, name:"BC547 NPN Transistor",         category:"Transistors", price:"Rs. 25",    stock:"In Stock", description:"BC547 NPN general purpose transistor. 45V, 100mA.",                               image:"/products/bc547.jpg",              badge:"hot"  },
+  { id:22, name:"BC557 PNP Transistor",         category:"Transistors", price:"Rs. 25",    stock:"In Stock", description:"BC557 PNP transistor. Complementary to BC547.",                                   image:"/products/bc557.jpg",              badge:null   },
+  { id:23, name:"2N2222 NPN Transistor",        category:"Transistors", price:"Rs. 30",    stock:"In Stock", description:"2N2222 NPN transistor. Fast switching, 600mA.",                                   image:"/products/2n2222.jpg",             badge:null   },
+  { id:24, name:"TIP120 Darlington Transistor", category:"Transistors", price:"Rs. 120",   stock:"In Stock", description:"TIP120 NPN Darlington power transistor. 5A, 60V.",                                image:"/products/tip120.jpg",             badge:null   },
+  { id:25, name:"IRF540N N-Channel MOSFET",     category:"Transistors", price:"Rs. 180",   stock:"In Stock", description:"IRF540N N-Channel power MOSFET. 33A, 100V.",                                      image:"/products/irf540n.jpg",            badge:"new"  },
+  { id:26, name:"Resistor Kit 10 Values 500pc", category:"Resistors",   price:"Rs. 350",   stock:"In Stock", description:"500 piece resistor kit. 10 most common values. 1/4W.",                             image:"/products/resistor-pack.jpg",      badge:"hot"  },
+  { id:27, name:"10K Resistor Pack (100pcs)",   category:"Resistors",   price:"Rs. 150",   stock:"In Stock", description:"100 pieces 10K ohm resistors. 1/4W, 5% tolerance.",                               image:"/products/10k-resistor-pack.jpg",  badge:null   },
+  { id:28, name:"1K Resistor Pack (100pcs)",    category:"Resistors",   price:"Rs. 150",   stock:"In Stock", description:"100 pieces 1K ohm resistors. 1/4W, 5% tolerance.",                                image:"/products/1k-resistor.jpg",        badge:null   },
+  { id:29, name:"Potentiometer 10K",            category:"Resistors",   price:"Rs. 80",    stock:"In Stock", description:"10K ohm single turn potentiometer. Panel mount.",                                  image:"/products/potentiometer.jpg",      badge:null   },
+  { id:30, name:"Digital Multimeter",           category:"Tools",       price:"Rs. 2,450", stock:"Limited",  description:"Digital multimeter. Voltage, current, resistance, continuity.",                    image:"/products/digital-multimeter.jpg", badge:"hot"  },
+  { id:31, name:"Soldering Iron 60W with Stand",category:"Tools",       price:"Rs. 1,100", stock:"In Stock", description:"60W soldering iron with stand and sponge.", originalPrice:"Rs. 1,400",             image:"/products/soldering-iron.jpg",     badge:"sale" },
+  { id:32, name:"Soldering Wire 60/40 100g",    category:"Tools",       price:"Rs. 380",   stock:"In Stock", description:"60/40 rosin core solder wire. 0.8mm, 100g reel.",                                  image:"/products/solder-wire.jpg",        badge:null   },
+  { id:33, name:"Breadboard 830 Points",        category:"Tools",       price:"Rs. 220",   stock:"In Stock", description:"Full size 830-point solderless breadboard.",                                       image:"/products/breadboard.jpg",         badge:null   },
+  { id:34, name:"Jumper Wires Set 65pcs",       category:"Tools",       price:"Rs. 280",   stock:"In Stock", description:"65 piece jumper wire set. M-M, M-F, F-F. 20cm.",                                  image:"/products/jumper-wires.jpg",       badge:"new"  },
+  { id:35, name:"Wire Stripper & Cutter",       category:"Tools",       price:"Rs. 450",   stock:"In Stock", description:"Professional automatic wire stripper. Strips 10-24 AWG.",                          image:"/products/wire-stripper.jpg",      badge:null   },
+  { id:36, name:"Heat Shrink Tube Set",         category:"Tools",       price:"Rs. 200",   stock:"In Stock", description:"Assorted heat shrink tubing kit. Multiple sizes.",                                 image:"/products/heat-shrink.jpg",        badge:null   },
 ];
 
-export const featuredProducts: Product[] = allProducts.slice(0, 4);
-
-export const categories = [
-  "All",
-  "Modules",
-  "ICs",
-  "Transistors",
-  "Resistors",
-  "Tools",
-];
+export const featuredProducts = allProducts.filter(p => p.badge === "hot").slice(0, 4);
+export const categories = ["All", "Modules", "ICs", "Transistors", "Resistors", "Tools"];
