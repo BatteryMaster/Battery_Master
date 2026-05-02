@@ -188,3 +188,34 @@ input, textarea, select { font-family: var(--font); background: #fff; color: #0f
   .btn-lg      { padding: 13px 28px; font-size: 14px; }
 }
 @media (min-width: 769px) { .show-mob { display: none !important; } }
+
+/* ══ ADD TO CART BUTTON ══ */
+.add-btn {
+  width: 100%; border: none; border-radius: 8px;
+  font-family: var(--font); font-weight: 700; font-size: 12px;
+  cursor: pointer; transition: background .15s;
+  background: #2563eb; color: #fff;
+}
+.add-btn:disabled { background: #f1f5f9; color: #94a3b8; cursor: not-allowed; }
+
+/* ══ MOBILE WRAP FIX ══ */
+@media (max-width: 480px) {
+  .wrap {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* ══ FOOTER MOBILE ══ */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    padding-top: 36px !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+}

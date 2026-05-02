@@ -23,32 +23,35 @@ export default function CategoriesPage() {
       <Header />
       <WhatsAppButton />
 
-      <div style={{ background:"#fff", borderBottom:"1.5px solid #e2e8f0", padding:"40px 0 36px" }}>
+      <div style={{ background:"#fff", borderBottom:"1.5px solid #dde3f0", padding:"40px 0 36px" }}>
         <div className="wrap">
-          <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:10 }}>
-            Browse
-          </div>
-          <h1 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, letterSpacing:"-.02em", color:"#0f172a", marginBottom:12 }}>
+          <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:10 }}>Browse</div>
+          <h1 style={{ fontSize:"clamp(24px,4vw,38px)", fontWeight:800, letterSpacing:"-.02em", color:"#0f172a", marginBottom:10 }}>
             Product Categories
           </h1>
-          <p style={{ fontSize:15, color:"#475569", lineHeight:1.7, maxWidth:500 }}>
+          <p style={{ fontSize:15, color:"#475569", lineHeight:1.7 }}>
             Quickly find the electronics parts and tools you need.
           </p>
         </div>
       </div>
 
-      <div className="wrap" style={{ padding:"40px 0 80px" }}>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))", gap:20 }}>
+      <div className="wrap" style={{ padding:"36px 0 80px" }}>
+        {/* Mobile: 1 column, Tablet: 2 cols, Desktop: auto */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 260px), 1fr))",
+          gap: 16,
+        }}>
           {CATS.map(cat => (
             <Link key={cat.slug} href={`/categories/${cat.slug}`} className="cat-card">
-              <div style={{ fontSize:40, marginBottom:16 }}>{cat.icon}</div>
-              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:10 }}>
-                <h2 style={{ fontSize:18, fontWeight:700, color:"#0f172a" }}>{cat.name}</h2>
+              <div style={{ fontSize:36, marginBottom:14 }}>{cat.icon}</div>
+              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:8, gap:8 }}>
+                <h2 style={{ fontSize:17, fontWeight:700, color:"#0f172a" }}>{cat.name}</h2>
                 <span style={{ fontSize:11, fontWeight:700, color:"#2563eb", background:"rgba(37,99,235,0.08)", padding:"3px 10px", borderRadius:4, flexShrink:0 }}>
                   {cat.count}
                 </span>
               </div>
-              <p style={{ fontSize:13, color:"#64748b", lineHeight:1.65, marginBottom:16 }}>{cat.desc}</p>
+              <p style={{ fontSize:13, color:"#64748b", lineHeight:1.65, marginBottom:14 }}>{cat.desc}</p>
               <div style={{ fontSize:13, fontWeight:600, color:"#2563eb" }}>Browse {cat.name} →</div>
             </Link>
           ))}
