@@ -11,50 +11,114 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
+    <main style={{ minHeight:"100vh", background:"#eef2ff" }}>
       <Header />
       <WhatsAppButton />
 
-      <div style={{ background: "#fff", borderBottom: "1.5px solid var(--border)", padding: "36px 0 32px" }}>
+      {/* Page header */}
+      <div style={{ background:"#fff", borderBottom:"1.5px solid #dde3f0", padding:"36px 0 32px" }}>
         <div className="wrap">
-          <div className="sec-label">Contact zeko.pk</div>
-          <h1 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 800, letterSpacing: "-.02em", color: "var(--t1)", marginTop: 8 }}>
+          <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:8 }}>
+            Contact zeko.pk
+          </div>
+          <h1 style={{ fontSize:"clamp(24px,4vw,38px)", fontWeight:800, letterSpacing:"-.02em", color:"#0f172a", marginBottom:8 }}>
             Get in Touch
           </h1>
-          <p style={{ fontSize: 15, color: "var(--t2)", marginTop: 10 }}>
+          <p style={{ fontSize:15, color:"#475569" }}>
             Questions, orders, or support — we&apos;re here to help.
           </p>
         </div>
       </div>
 
-      <div className="wrap" style={{ padding: "40px 0 80px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, maxWidth: 900 }}>
+      <div className="wrap" style={{ padding:"36px 0 80px" }}>
 
-          {/* Contact cards */}
+        {/* Contact cards — responsive grid */}
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 260px), 1fr))",
+          gap:16,
+          marginBottom:20,
+        }}>
           {[
-            { icon: "📞", title: "Phone / WhatsApp", info: "03150220243", sub: "Call or WhatsApp anytime", href: "https://wa.me/923150220243", cta: "Chat on WhatsApp", ctaClass: "btn-green" },
-            { icon: "📧", title: "Email", info: "hussamm621@gmail.com", sub: "We reply within 24 hours", href: "mailto:hussamm621@gmail.com", cta: "Send Email", ctaClass: "btn-outline" },
-            { icon: "📍", title: "Our Location", info: "Shop G1A, National Radio & TV Market", sub: "Near Regal Chowk, Saddar, Karachi", href: null, cta: null, ctaClass: "" },
-            { icon: "🕐", title: "Working Hours", info: "Mon – Sat: 10am – 8pm", sub: "Sunday: 12pm – 6pm", href: null, cta: null, ctaClass: "" },
+            {
+              icon:"📞", title:"Phone / WhatsApp",
+              info:"03150220243", sub:"Call or WhatsApp anytime",
+              href:"https://wa.me/923150220243", cta:"Chat on WhatsApp",
+              bg:"#f0fdf4", ctaBg:"#25D366", ctaColor:"#fff",
+            },
+            {
+              icon:"📧", title:"Email",
+              info:"hussamm621@gmail.com", sub:"We reply within 24 hours",
+              href:"mailto:hussamm621@gmail.com", cta:"Send Email",
+              bg:"#eff6ff", ctaBg:"transparent", ctaColor:"#2563eb",
+            },
+            {
+              icon:"📍", title:"Our Location",
+              info:"Shop G1A, National Radio & TV Market",
+              sub:"Near Regal Chowk, Saddar, Karachi",
+              href:null, cta:null, bg:"#fefce8", ctaBg:"", ctaColor:"",
+            },
+            {
+              icon:"🕐", title:"Working Hours",
+              info:"Mon – Sat: 10am – 8pm",
+              sub:"Sunday: 12pm – 6pm",
+              href:null, cta:null, bg:"#f5f3ff", ctaBg:"", ctaColor:"",
+            },
           ].map((c, i) => (
-            <div key={i} style={{ background: "#fff", border: "1.5px solid var(--border)", borderRadius: "var(--r-lg)", padding: "28px 24px" }}>
-              <div style={{ fontSize: 32, marginBottom: 14 }}>{c.icon}</div>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--t3)", marginBottom: 6 }}>{c.title}</div>
-              <div style={{ fontSize: 15, fontWeight: 700, color: "var(--t1)", marginBottom: 4 }}>{c.info}</div>
-              <div style={{ fontSize: 13, color: "var(--t2)", marginBottom: c.cta ? 18 : 0 }}>{c.sub}</div>
+            <div key={i} style={{
+              background:"#fff", border:"1.5px solid #dde3f0",
+              borderRadius:16, padding:"24px 20px",
+            }}>
+              <div style={{ fontSize:28, marginBottom:12 }}>{c.icon}</div>
+              <div style={{ fontSize:10, fontWeight:700, letterSpacing:".08em", textTransform:"uppercase", color:"#94a3b8", marginBottom:6 }}>
+                {c.title}
+              </div>
+              <div style={{ fontSize:14, fontWeight:700, color:"#0f172a", marginBottom:4, wordBreak:"break-word" }}>
+                {c.info}
+              </div>
+              <div style={{ fontSize:13, color:"#64748b", marginBottom:c.cta ? 16 : 0, lineHeight:1.5 }}>
+                {c.sub}
+              </div>
               {c.cta && c.href && (
-                <a href={c.href} target="_blank" rel="noopener noreferrer" className={`btn ${c.ctaClass} btn-sm`}>{c.cta}</a>
+                <a href={c.href} target="_blank" rel="noopener noreferrer" style={{
+                  display:"inline-flex", alignItems:"center", justifyContent:"center",
+                  padding:"9px 18px", fontSize:13, fontWeight:700, borderRadius:8,
+                  background: c.ctaBg, color: c.ctaColor,
+                  border: c.ctaBg === "transparent" ? "1.5px solid #dde3f0" : "none",
+                  textDecoration:"none", whiteSpace:"nowrap",
+                }}>
+                  {c.cta}
+                </a>
               )}
             </div>
           ))}
         </div>
 
-        <div style={{ marginTop: 20, background: "linear-gradient(135deg,#1a3fc4,#0f2885)", borderRadius: "var(--r-lg)", padding: "32px 28px", maxWidth: 900, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 20 }}>
+        {/* CTA banner */}
+        <div style={{
+          background:"linear-gradient(135deg,#1e40af,#1e3a8a)",
+          borderRadius:16, padding:"28px 24px",
+          display:"flex", alignItems:"center",
+          justifyContent:"space-between",
+          flexWrap:"wrap", gap:16,
+        }}>
           <div>
-            <div style={{ fontSize: 18, fontWeight: 800, color: "#fff", marginBottom: 6 }}>Ready to order?</div>
-            <div style={{ fontSize: 14, color: "rgba(255,255,255,0.7)" }}>Browse products and place your order directly.</div>
+            <div style={{ fontSize:17, fontWeight:800, color:"#fff", marginBottom:6 }}>
+              Ready to order?
+            </div>
+            <div style={{ fontSize:13, color:"rgba(255,255,255,0.65)" }}>
+              Browse products and place your order directly.
+            </div>
           </div>
-          <Link href="/shop" className="btn btn-accent btn-md">Shop Now →</Link>
+          <Link href="/shop" style={{
+            display:"inline-flex", alignItems:"center",
+            padding:"11px 24px", fontSize:14, fontWeight:700,
+            background:"#f97316", color:"#fff",
+            borderRadius:8, textDecoration:"none", whiteSpace:"nowrap",
+            flexShrink:0,
+          }}>
+            Shop Now →
+          </Link>
         </div>
       </div>
 
