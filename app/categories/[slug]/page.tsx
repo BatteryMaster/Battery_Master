@@ -9,99 +9,145 @@ import Link from "next/link";
 
 type Props = { params: Promise<{ slug: string }> };
 
+const CAT_SEO: Record<string, {
+  name: string; icon: string; desc: string;
+  title: string; metaDesc: string; keywords: string[];
+}> = {
+  modules: {
+    name: "Modules", icon: "🔌",
+    desc: "Arduino boards, relay modules, sensor modules, WiFi modules aur zyada",
+    title: "Arduino & Electronic Modules Price in Pakistan — Buy Online | zeko.pk",
+    metaDesc: "Buy Arduino Uno, Arduino Nano, NodeMCU ESP8266, relay modules, HC-SR04, DHT11, L298N motor driver in Pakistan. Best prices, Karachi delivery, Cash on Delivery.",
+    keywords: ["arduino modules pakistan", "buy arduino online pakistan", "NodeMCU price pakistan", "relay module karachi", "HC-SR04 sensor pakistan", "electronics modules karachi"],
+  },
+  ics: {
+    name: "ICs", icon: "🔬",
+    desc: "NE555 timer, LM358, LM741 op-amps, voltage regulators, logic ICs aur more",
+    title: "ICs & Integrated Circuits Price in Pakistan — Buy Online | zeko.pk",
+    metaDesc: "Buy NE555 timer, LM358, LM741, LM7805, LM7812, CD4017, 74HC595, ATmega328P, L293D, ULN2003 ICs in Pakistan. Best prices in Karachi. Cash on Delivery.",
+    keywords: ["ICs pakistan", "NE555 IC price pakistan", "LM7805 voltage regulator pakistan", "buy ICs online karachi", "ATmega328P pakistan", "integrated circuits karachi"],
+  },
+  transistors: {
+    name: "Transistors", icon: "⚡",
+    desc: "BC547, BC557, 2N2222, TIP120, IRF540N MOSFET aur other transistors",
+    title: "Transistors & MOSFETs Price in Pakistan — Buy Online | zeko.pk",
+    metaDesc: "Buy BC547, BC557, 2N2222, TIP120 Darlington, IRF540N MOSFET transistors in Pakistan. Wholesale and retail. Best prices in Karachi, Cash on Delivery.",
+    keywords: ["transistors pakistan", "BC547 transistor price pakistan", "buy transistors karachi", "IRF540N MOSFET pakistan", "2N2222 transistor pakistan", "TIP120 darlington pakistan"],
+  },
+  resistors: {
+    name: "Resistors", icon: "〰️",
+    desc: "Resistor kits, bulk packs — 10K, 1K, potentiometers aur all values",
+    title: "Resistors & Resistor Kits Price in Pakistan — Buy Online | zeko.pk",
+    metaDesc: "Buy resistor kits, 10K resistors, 1K resistors, potentiometers in Pakistan. 500pc assortment kits, bulk packs. Best prices in Karachi. Cash on Delivery.",
+    keywords: ["resistors pakistan", "buy resistors karachi", "10K resistor pack pakistan", "resistor kit pakistan", "potentiometer price pakistan", "electronics resistors karachi"],
+  },
+  tools: {
+    name: "Tools", icon: "🔧",
+    desc: "Soldering irons, digital multimeters, breadboards, jumper wires aur accessories",
+    title: "Electronics Tools Price in Pakistan — Soldering Iron, Multimeter | zeko.pk",
+    metaDesc: "Buy soldering iron, digital multimeter, breadboard, jumper wires, wire stripper, heat shrink in Pakistan. Best prices in Karachi. Cash on Delivery.",
+    keywords: ["soldering iron price pakistan", "digital multimeter karachi", "breadboard price pakistan", "jumper wires pakistan", "electronics tools karachi", "buy soldering iron online pakistan"],
+  },
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const name = slug === "ics" ? "ICs" : slug.charAt(0).toUpperCase() + slug.slice(1);
+  const cat = CAT_SEO[slug];
+  if (!cat) return { title: "Category Not Found" };
   return {
-    title: `${name} — Electronics Category`,
-    description: `Browse all ${name} products at zeko.pk`,
+    title: cat.title,
+    description: cat.metaDesc,
+    keywords: cat.keywords,
+    alternates: { canonical: `https://zeko.pk/categories/${slug}` },
+    openGraph: {
+      title: cat.title,
+      description: cat.metaDesc,
+      url: `https://zeko.pk/categories/${slug}`,
+      type: "website",
+    },
   };
 }
 
-const CAT_INFO: Record<string, { icon: string; desc: string }> = {
-  modules:     { icon: "🔌", desc: "Arduino boards, relay modules, sensor modules aur zyada" },
-  ics:         { icon: "🔬", desc: "555 timer, op-amps, logic ICs aur other integrated circuits" },
-  transistors: { icon: "⚡", desc: "BC547, 2N2222, IRF540N, TIP120 aur other transistors" },
-  resistors:   { icon: "〰️", desc: "Resistor packs, all values, bulk kits aur more" },
-  tools:       { icon: "🔧", desc: "Soldering irons, multimeters, jumper wires aur accessories" },
-};
-
 export default function CategoryDetailPage({ params }: Props) {
   const { slug } = use(params);
-  const name = slug === "ics" ? "ICs" : slug.charAt(0).toUpperCase() + slug.slice(1);
-  const info = CAT_INFO[slug] ?? { icon: "📦", desc: `Browse all ${name} products` };
+  const cat  = CAT_SEO[slug] ?? { name: slug.charAt(0).toUpperCase() + slug.slice(1), icon: "📦", desc: `Browse all ${slug} products`, title: "", metaDesc: "", keywords: [] };
+  const name = cat.name;
 
-  const products = allProducts.filter(
-    (p) => p.category.toLowerCase() === name.toLowerCase()
-  );
+  // Category schema for Google
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: cat.title,
+    description: cat.metaDesc,
+    url: `https://zeko.pk/categories/${slug}`,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home",       item: "https://zeko.pk" },
+        { "@type": "ListItem", position: 2, name: "Categories", item: "https://zeko.pk/categories" },
+        { "@type": "ListItem", position: 3, name: name,         item: `https://zeko.pk/categories/${slug}` },
+      ],
+    },
+  };
+
+  const products = allProducts.filter(p => p.category.toLowerCase() === name.toLowerCase());
 
   return (
-    <main style={{ minHeight: "100vh", background: "#eef2ff" }}>
+    <main style={{ minHeight:"100vh", background:"#eef2ff", overflowX:"hidden" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <Header />
       <WhatsAppButton />
 
       {/* Page Header */}
-      <div style={{ background: "#fff", borderBottom: "1.5px solid #dde3f0", padding: "40px 0 36px" }}>
+      <div style={{ background:"#fff", borderBottom:"1.5px solid #dde3f0", padding:"36px 0 32px" }}>
         <div className="wrap">
-          <Link href="/categories" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: "#2563eb", marginBottom: 20 }}>
-            ← Back to Categories
-          </Link>
-          <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
-            <div style={{ width: 56, height: 56, background: "#eef2ff", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, flexShrink: 0 }}>
-              {info.icon}
+          {/* Breadcrumb */}
+          <nav style={{ display:"flex", alignItems:"center", gap:6, fontSize:12, color:"#64748b", marginBottom:16, flexWrap:"wrap" }}>
+            <Link href="/" style={{ color:"#64748b" }}>Home</Link>
+            <span>›</span>
+            <Link href="/categories" style={{ color:"#64748b" }}>Categories</Link>
+            <span>›</span>
+            <span style={{ color:"#0f172a", fontWeight:600 }}>{name}</span>
+          </nav>
+
+          <div style={{ display:"flex", alignItems:"center", gap:16, flexWrap:"wrap" }}>
+            <div style={{ width:52, height:52, background:"#eef2ff", borderRadius:14, display:"flex", alignItems:"center", justifyContent:"center", fontSize:26, flexShrink:0 }}>
+              {cat.icon}
             </div>
             <div>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "#f97316", marginBottom: 6 }}>
-                Category
-              </div>
-              <h1 style={{ fontSize: "clamp(24px,4vw,38px)", fontWeight: 800, letterSpacing: "-.02em", color: "#0f172a", marginBottom: 6 }}>
-                {name}
+              <h1 style={{ fontSize:"clamp(22px,4vw,36px)", fontWeight:800, letterSpacing:"-.02em", color:"#0f172a", marginBottom:6 }}>
+                {name} in Pakistan
               </h1>
-              <p style={{ fontSize: 14, color: "#64748b", maxWidth: 480 }}>{info.desc}</p>
+              <p style={{ fontSize:14, color:"#475569" }}>{cat.desc}</p>
             </div>
-          </div>
-
-          {/* Stats bar */}
-          <div style={{ marginTop: 24, display: "inline-flex", alignItems: "center", gap: 8, background: "#eef2ff", border: "1.5px solid #dde3f0", borderRadius: 8, padding: "8px 16px" }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: "#0f172a" }}>{products.length}</span>
-            <span style={{ fontSize: 13, color: "#64748b" }}>products in this category</span>
           </div>
         </div>
       </div>
 
-      {/* Products Grid */}
-      <div className="wrap" style={{ padding: "36px 0 80px" }}>
-        {products.length > 0 ? (
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-            gap: 20,
-          }}>
-            {products.map((p) => (
-              <ProductCard
-                key={p.id}
-                id={p.id}
-                name={p.name}
-                category={p.category}
-                price={p.price}
-                stock={p.stock}
-                image={p.image}
-                badge={p.badge}
-              />
-            ))}
-          </div>
-        ) : (
-          <div style={{ background: "#fff", border: "1.5px solid #dde3f0", borderRadius: 16, padding: "60px 32px", textAlign: "center" }}>
-            <div style={{ fontSize: 44, marginBottom: 16 }}>📦</div>
-            <h2 style={{ fontSize: 20, fontWeight: 700, color: "#0f172a", marginBottom: 8 }}>No products yet</h2>
-            <p style={{ fontSize: 14, color: "#64748b", marginBottom: 24 }}>This category has no products available right now.</p>
-            <Link href="/shop" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#2563eb", color: "#fff", borderRadius: 8, padding: "11px 24px", fontSize: 14, fontWeight: 700 }}>
-              Browse All Products →
-            </Link>
-          </div>
-        )}
-      </div>
+      <div className="wrap" style={{ paddingTop:"32px", paddingBottom:"80px" }}>
+        <div style={{ fontSize:13, color:"#64748b", marginBottom:20 }}>
+          <span style={{ fontWeight:800, color:"#0f172a" }}>{products.length}</span> products in {name}
+        </div>
+        <div className="prod-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(min(210px,100%),1fr))", gap:16 }}>
+          {products.map(p => (
+            <ProductCard key={p.id} id={p.id} name={p.name} category={p.category}
+              price={p.price} stock={p.stock} image={p.image}
+              badge={p.badge} originalPrice={p.originalPrice} />
+          ))}
+        </div>
 
+        {/* SEO text block at bottom */}
+        <div style={{ marginTop:56, background:"#fff", border:"1.5px solid #dde3f0", borderRadius:18, padding:"32px 28px" }}>
+          <h2 style={{ fontSize:18, fontWeight:800, color:"#0f172a", marginBottom:12 }}>
+            Buy {name} Online in Pakistan — zeko.pk
+          </h2>
+          <p style={{ fontSize:14, color:"#475569", lineHeight:1.9 }}>
+            zeko.pk Pakistan ka trusted electronics store hai jahan se aap {name.toLowerCase()} best prices par khareed sakte hain.
+            Hum Karachi mein 1–2 din mein deliver karte hain, Cash on Delivery available hai.
+            Students, hobbyists, aur professionals sab ke liye quality {name.toLowerCase()} available hain.
+          </p>
+        </div>
+      </div>
       <Footer />
     </main>
   );

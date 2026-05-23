@@ -1,75 +1,51 @@
 import type { Product } from "@/data/products";
 
-type ProductSchemaProps = {
-  product: Product;
-};
-
-function getNumericPrice(price: string) {
-  return price.replace("Rs.", "").replace(/,/g, "").trim();
-}
-
-export default function ProductSchema({ product }: ProductSchemaProps) {
-  const numericPrice = getNumericPrice(product.price);
-  const isInStock = product.stock.toLowerCase().includes("in stock");
-  const isLimited = product.stock.toLowerCase().includes("limited");
-
-  let availability = "https://schema.org/OutOfStock";
-  if (isInStock) availability = "https://schema.org/InStock";
-  else if (isLimited) availability = "https://schema.org/LimitedAvailability";
+export default function ProductSchema({ product }: { product: Product }) {
+  // Parse price string e.g. "Rs. 1,850" → "1850"
+  const priceNum = product.price.replace(/[^0-9]/g, "");
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: [`https://zeko.pk${product.image}`],
+    image: `https://zeko.pk${product.image}`,
     sku: `ZEKO-${product.id}`,
-    mpn: `ZEKO-${product.id}`,
+    brand: { "@type": "Brand", name: "zeko.pk" },
     category: product.category,
-    brand: {
-      "@type": "Brand",
-      name: "zeko.pk",
-    },
     offers: {
       "@type": "Offer",
       priceCurrency: "PKR",
-      price: numericPrice,
-      availability,
-      url: `https://zeko.pk/shop/${product.id}`,
-      itemCondition: "https://schema.org/NewCondition",
+      price: priceNum,
+      availability: product.stock.toLowerCase().includes("out")
+        ? "https://schema.org/OutOfStock"
+        : "https://schema.org/InStock",
       seller: {
         "@type": "Organization",
         name: "zeko.pk",
         url: "https://zeko.pk",
       },
+      url: `https://zeko.pk/shop/${product.id}`,
       shippingDetails: {
         "@type": "OfferShippingDetails",
         shippingRate: {
           "@type": "MonetaryAmount",
-          value: "250",
+          value: "0",
           currency: "PKR",
         },
         shippingDestination: {
           "@type": "DefinedRegion",
           addressCountry: "PK",
+          addressRegion: "Sindh",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          businessDays: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] },
+          cutoffTime: "17:00:00+05:00",
+          handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 1, unitCode: "DAY" },
+          transitTime:  { "@type": "QuantitativeValue", minValue: 1, maxValue: 2, unitCode: "DAY" },
         },
       },
-      hasMerchantReturnPolicy: {
-        "@type": "MerchantReturnPolicy",
-        applicableCountry: "PK",
-        returnPolicyCategory:
-          "https://schema.org/MerchantReturnFiniteReturnWindow",
-        merchantReturnDays: 7,
-        returnMethod: "https://schema.org/ReturnByMail",
-        returnFees: "https://schema.org/FreeReturn",
-      },
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.5",
-      reviewCount: "12",
-      bestRating: "5",
-      worstRating: "1",
     },
   };
 

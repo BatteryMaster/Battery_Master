@@ -7,28 +7,49 @@ import ProductDetailContent from "@/components/ProductDetailContent";
 import ProductSchema from "@/components/ProductSchema";
 import { allProducts } from "@/data/products";
 
-type ProductPageProps = { params: Promise<{ id: string }> };
+type Props = { params: Promise<{ id: string }> };
 
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const product = allProducts.find((item) => item.id === Number(id));
-  if (!product) return { title: "Product not found", description: "The requested product could not be found on Zeko.pk." };
-  return { title: `${product.name} — ${product.category} | zeko.pk`, description: product.description };
+  const product = allProducts.find(p => p.id === Number(id));
+  if (!product) return { title: "Product Not Found" };
+
+  const priceNum = product.price.replace(/[^0-9]/g, "");
+  const catSlug  = product.category.toLowerCase();
+
+  return {
+    title: `${product.name} Price in Pakistan — Buy Online Rs. ${priceNum} | zeko.pk`,
+    description: `Buy ${product.name} in Pakistan at Rs. ${priceNum}. ${product.description} Fast delivery in Karachi, Cash on Delivery. Shop at zeko.pk.`,
+    keywords: [
+      `${product.name.toLowerCase()} pakistan`,
+      `${product.name.toLowerCase()} price pakistan`,
+      `buy ${product.name.toLowerCase()} online`,
+      `${product.name.toLowerCase()} karachi`,
+      `${product.category.toLowerCase()} pakistan`,
+    ],
+    alternates: { canonical: `https://zeko.pk/shop/${product.id}` },
+    openGraph: {
+      title: `${product.name} — Rs. ${priceNum} | zeko.pk`,
+      description: `${product.description} Available in Pakistan. Fast Karachi delivery, COD.`,
+      url: `https://zeko.pk/shop/${product.id}`,
+      type: "website",
+    },
+  };
 }
 
-export default async function ProductDetailPage({ params }: ProductPageProps) {
+export default async function ProductDetailPage({ params }: Props) {
   const { id } = await params;
-  const product = allProducts.find((item) => item.id === Number(id));
+  const product = allProducts.find(p => p.id === Number(id));
 
   if (!product) {
     return (
-      <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
+      <main style={{ minHeight:"100vh", background:"var(--bg)", overflowX:"hidden" }}>
         <Header />
-        <div className="wrap" style={{ padding: "80px 0", textAlign: "center" }}>
-          <div style={{ fontSize: 56, marginBottom: 20 }}>🔍</div>
-          <h1 style={{ fontSize: 28, fontWeight: 800, color: "var(--t1)", marginBottom: 12 }}>Product not found</h1>
-          <p style={{ fontSize: 15, color: "var(--t2)", marginBottom: 28 }}>The product you are looking for does not exist.</p>
-          <Link href="/shop" className="btn btn-primary btn-md">Back to Shop</Link>
+        <div className="wrap" style={{ paddingTop:"80px", paddingBottom:"80px", textAlign:"center" }}>
+          <div style={{ fontSize:56, marginBottom:20 }}>🔍</div>
+          <h1 style={{ fontSize:28, fontWeight:800, color:"#0f172a", marginBottom:12 }}>Product Not Found</h1>
+          <p style={{ fontSize:15, color:"#64748b", marginBottom:28 }}>This product does not exist.</p>
+          <Link href="/shop" style={{ background:"#2563eb", color:"#fff", borderRadius:9, padding:"12px 28px", fontWeight:700, fontSize:14 }}>Back to Shop</Link>
         </div>
         <Footer />
       </main>
@@ -36,7 +57,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   }
 
   return (
-    <main style={{ minHeight: "100vh", background: "var(--bg)" }}>
+    <main style={{ minHeight:"100vh", background:"#f5f7ff", overflowX:"hidden" }}>
       <Header />
       <WhatsAppButton />
       <ProductSchema product={product} />

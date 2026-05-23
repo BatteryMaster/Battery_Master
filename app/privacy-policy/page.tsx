@@ -25,7 +25,7 @@ export default function PrivacyPolicyPage() {
           <h1 style={{ fontSize: "clamp(26px,4vw,38px)", fontWeight: 800, letterSpacing: "-.02em", color: "var(--t1)", marginTop: 8 }}>Your Privacy Matters</h1>
         </div>
       </div>
-      <div className="wrap" style={{ padding: "40px 0 80px", maxWidth: 760 }}>
+      <div className="wrap" style={{ paddingTop:"40px", paddingBottom:"80px", maxWidth: 760 }}>
         <div style={{ background: "#fff", border: "1.5px solid var(--border)", borderRadius: "var(--r-lg)", padding: "36px" }}>
           {PARAS.map((p, i) => <p key={i} style={{ fontSize: 15, color: "var(--t2)", lineHeight: 1.85, marginBottom: i < PARAS.length - 1 ? 18 : 0 }}>{p}</p>)}
         </div>

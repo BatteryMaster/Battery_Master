@@ -2,75 +2,33 @@ import type { MetadataRoute } from "next";
 import { allProducts } from "@/data/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://zeko.pk";
-  const now = new Date();
+  const base = "https://zeko.pk";
+  const now  = new Date();
 
-  const productUrls = allProducts.map((product) => ({
-    url: `${baseUrl}/shop/${product.id}`,
+  const products = allProducts.map(p => ({
+    url: `${base}/shop/${p.id}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
-    priority: 0.8,
+    priority: p.badge === "hot" ? 0.90 : p.badge === "new" ? 0.85 : 0.80,
   }));
 
-  const categorySlugs = ["modules", "ics", "transistors", "resistors", "tools"];
-
-  const categoryUrls = categorySlugs.map((slug) => ({
-    url: `${baseUrl}/categories/${slug}`,
+  const categories = ["modules","ics","transistors","resistors","tools"].map(slug => ({
+    url: `${base}/categories/${slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
-    priority: 0.75,
+    priority: 0.85,
   }));
 
   return [
-    {
-      url: baseUrl,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/shop`,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/categories`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/privacy-policy`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.2,
-    },
-    {
-      url: `${baseUrl}/terms-conditions`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.2,
-    },
-    {
-      url: `${baseUrl}/return-refund-policy`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.2,
-    },
-    ...categoryUrls,
-    ...productUrls,
+    { url: base,                         lastModified: now, changeFrequency: "daily",   priority: 1.00 },
+    { url: `${base}/shop`,               lastModified: now, changeFrequency: "daily",   priority: 0.95 },
+    { url: `${base}/categories`,         lastModified: now, changeFrequency: "weekly",  priority: 0.88 },
+    { url: `${base}/about`,              lastModified: now, changeFrequency: "monthly", priority: 0.55 },
+    { url: `${base}/contact`,            lastModified: now, changeFrequency: "monthly", priority: 0.60 },
+    { url: `${base}/privacy-policy`,     lastModified: now, changeFrequency: "yearly",  priority: 0.20 },
+    { url: `${base}/terms-conditions`,   lastModified: now, changeFrequency: "yearly",  priority: 0.20 },
+    { url: `${base}/return-refund-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.20 },
+    ...categories,
+    ...products,
   ];
 }

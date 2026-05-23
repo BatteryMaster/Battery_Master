@@ -33,7 +33,7 @@ export default function CartPage() {
         </div>
       </div>
 
-      <div className="wrap" style={{ padding: "36px 0 80px" }}>
+      <div className="wrap" style={{ paddingTop:"36px", paddingBottom:"80px" }}>
         {cartItems.length > 0 ? (
           <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 24, alignItems: "start" }} className="checkout-grid">
 

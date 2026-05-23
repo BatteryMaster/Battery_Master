@@ -30,7 +30,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="wrap" style={{ padding:"36px 0 80px" }}>
+      <div className="wrap" style={{ paddingTop:"36px", paddingBottom:"80px" }}>
 
         {/* Contact cards — responsive grid */}
         <div style={{

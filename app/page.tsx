@@ -59,7 +59,7 @@ export default function Home() {
 
             <div style={{ display:"flex", gap:36, marginTop:48, flexWrap:"wrap" }}>
               {[
-                { v:"36+",  l:"Products" },
+                { v:"2000+",  l:"Products" },
                 { v:"1–2",  l:"Day Delivery" },
                 { v:"COD",  l:"Cash on Delivery" },
                 { v:"5★",   l:"Customer Rating" },

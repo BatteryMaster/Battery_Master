@@ -24,7 +24,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="wrap" style={{ padding: "48px 0 80px", maxWidth: 760 }}>
+      <div className="wrap" style={{ paddingTop:"48px", paddingBottom:"80px", maxWidth: 760 }}>
         <div style={{ background: "#fff", border: "1.5px solid var(--border)", borderRadius: "var(--r-lg)", padding: "40px 36px" }}>
           <p style={{ fontSize: 16, color: "var(--t2)", lineHeight: 1.85, marginBottom: 20 }}>
             zeko.pk is a modern electronics ecommerce store built for customers in Pakistan who need modules, ICs, transistors, resistors, sensors, and electronics tools — all in one reliable place.

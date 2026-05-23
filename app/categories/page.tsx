@@ -35,7 +35,7 @@ export default function CategoriesPage() {
         </div>
       </div>
 
-      <div className="wrap" style={{ padding:"36px 0 80px" }}>
+      <div className="wrap" style={{ paddingTop:"36px", paddingBottom:"80px" }}>
         {/* Mobile: 1 column, Tablet: 2 cols, Desktop: auto */}
         <div style={{
           display: "grid",

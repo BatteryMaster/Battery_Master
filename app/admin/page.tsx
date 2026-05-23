@@ -24,7 +24,7 @@ export default function AdminPage() {
   if (!auth) return (
     <div style={{ minHeight:"100vh", background:"var(--bg)", display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}>
       <div style={{ background:"#fff", border:"1.5px solid var(--border)", borderRadius:"var(--r-xl)", padding:"44px 36px", width:"100%", maxWidth:360, textAlign:"center" }}>
-        <div style={{ width:50, height:50, background:"var(--primary)", borderRadius:10, margin:"0 auto 18px", display:"flex", alignItems:"center", justifyContent:"center", fontWeight:900, fontSize:22, color:"#fff" }}>Z</div>
+        <img src="/logo.png" alt="zeko.pk" style={{ width:50, height:50, borderRadius:"50%", objectFit:"cover", margin:"0 auto 18px", display:"block" }} />
         <h1 style={{ fontSize:20, fontWeight:800, marginBottom:5 }}>Admin Panel</h1>
         <p style={{ color:"var(--t2)", fontSize:13, marginBottom:22 }}>zeko.pk order management</p>
         <input type="password" placeholder="Enter password" value={pass}

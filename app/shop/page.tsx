@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShopPageContent from "@/components/ShopPageContent";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "Shop Electronics Products",
-  description: "Browse all electronics products at zeko.pk — modules, ICs, transistors, resistors, and tools in Pakistan.",
+  title: "Shop — Buy Arduino, Electronics Components & Modules in Pakistan",
+  description: "Buy Arduino Uno, Arduino Nano, NodeMCU, sensors, ICs, transistors, resistors & tools in Pakistan. Best prices, Karachi delivery, Cash on Delivery.",
+  alternates: { canonical: "https://zeko.pk/shop" },
 };
 
 export default function ShopPage() {
   return (
-    <main style={{ minHeight:"100vh", background:"#f5f7ff" }}>
+    <main style={{ minHeight:"100vh", background:"#f5f7ff", overflowX:"hidden" }}>
       <Header />
       <WhatsAppButton />
 
-      {/* Page header */}
+      {/* Page header — SAME as original */}
       <div style={{ background:"#fff", borderBottom:"1.5px solid #e2e8f0", padding:"40px 0 36px" }}>
         <div className="wrap">
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:10 }}>
@@ -30,8 +32,14 @@ export default function ShopPage() {
         </div>
       </div>
 
-      <div className="wrap" style={{ padding:"36px 0 80px" }}>
-        <ShopPageContent />
+      <div className="wrap" style={{ paddingTop:"36px", paddingBottom:"80px" }}>
+        <Suspense fallback={
+          <div style={{ padding:"40px 0", textAlign:"center", color:"#94a3b8", fontSize:14 }}>
+            Loading products...
+          </div>
+        }>
+          <ShopPageContent />
+        </Suspense>
       </div>
 
       <Footer />

@@ -38,11 +38,16 @@ export default function Header() {
       <div style={{
         background: "#1e40af", color: "#fff",
         fontSize: 12, fontWeight: 600, textAlign: "center",
-        padding: "9px 16px", letterSpacing: ".01em",
+        padding: "8px 12px", letterSpacing: ".01em",
+        overflowX: "hidden", width: "100%",
       }}>
-        🚚 Karachi delivery <strong>1–2 din</strong>
-        &nbsp;·&nbsp; 💳 Cash on Delivery
-        &nbsp;·&nbsp; 📞 <strong>03150220243</strong>
+        <span style={{ display: "inline-flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "4px 10px" }}>
+          <span>🚚 Karachi delivery <strong>1–2 din</strong></span>
+          <span style={{ opacity: 0.5 }}>·</span>
+          <span>💳 Cash on Delivery</span>
+          <span style={{ opacity: 0.5 }}>·</span>
+          <span>📞 <strong>03150220243</strong></span>
+        </span>
       </div>
 
       <header style={{
@@ -51,24 +56,26 @@ export default function Header() {
         borderBottom: "1.5px solid #dde3f0",
         boxShadow: raised ? "0 4px 20px rgba(0,0,0,0.08)" : "none",
         transition: "box-shadow .25s",
+        overflow: "hidden",
+        width: "100%",
+        maxWidth: "100vw",
       }}>
         {/* Main row */}
-        <div className="wrap" style={{ height: 66, display: "flex", alignItems: "center", gap: 8 }}>
+        <div className="wrap" style={{ height: 66, display: "flex", alignItems: "center", gap: 8, overflow: "hidden" }}>
 
           {/* Logo */}
           <Link href="/" style={{
             display: "flex", alignItems: "center", gap: 10,
-            flexShrink: 0, marginRight: 24,
+            flexShrink: 0, marginRight: 16, textDecoration: "none",
           }}>
-            <div style={{
-              width: 38, height: 38,
-              background: "linear-gradient(135deg,#2563eb,#1d4ed8)",
-              borderRadius: 10, display: "flex", alignItems: "center",
-              justifyContent: "center", fontWeight: 900, fontSize: 19,
-              color: "#fff", boxShadow: "0 2px 10px rgba(37,99,235,0.30)", flexShrink: 0,
-            }}>Z</div>
+            <img
+              src="/logo.png"
+              alt="zeko.pk logo"
+              width={42} height={42}
+              style={{ borderRadius: "50%", objectFit: "cover", flexShrink: 0, border: "2px solid #e2e8f0" }}
+            />
             <div>
-              <div style={{ fontSize: 19, fontWeight: 800, lineHeight: 1.1, letterSpacing: "-.025em", color: "#0f172a" }}>
+              <div style={{ fontSize: 18, fontWeight: 800, lineHeight: 1.1, letterSpacing: "-.025em", color: "#0f172a" }}>
                 zeko<span style={{ color: "#2563eb" }}>.pk</span>
               </div>
               <div style={{ fontSize: 9, color: "#94a3b8", letterSpacing: ".13em", textTransform: "uppercase", marginTop: 1 }}>
@@ -77,7 +84,7 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop nav — CSS class hover, no JS events */}
+          {/* Desktop nav */}
           <nav className="hide-mob" style={{ display: "flex", alignItems: "center", gap: 2, flexShrink: 0 }}>
             {NAV.map(n => (
               <Link key={n.href} href={n.href} className="nav-link">{n.label}</Link>
@@ -86,13 +93,13 @@ export default function Header() {
 
           <div style={{ flex: 1 }} />
 
-          {/* Cart button */}
+          {/* Cart */}
           <Link href="/cart" style={{
             display: "flex", alignItems: "center", gap: 8,
             background: "#2563eb", borderRadius: 8,
             padding: "9px 20px", fontSize: 14, fontWeight: 700, color: "#fff",
             position: "relative", whiteSpace: "nowrap", flexShrink: 0,
-            boxShadow: "0 2px 10px rgba(37,99,235,0.22)",
+            boxShadow: "0 2px 10px rgba(37,99,235,0.22)", textDecoration: "none",
           }}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
@@ -130,7 +137,7 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Category strip — CSS class hover */}
+        {/* Category strip */}
         <div style={{ borderTop: "1.5px solid #dde3f0", background: "#f5f7ff" }}>
           <div className="wrap" style={{ height: 40, display: "flex", alignItems: "center", gap: 4, overflowX: "auto" }}>
             {CATS.map(c => (
@@ -146,7 +153,7 @@ export default function Header() {
               <Link key={n.href} href={n.href} onClick={() => setOpen(false)} style={{
                 display: "flex", alignItems: "center",
                 padding: "14px 24px", fontSize: 15, fontWeight: 600,
-                color: "#0f172a", borderBottom: "1px solid #f1f5f9",
+                color: "#0f172a", borderBottom: "1px solid #f1f5f9", textDecoration: "none",
               }}>
                 {n.label}
               </Link>
@@ -159,7 +166,7 @@ export default function Header() {
                 {CATS.map(c => (
                   <Link key={c.href} href={c.href} onClick={() => setOpen(false)} style={{
                     padding: "7px 14px", fontSize: 13, fontWeight: 600,
-                    background: "rgba(37,99,235,0.07)", color: "#2563eb", borderRadius: 8,
+                    background: "rgba(37,99,235,0.07)", color: "#2563eb", borderRadius: 8, textDecoration: "none",
                   }}>
                     {c.label}
                   </Link>

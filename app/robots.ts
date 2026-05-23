@@ -1,23 +1,15 @@
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://zeko.pk";
-
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/cart", "/checkout"],
-      },
-      {
-        // Allow Googlebot full access except private pages
-        userAgent: "Googlebot",
-        allow: "/",
-        disallow: ["/cart", "/checkout"],
+        disallow: ["/admin", "/order-success"],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: "https://zeko.pk/sitemap.xml",
+    host: "https://zeko.pk",
   };
 }

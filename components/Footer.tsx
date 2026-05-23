@@ -35,7 +35,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <Link href="/" style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16 }}>
-            <div style={{ width:36, height:36, background:"linear-gradient(135deg,#2563eb,#1d4ed8)", borderRadius:9, display:"flex", alignItems:"center", justifyContent:"center", fontWeight:900, fontSize:17, color:"#fff", flexShrink:0 }}>Z</div>
+            <img src="/logo.png" alt="zeko.pk" width={38} height={38} style={{ borderRadius:"50%", objectFit:"cover", flexShrink:0, border:"2px solid rgba(255,255,255,0.15)" }} />
             <span style={{ fontSize:17, fontWeight:800, color:"#fff", letterSpacing:"-.02em" }}>
               zeko<span style={{ color:"#60a5fa" }}>.pk</span>
             </span>
@@ -93,7 +93,7 @@ export default function Footer() {
       <div style={{ borderTop:"1px solid rgba(255,255,255,0.07)", padding:"16px 0" }}>
         <div className="wrap footer-bottom" style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:8, alignItems:"center" }}>
           <div style={{ fontSize:12, color:"rgba(255,255,255,0.25)" }}>
-            © 2025 zeko.pk — All rights reserved. Built for Pakistan 🇵🇰
+            © {new Date().getFullYear()} zeko.pk — All rights reserved. Built for Pakistan 🇵🇰
           </div>
           <div style={{ fontSize:12, color:"rgba(255,255,255,0.25)" }}>Karachi, Pakistan</div>
         </div>
