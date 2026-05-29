@@ -43,7 +43,7 @@ export default function CheckoutPage() {
     const id = addOrder({
       customer: form,
       items: cartItems.map(i => ({ id:i.id, name:i.name, category:i.category, price:i.price, quantity:i.quantity })),
-      subtotal, deliveryFee: delivery, total,
+      subtotal, delivery_fee: delivery, total,
     });
     clearCart();
     router.push(`/order-success?id=${id}`);
