@@ -35,12 +35,12 @@ export default function CheckoutPage() {
     return e;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setLoading(true);
-    const id = addOrder({
+    const id = await addOrder({
       customer: form,
       items: cartItems.map(i => ({ id:i.id, name:i.name, category:i.category, price:i.price, quantity:i.quantity })),
       subtotal, delivery_fee: delivery, total,
