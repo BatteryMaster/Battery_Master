@@ -106,13 +106,13 @@ export default function CheckoutPage() {
 
               <div>
                 <label style={{ display:"block", fontSize:13, fontWeight:600, color:"var(--t1)", marginBottom:5 }}>Notes (optional)</label>
-                <textarea value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} placeholder="Koi special instruction..." rows={2} className="inp" style={{ resize:"vertical" }} />
+                <textarea value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} placeholder="Any special instruction..." rows={2} className="inp" style={{ resize:"vertical" }} />
               </div>
 
               <div style={{ background:"var(--primary-dim)", border:"1.5px solid var(--primary-bdr)", borderRadius:"var(--r-md)", padding:"14px 16px" }}>
                 <div style={{ fontSize:13, fontWeight:700, color:"var(--primary)", marginBottom:6 }}>📋 Order Process</div>
                 <div style={{ fontSize:12, color:"var(--t2)", lineHeight:1.8 }}>
-                  1. Order place karein → 2. Call/WhatsApp se confirm → 3. Same day dispatch → 4. 1–2 din delivery
+                  1. Order place here → 2. Call/WhatsApp the confirm → 3. Same day dispatch → 4. 1–2 din delivery
                 </div>
               </div>
 
