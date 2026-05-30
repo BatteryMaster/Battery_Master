@@ -8,7 +8,6 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { useCart } from "@/context/CartContext";
 import { useOrders } from "@/context/OrderContext";
 
-/* Fix: strip "Rs. " and commas then parse — e.g. "Rs. 1,850" → 1850 */
 function toNum(price: string): number {
   return Number(price.replace(/[^0-9]/g, ""));
 }
@@ -43,7 +42,9 @@ export default function CheckoutPage() {
     const id = await addOrder({
       customer: form,
       items: cartItems.map(i => ({ id:i.id, name:i.name, category:i.category, price:i.price, quantity:i.quantity })),
-      subtotal, delivery_fee: delivery, total,
+      subtotal,
+      delivery_fee: delivery,  // ← yeh fix hai
+      total,
     });
     clearCart();
     router.push(`/order-success?id=${id}`);
