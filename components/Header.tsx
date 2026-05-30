@@ -42,7 +42,7 @@ export default function Header() {
         overflowX: "hidden", width: "100%",
       }}>
         <span style={{ display: "inline-flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "4px 10px" }}>
-          <span>🚚 Karachi delivery <strong>1–2 din</strong></span>
+          <span>🚚 Karachi delivery <strong>1–2 days</strong></span>
           <span style={{ opacity: 0.5 }}>·</span>
           <span>💳 Cash on Delivery</span>
           <span style={{ opacity: 0.5 }}>·</span>

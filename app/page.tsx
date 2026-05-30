@@ -49,7 +49,7 @@ export default function Home() {
             </h1>
 
             <p style={{ fontSize:15, color:"rgba(255,255,255,0.68)", lineHeight:1.85, maxWidth:420, marginBottom:36 }}>
-              Modules, ICs, transistors, resistors, sensors aur tools — sab ek jagah. Karachi mein fast delivery aur Cash on Delivery.
+              Modules, ICs, transistors, resistors, sensors aur tools — All in one place. Karachi mein fast delivery aur Cash on Delivery.
             </p>
 
             <div style={{ display:"flex", gap:14, flexWrap:"wrap" }}>
@@ -176,10 +176,10 @@ export default function Home() {
             <div style={{ position:"absolute", top:-60, right:80, width:300, height:300, borderRadius:"50%", background:"radial-gradient(circle,rgba(255,255,255,0.05) 0%,transparent 70%)", pointerEvents:"none" }}/>
             <div style={{ position:"relative" }}>
               <h2 style={{ fontSize:"clamp(20px,3vw,28px)", fontWeight:800, color:"#fff", letterSpacing:"-.02em", marginBottom:10 }}>
-                Apna order abhi place karein
+                Place your order now.
               </h2>
               <p style={{ color:"rgba(255,255,255,0.62)", maxWidth:480, lineHeight:1.75, fontSize:14 }}>
-                Website se direct order karein ya WhatsApp par message karein. Cash on Delivery, 1–2 din mein Karachi delivery.
+                Order directly from the website or send a message on WhatsApp. Delivery to Kush, Karachi delivery in 1–2 days.
               </p>
             </div>
             <div style={{ display:"flex", flexDirection:"column", gap:12, flexShrink:0, position:"relative" }}>

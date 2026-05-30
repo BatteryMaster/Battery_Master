@@ -51,7 +51,7 @@ export default function HeroSection() {
             fontSize: 17, color: "var(--text-secondary)",
             lineHeight: 1.7, maxWidth: 520, marginBottom: 36,
           }}>
-            Modules, ICs, transistors, resistors, sensors aur tools — sab ek jagah. Students, hobbyists, aur professionals ke liye.
+            Modules, ICs, transistors, resistors, sensors aur tools — All in one place. Students, hobbyists, aur professionals ke liye.
           </p>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -77,7 +77,7 @@ export default function HeroSection() {
           <div style={{ display: "flex", gap: 32, marginTop: 48, flexWrap: "wrap" }}>
             {[
               { value: "36+", label: "Products" },
-              { value: "1-2 din", label: "Karachi Delivery" },
+              { value: "1-2 days", label: "Karachi Delivery" },
               { value: "COD", label: "Cash on Delivery" },
               { value: "7 din", label: "Return Policy" },
             ].map((stat) => (

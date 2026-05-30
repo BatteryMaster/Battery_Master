@@ -134,7 +134,7 @@ export default function AdminPage() {
                 })}
               </div>
               <div style={{ display:"flex", gap:8 }}>
-                <a href={`https://wa.me/${sel.customer.phone.replace(/^0/,"92")}?text=${encodeURIComponent(`Assalam o Alaikum ${sel.customer.name}! Aapka zeko.pk order ${sel.id} confirm ho gaya. Total: Rs. ${sel.total}. 1-2 din mein delivery hogi. Shukriya!`)}`}
+                <a href={`https://wa.me/${sel.customer.phone.replace(/^0/,"92")}?text=${encodeURIComponent(`Assalam o Alaikum ${sel.customer.name}! Aapka zeko.pk order ${sel.id} confirm ho gaya. Total: Rs. ${sel.total}. 1-2 days mein delivery hogi. Shukriya!`)}`}
                   target="_blank" rel="noopener noreferrer"
                   style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", gap:6, background:"#25D366", color:"#fff", borderRadius:"var(--r-sm)", padding:"9px", fontSize:12, fontWeight:700, textDecoration:"none" }}>
                   💬 WhatsApp

@@ -111,7 +111,7 @@ export default function ProductDetailContent({ product }: { product: Product }) 
 
           {/* Trust chips */}
           <div style={{ display:"flex", flexWrap:"wrap", gap:7, marginBottom:22 }}>
-            {["🚚 Karachi 1–2 days","💳 Cash on Delivery","🔄 7-day returns","✅ Quality checked"].map(t => (
+            {["🚚 Karachi 1–2 days","💳 Cash on Delivery","🔄 7-days returns","✅ Quality checked"].map(t => (
               <span key={t} style={{ fontSize:11.5, fontWeight:600, color:"#374151", background:"#f1f5f9", border:"1px solid #e2e8f0", borderRadius:100, padding:"5px 12px" }}>
                 {t}
               </span>

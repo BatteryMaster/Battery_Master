@@ -8,7 +8,7 @@ export default function WebsiteSchema() {
         name: "zeko.pk",
         url: "https://zeko.pk",
         logo: "https://zeko.pk/favicon.svg",
-        description: "Pakistan ka trusted electronics store. Arduino, modules, ICs, transistors, resistors, tools. Fast delivery in Karachi, Cash on Delivery.",
+        description: "Pakistan's Trusted Electronics Store. Arduino, Modules, ICs, Transistors, Resistors, Tools. Fast Delivery In Karachi, Cash on Delivery.",
         telephone: "+923150220243",
         email: "hussamm621@gmail.com",
         address: {

@@ -112,7 +112,7 @@ export default function CheckoutPage() {
               <div style={{ background:"var(--primary-dim)", border:"1.5px solid var(--primary-bdr)", borderRadius:"var(--r-md)", padding:"14px 16px" }}>
                 <div style={{ fontSize:13, fontWeight:700, color:"var(--primary)", marginBottom:6 }}>📋 Order Process</div>
                 <div style={{ fontSize:12, color:"var(--t2)", lineHeight:1.8 }}>
-                  1. Order place here → 2. Call/WhatsApp the confirm → 3. Same day dispatch → 4. 1–2 din delivery
+                  1. Order place here → 2. Call/WhatsApp the confirm → 3. Same day dispatch → 4. 1–2 days delivery
                 </div>
               </div>
 

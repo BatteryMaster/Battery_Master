@@ -41,7 +41,7 @@ export default function Footer() {
             </span>
           </Link>
           <p style={{ fontSize:13, color:"rgba(255,255,255,0.40)", lineHeight:1.85, maxWidth:240 }}>
-            Pakistan ka trusted electronics store. Sab ek jagah.
+            Pakistan Trusted Electronics Store. All in one place.
           </p>
           <div style={{ marginTop:16, fontSize:13, color:"rgba(255,255,255,0.40)", lineHeight:2.1 }}>
             <div>📍 Shop G1A, National Radio &amp; TV Market</div>

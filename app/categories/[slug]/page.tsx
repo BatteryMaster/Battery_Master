@@ -142,9 +142,9 @@ export default function CategoryDetailPage({ params }: Props) {
             Buy {name} Online in Pakistan — zeko.pk
           </h2>
           <p style={{ fontSize:14, color:"#475569", lineHeight:1.9 }}>
-            zeko.pk Pakistan ka trusted electronics store hai jahan se aap {name.toLowerCase()} best prices par khareed sakte hain.
-            Hum Karachi mein 1–2 din mein deliver karte hain, Cash on Delivery available hai.
-            Students, hobbyists, aur professionals sab ke liye quality {name.toLowerCase()} available hain.
+            zeko.pk is Pakistan trusted electronics store from where you can {name.toLowerCase()} Can be purchased at Best Buy.
+            Hum Karachi mein 1–2 days mein deliver karte hain, Cash on Delivery available hai.
+            Quality for students, hobbyists, and professionals a like {name.toLowerCase()} available here.
           </p>
         </div>
       </div>
