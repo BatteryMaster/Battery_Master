@@ -41,6 +41,18 @@ export const allProducts: Product[] = [
   { id:34, name:"Jumper Wires Set 65pcs",       category:"Tools",       price:"Rs. 280",   stock:"In Stock", description:"65 piece jumper wire set with male-male, male-female, female-female types. 20cm length, flexible, color coded. Essential for Arduino breadboard projects and circuit prototyping.",                                  image:"/products/jumper-wires.jpg",       badge:"new"  },
   { id:35, name:"Wire Stripper & Cutter",       category:"Tools",       price:"Rs. 450",   stock:"In Stock", description:"Professional automatic wire stripper and cutter tool. Strips 10-24 AWG wire cleanly. Spring loaded, ergonomic grip. Essential tool for electronics wiring and assembly work.",          image:"/products/wire-stripper.jpg",        badge:null   },
   { id:36, name:"Heat Shrink Tube Set",         category:"Tools",       price:"Rs. 200",   stock:"In Stock", description:"Assorted heat shrink tubing kit with multiple sizes and colors. 2:1 shrink ratio. Provides insulation and strain relief for wires, connectors, and solder joints.",                                 image:"/products/heat-shrink.jpg",        badge:null   },
+
+  { 
+  id: 37,  // ← agle number par (abhi 36 hain)
+  name: "Arduino Mega 2560", 
+  category: "Modules",   // Modules / ICs / Transistors / Resistors / Tools
+  price: "Rs. 3,000", 
+  stock: "In Stock",     // In Stock / Limited Stock / Out of Stock
+  description: "Arduino Mega 2560 development board with ATmega2560. 54 digital I/O pins, 16 analog inputs, 4 UARTs. Perfect for complex projects requiring more memory and pins.",
+  image: "/products/arduino-mega.jpg",  // ← image public/products/ mein rakho
+  badge: null,   // hot / new / sale / null
+},
+
 ];
 
 export const featuredProducts = allProducts.filter(p => p.badge === "hot").slice(0, 4);
