@@ -81,7 +81,7 @@ export default function ShopPageContent() {
       {/* Grid */}
       {filtered.length > 0 ? (
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(210px,1fr))", gap:16 }}>
-          {filtered.map(p => <ProductCard key={p.id} product={p} />)}
+          {filtered.map(p => <ProductCard key={p.id} id={p.id} name={p.name} category={p.category} price={p.price} stock={p.stock} image={p.image} badge={p.badge} originalPrice={p.originalPrice} />)}
         </div>
       ) : (
         <div style={{ textAlign:"center", padding:"64px 20px", color:"#94a3b8" }}>
