@@ -1,23 +1,36 @@
-"use client";
 import Link from "next/link";
 
-const CATS = [
-  { name:"Modules",     icon:"🔌", desc:"Arduino, Relay, Sensor boards", href:"/categories/modules" },
-  { name:"ICs",         icon:"🔬", desc:"555, Op-Amp, Logic ICs",        href:"/categories/ics" },
-  { name:"Transistors", icon:"⚡", desc:"BC547, MOSFET, Darlington",      href:"/categories/transistors" },
-  { name:"Resistors",   icon:"〰️", desc:"All values, bulk packs",         href:"/categories/resistors" },
-  { name:"Tools",       icon:"🔧", desc:"Soldering, Multimeters",          href:"/categories/tools" },
+const TILES = [
+  { name:"JK BMS",          slug:"jk-bms",                icon:"🛡️", bg:"rgba(255,255,255,0.12)" },
+  { name:"LiFePO4 Cell",    slug:"lifepo4-cell",           icon:"🌱", bg:"rgba(255,255,255,0.10)" },
+  { name:"E-Bike Kits",     slug:"eve-bike-kits",          icon:"🛵", bg:"rgba(255,255,255,0.10)" },
+  { name:"Chargers",        slug:"chargers",               icon:"🔌", bg:"rgba(255,255,255,0.10)" },
+  { name:"LCD Display",     slug:"lcd-display",            icon:"📺", bg:"rgba(255,255,255,0.10)" },
+  { name:"Meter Tools",     slug:"meter-tools",            icon:"🔧", bg:"rgba(255,255,255,0.10)" },
 ];
 
-export default function HeroCategoryTiles() {
+export function HeroCategoryTiles() {
   return (
-    <div className="hide-mob" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
-      {CATS.map((c, i) => (
-        <Link key={c.name} href={c.href} className="hero-tile"
-          style={{ gridColumn: i === 4 ? "span 2" : "span 1" }}>
-          <div style={{ fontSize:26, marginBottom:10 }}>{c.icon}</div>
-          <div style={{ fontWeight:700, fontSize:13, color:"#fff", marginBottom:4 }}>{c.name}</div>
-          <div style={{ fontSize:11, color:"rgba(255,255,255,0.55)" }}>{c.desc}</div>
+    <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:10 }}>
+      {TILES.map(t => (
+        <Link key={t.slug} href={`/categories/${t.slug}`}
+          style={{ background:t.bg, border:"1px solid rgba(255,255,255,0.18)", borderRadius:12, padding:"16px 12px", textDecoration:"none", textAlign:"center", display:"block" }}>
+          <div style={{ fontSize:24, marginBottom:6 }}>{t.icon}</div>
+          <div style={{ fontSize:11, fontWeight:700, color:"rgba(255,255,255,0.85)", lineHeight:1.3 }}>{t.name}</div>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+export function CategoryCards() {
+  return (
+    <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(180px,1fr))", gap:14 }}>
+      {TILES.map(t => (
+        <Link key={t.slug} href={`/categories/${t.slug}`}
+          style={{ background:"#fff", border:"1.5px solid #e2e8f0", borderRadius:14, padding:"22px 18px", textDecoration:"none", display:"block" }}>
+          <div style={{ fontSize:30, marginBottom:10 }}>{t.icon}</div>
+          <div style={{ fontSize:13, fontWeight:700, color:"#0f172a", marginBottom:4 }}>{t.name}</div>
         </Link>
       ))}
     </div>

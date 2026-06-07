@@ -77,7 +77,7 @@ export default function ContactPage() {
             <div style={{ fontSize:14, fontWeight:700, color:"#0f172a", marginBottom:8 }}>Somwar – Shanbe: 10am – 8pm</div>
             <div style={{ fontSize:13, color:"#64748b" }}>Itwar: 12pm – 6pm</div>
             <div style={{ marginTop:14, padding:"10px 12px", background:"#fef2f2", borderRadius:8, border:"1px solid #fecaca" }}>
-              <div style={{ fontSize:12, fontWeight:700, color:"#dc2626" }}>❌ COD Available Nahi</div>
+              <div style={{ fontSize:12, fontWeight:700, color:"#dc2626" }}>❌ COD Not Available </div>
               <div style={{ fontSize:11, color:"#64748b", marginTop:2 }}>Online payment ya bank transfer zaroor</div>
             </div>
           </div>
