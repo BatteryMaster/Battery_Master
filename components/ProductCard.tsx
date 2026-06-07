@@ -29,7 +29,7 @@ export default function ProductCard({ id, name, category, price, stock, image, b
       >
         <Image
           src={image}
-          alt={`${name} — ${category} | zeko.pk`}
+          alt={`${name} — ${category} | batterymaster.pk`}
           fill
           sizes="(max-width:480px) 50vw, (max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw"
           style={{ objectFit: "contain", padding: 14 }}

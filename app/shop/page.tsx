@@ -6,38 +6,33 @@ import ShopPageContent from "@/components/ShopPageContent";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "Shop — Buy Arduino, Electronics Components & Modules in Pakistan",
-  description: "Buy Arduino Uno, Arduino Nano, NodeMCU, sensors, ICs, transistors, resistors & tools in Pakistan. Best prices, Karachi delivery, Cash on Delivery.",
-  alternates: { canonical: "https://zeko.pk/shop" },
+  title: "Shop — JK BMS, LiFePO4 Cells, E-Bike Kits | Battery Master Karachi",
+  description: "Battery Master ki puri shop. JK BMS, LiFePO4 cells, lithium battery packs, e-bike kits, chargers, LCD displays, silicon wires & more. Saddar Karachi.",
 };
 
 export default function ShopPage() {
   return (
-    <main style={{ minHeight:"100vh", background:"#f5f7ff", overflowX:"hidden" }}>
+    <main style={{ minHeight:"100vh", background:"#f1f5f9", overflowX:"hidden" }}>
       <Header />
       <WhatsAppButton />
 
-      {/* Page header — SAME as original */}
-      <div style={{ background:"#fff", borderBottom:"1.5px solid #e2e8f0", padding:"40px 0 36px" }}>
+      {/* Page header */}
+      <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"40px 0 36px" }}>
         <div className="wrap">
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:10 }}>
-            zeko.pk Shop
+            Battery Master
           </div>
-          <h1 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, letterSpacing:"-.02em", color:"#0f172a", marginBottom:12 }}>
-            Explore All Products
+          <h1 style={{ fontSize:"clamp(24px,4vw,38px)", fontWeight:900, color:"#fff", marginBottom:10 }}>
+            Saare Products
           </h1>
-          <p style={{ fontSize:15, color:"#475569", maxWidth:520, lineHeight:1.7 }}>
-            Browse electronics modules, ICs, transistors, resistors, and tools in one place.
+          <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", maxWidth:480, lineHeight:1.7 }}>
+            JK BMS · LiFePO4 Cells · Lithium Packs · E-Bike Kits · Chargers · LCD Displays · Silicon Wires — sab kuch yahan
           </p>
         </div>
       </div>
 
-      <div className="wrap" style={{ paddingTop:"36px", paddingBottom:"80px" }}>
-        <Suspense fallback={
-          <div style={{ padding:"40px 0", textAlign:"center", color:"#94a3b8", fontSize:14 }}>
-            Loading products...
-          </div>
-        }>
+      <div className="wrap" style={{ paddingTop:32, paddingBottom:80 }}>
+        <Suspense fallback={<div style={{ padding:40, textAlign:"center", color:"#64748b" }}>Loading products...</div>}>
           <ShopPageContent />
         </Suspense>
       </div>

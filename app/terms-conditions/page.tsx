@@ -4,15 +4,15 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions",
-  description: "Read the Terms and Conditions for using Zeko.pk and placing orders.",
+  description: "Read the Terms and Conditions for using batterymaster.pk and placing orders.",
 };
 
 const PARAS = [
-  "By using Zeko.pk, you agree to comply with our website terms, policies, and applicable laws.",
-  "All orders placed on zeko.pk are subject to availability and confirmation. We reserve the right to cancel orders in exceptional circumstances.",
+  "By using batterymaster.pk, you agree to comply with our website terms, policies, and applicable laws.",
+  "All orders placed on batterymaster.pk are subject to availability and confirmation. We reserve the right to cancel orders in exceptional circumstances.",
   "Prices listed on the website are in Pakistani Rupees and are subject to change without prior notice.",
-  "Customers are responsible for providing accurate delivery information. zeko.pk is not liable for delivery failures due to incorrect address details.",
-  "Any disputes arising from transactions on zeko.pk will be handled in accordance with Pakistani law.",
+  "Customers are responsible for providing accurate delivery information. batterymaster.pk is not liable for delivery failures due to incorrect address details.",
+  "Any disputes arising from transactions on batterymaster.pk will be handled in accordance with Pakistani law.",
 ];
 
 export default function TermsConditionsPage() {

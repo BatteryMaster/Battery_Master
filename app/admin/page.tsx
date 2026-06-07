@@ -10,7 +10,7 @@ const SC: Record<Order["status"], { bg: string; color: string; label: string }> 
   delivered:  { bg: "#f0fdf4", color: "#166534", label: "Delivered" },
   cancelled:  { bg: "#fef2f2", color: "#b91c1c", label: "Cancelled" },
 };
-const PASS = "zeko2025";
+const PASS = "batterymaster2025";
 function toNum(price: string): number { return Number(price.replace(/[^0-9]/g, "")); }
 
 export default function AdminPage() {
@@ -24,9 +24,9 @@ export default function AdminPage() {
   if (!auth) return (
     <div style={{ minHeight:"100vh", background:"var(--bg)", display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}>
       <div style={{ background:"#fff", border:"1.5px solid var(--border)", borderRadius:"var(--r-xl)", padding:"44px 36px", width:"100%", maxWidth:360, textAlign:"center" }}>
-        <img src="/logo.png" alt="zeko.pk" style={{ width:56, height:56, borderRadius:"50%", objectFit:"cover", margin:"0 auto 18px", display:"block" }} />
+        <img src="/logo.png" alt="batterymaster.pk" style={{ width:56, height:56, borderRadius:"50%", objectFit:"cover", margin:"0 auto 18px", display:"block" }} />
         <h1 style={{ fontSize:20, fontWeight:800, marginBottom:5 }}>Admin Panel</h1>
-        <p style={{ color:"var(--t3)", fontSize:13, marginBottom:22 }}>zeko.pk order management</p>
+        <p style={{ color:"var(--t3)", fontSize:13, marginBottom:22 }}>batterymaster.pk order management</p>
         <input type="password" placeholder="Enter password" value={pass}
           onChange={e=>{setPass(e.target.value);setErr(false);}}
           onKeyDown={e=>{if(e.key==="Enter"){if(pass===PASS)setAuth(true);else setErr(true);}}}
@@ -134,7 +134,7 @@ export default function AdminPage() {
                 })}
               </div>
               <div style={{ display:"flex", gap:8 }}>
-                <a href={`https://wa.me/${sel.customer.phone.replace(/^0/,"92")}?text=${encodeURIComponent(`Assalam o Alaikum ${sel.customer.name}! Aapka zeko.pk order ${sel.id} confirm ho gaya. Total: Rs. ${sel.total}. 1-2 days mein delivery hogi. Shukriya!`)}`}
+                <a href={`https://wa.me/${sel.customer.phone.replace(/^0/,"92")}?text=${encodeURIComponent(`Assalam o Alaikum ${sel.customer.name}! Aapka batterymaster.pk order ${sel.id} confirm ho gaya. Total: Rs. ${sel.total}. 1-2 days mein delivery hogi. Shukriya!`)}`}
                   target="_blank" rel="noopener noreferrer"
                   style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", gap:6, background:"#25D366", color:"#fff", borderRadius:"var(--r-sm)", padding:"9px", fontSize:12, fontWeight:700, textDecoration:"none" }}>
                   💬 WhatsApp

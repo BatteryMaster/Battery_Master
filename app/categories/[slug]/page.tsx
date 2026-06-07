@@ -9,145 +9,94 @@ import Link from "next/link";
 
 type Props = { params: Promise<{ slug: string }> };
 
-const CAT_SEO: Record<string, {
-  name: string; icon: string; desc: string;
-  title: string; metaDesc: string; keywords: string[];
-}> = {
-  modules: {
-    name: "Modules", icon: "🔌",
-    desc: "Arduino boards, relay modules, sensor modules, WiFi modules aur zyada",
-    title: "Arduino & Electronic Modules Price in Pakistan — Buy Online | zeko.pk",
-    metaDesc: "Buy Arduino Uno, Arduino Nano, NodeMCU ESP8266, relay modules, HC-SR04, DHT11, L298N motor driver in Pakistan. Best prices, Karachi delivery, Cash on Delivery.",
-    keywords: ["arduino modules pakistan", "buy arduino online pakistan", "NodeMCU price pakistan", "relay module karachi", "HC-SR04 sensor pakistan", "electronics modules karachi"],
-  },
-  ics: {
-    name: "ICs", icon: "🔬",
-    desc: "NE555 timer, LM358, LM741 op-amps, voltage regulators, logic ICs aur more",
-    title: "ICs & Integrated Circuits Price in Pakistan — Buy Online | zeko.pk",
-    metaDesc: "Buy NE555 timer, LM358, LM741, LM7805, LM7812, CD4017, 74HC595, ATmega328P, L293D, ULN2003 ICs in Pakistan. Best prices in Karachi. Cash on Delivery.",
-    keywords: ["ICs pakistan", "NE555 IC price pakistan", "LM7805 voltage regulator pakistan", "buy ICs online karachi", "ATmega328P pakistan", "integrated circuits karachi"],
-  },
-  transistors: {
-    name: "Transistors", icon: "⚡",
-    desc: "BC547, BC557, 2N2222, TIP120, IRF540N MOSFET aur other transistors",
-    title: "Transistors & MOSFETs Price in Pakistan — Buy Online | zeko.pk",
-    metaDesc: "Buy BC547, BC557, 2N2222, TIP120 Darlington, IRF540N MOSFET transistors in Pakistan. Wholesale and retail. Best prices in Karachi, Cash on Delivery.",
-    keywords: ["transistors pakistan", "BC547 transistor price pakistan", "buy transistors karachi", "IRF540N MOSFET pakistan", "2N2222 transistor pakistan", "TIP120 darlington pakistan"],
-  },
-  resistors: {
-    name: "Resistors", icon: "〰️",
-    desc: "Resistor kits, bulk packs — 10K, 1K, potentiometers aur all values",
-    title: "Resistors & Resistor Kits Price in Pakistan — Buy Online | zeko.pk",
-    metaDesc: "Buy resistor kits, 10K resistors, 1K resistors, potentiometers in Pakistan. 500pc assortment kits, bulk packs. Best prices in Karachi. Cash on Delivery.",
-    keywords: ["resistors pakistan", "buy resistors karachi", "10K resistor pack pakistan", "resistor kit pakistan", "potentiometer price pakistan", "electronics resistors karachi"],
-  },
-  tools: {
-    name: "Tools", icon: "🔧",
-    desc: "Soldering irons, digital multimeters, breadboards, jumper wires aur accessories",
-    title: "Electronics Tools Price in Pakistan — Soldering Iron, Multimeter | zeko.pk",
-    metaDesc: "Buy soldering iron, digital multimeter, breadboard, jumper wires, wire stripper, heat shrink in Pakistan. Best prices in Karachi. Cash on Delivery.",
-    keywords: ["soldering iron price pakistan", "digital multimeter karachi", "breadboard price pakistan", "jumper wires pakistan", "electronics tools karachi", "buy soldering iron online pakistan"],
-  },
+// Map URL slug → category name in products.ts
+const SLUG_TO_CAT: Record<string, { name: string; icon: string; desc: string }> = {
+  "jk-bms":                { name:"JK BMS",                icon:"🛡️", desc:"4S to 24S JK Active Balancing BMS — Bluetooth, RS485, solar & EV ke liye" },
+  "lithium-battery-packed": { name:"Lithium Battery Packed", icon:"🔋", desc:"12V to 72V ready-made lithium packs with BMS — solar, e-bike, UPS ke liye" },
+  "battery-box":            { name:"Battery Box",            icon:"📦", desc:"12V to 72V plastic & aluminum battery enclosures — waterproof & lockable" },
+  "lithium-ion-cell":       { name:"Lithium Ion Cell",       icon:"⚡", desc:"Samsung, LG, Panasonic Grade-A 18650 cells — DIY battery packs ke liye" },
+  "lifepo4-cell":           { name:"LiFePO4 Cell",           icon:"🌱", desc:"EVE LF105, LF280K, CATL 200Ah, 304Ah Grade-A — solar & EV ke liye best" },
+  "lcd-display":            { name:"LCD Display",            icon:"📺", desc:"Battery level indicators, coulometers, e-bike S866 & 72V dashboards" },
+  "eve-bike-kits":          { name:"EVE Bike Kits",          icon:"🛵", desc:"48V 1000W to 72V 3000W complete e-bike conversion kits with motor & controller" },
+  "chargers":               { name:"Chargers",               icon:"🔌", desc:"12V to 72V smart CC/CV lithium chargers — auto cutoff, LED indicator" },
+  "eve-bike-display":       { name:"EVE Bike Display",       icon:"🖥️", desc:"S900 TFT, KT LCD3, SW102 wireless e-bike displays" },
+  "meter-tools":            { name:"Meter Tools",            icon:"🔧", desc:"Silicon wires, XT60, Anderson connectors, nickel strip, spot welder & more" },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const cat = CAT_SEO[slug];
+  const cat = SLUG_TO_CAT[slug];
   if (!cat) return { title: "Category Not Found" };
   return {
-    title: cat.title,
-    description: cat.metaDesc,
-    keywords: cat.keywords,
-    alternates: { canonical: `https://zeko.pk/categories/${slug}` },
-    openGraph: {
-      title: cat.title,
-      description: cat.metaDesc,
-      url: `https://zeko.pk/categories/${slug}`,
-      type: "website",
-    },
+    title: `${cat.name} — Battery Master Karachi`,
+    description: `Buy ${cat.name} in Karachi, Pakistan. ${cat.desc}. Battery Master, Shop No 78, Saddar Karachi.`,
   };
 }
 
 export default function CategoryDetailPage({ params }: Props) {
   const { slug } = use(params);
-  const cat  = CAT_SEO[slug] ?? { name: slug.charAt(0).toUpperCase() + slug.slice(1), icon: "📦", desc: `Browse all ${slug} products`, title: "", metaDesc: "", keywords: [] };
-  const name = cat.name;
-
-  // Category schema for Google
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: cat.title,
-    description: cat.metaDesc,
-    url: `https://zeko.pk/categories/${slug}`,
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home",       item: "https://zeko.pk" },
-        { "@type": "ListItem", position: 2, name: "Categories", item: "https://zeko.pk/categories" },
-        { "@type": "ListItem", position: 3, name: name,         item: `https://zeko.pk/categories/${slug}` },
-      ],
-    },
-  };
-
-  const products = allProducts.filter(p => p.category.toLowerCase() === name.toLowerCase());
+  const cat = SLUG_TO_CAT[slug] ?? { name: slug, icon: "📦", desc: `Browse all ${slug} products` };
+  const products = allProducts.filter(p => p.category === cat.name);
 
   return (
-    <main style={{ minHeight:"100vh", background:"#eef2ff", overflowX:"hidden" }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+    <main style={{ minHeight:"100vh", background:"#f1f5f9", overflowX:"hidden" }}>
       <Header />
       <WhatsAppButton />
 
       {/* Page Header */}
-      <div style={{ background:"#fff", borderBottom:"1.5px solid #dde3f0", padding:"36px 0 32px" }}>
+      <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"36px 0 32px" }}>
         <div className="wrap">
-          {/* Breadcrumb */}
-          <nav style={{ display:"flex", alignItems:"center", gap:6, fontSize:12, color:"#64748b", marginBottom:16, flexWrap:"wrap" }}>
-            <Link href="/" style={{ color:"#64748b" }}>Home</Link>
+          <nav style={{ display:"flex", alignItems:"center", gap:6, fontSize:12, color:"rgba(255,255,255,0.5)", marginBottom:16, flexWrap:"wrap" }}>
+            <Link href="/" style={{ color:"rgba(255,255,255,0.5)", textDecoration:"none" }}>Home</Link>
             <span>›</span>
-            <Link href="/categories" style={{ color:"#64748b" }}>Categories</Link>
+            <Link href="/categories" style={{ color:"rgba(255,255,255,0.5)", textDecoration:"none" }}>Categories</Link>
             <span>›</span>
-            <span style={{ color:"#0f172a", fontWeight:600 }}>{name}</span>
+            <span style={{ color:"#fff", fontWeight:600 }}>{cat.name}</span>
           </nav>
-
           <div style={{ display:"flex", alignItems:"center", gap:16, flexWrap:"wrap" }}>
-            <div style={{ width:52, height:52, background:"#eef2ff", borderRadius:14, display:"flex", alignItems:"center", justifyContent:"center", fontSize:26, flexShrink:0 }}>
+            <div style={{ width:54, height:54, background:"rgba(255,255,255,0.12)", borderRadius:14, display:"flex", alignItems:"center", justifyContent:"center", fontSize:28, flexShrink:0 }}>
               {cat.icon}
             </div>
             <div>
-              <h1 style={{ fontSize:"clamp(22px,4vw,36px)", fontWeight:800, letterSpacing:"-.02em", color:"#0f172a", marginBottom:6 }}>
-                {name} in Pakistan
-              </h1>
-              <p style={{ fontSize:14, color:"#475569" }}>{cat.desc}</p>
+              <h1 style={{ fontSize:"clamp(22px,4vw,36px)", fontWeight:900, color:"#fff", marginBottom:6 }}>{cat.name}</h1>
+              <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)" }}>{cat.desc}</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="wrap" style={{ paddingTop:"32px", paddingBottom:"80px" }}>
-        <div style={{ fontSize:13, color:"#64748b", marginBottom:20 }}>
-          <span style={{ fontWeight:800, color:"#0f172a" }}>{products.length}</span> products in {name}
-        </div>
-        <div className="prod-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(min(210px,100%),1fr))", gap:16 }}>
-          {products.map(p => (
-            <ProductCard key={p.id} id={p.id} name={p.name} category={p.category}
-              price={p.price} stock={p.stock} image={p.image}
-              badge={p.badge} originalPrice={p.originalPrice} />
-          ))}
+        <div style={{ fontSize:13, color:"#64748b", marginBottom:20, fontWeight:500 }}>
+          <span style={{ fontWeight:800, color:"#0f172a" }}>{products.length}</span> products in {cat.name}
         </div>
 
-        {/* SEO text block at bottom */}
-        <div style={{ marginTop:56, background:"#fff", border:"1.5px solid #dde3f0", borderRadius:18, padding:"32px 28px" }}>
-          <h2 style={{ fontSize:18, fontWeight:800, color:"#0f172a", marginBottom:12 }}>
-            Buy {name} Online in Pakistan — zeko.pk
-          </h2>
-          <p style={{ fontSize:14, color:"#475569", lineHeight:1.9 }}>
-            zeko.pk is Pakistan trusted electronics store from where you can {name.toLowerCase()} Can be purchased at Best Buy.
-            Hum Karachi mein 1–2 days mein deliver karte hain, Cash on Delivery available hai.
-            Quality for students, hobbyists, and professionals a like {name.toLowerCase()} available here.
-          </p>
+        {products.length > 0 ? (
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(min(210px,100%),1fr))", gap:16 }}>
+            {products.map(p => <ProductCard key={p.id} id={p.id} name={p.name} category={p.category} price={p.price} stock={p.stock} image={p.image} badge={p.badge} originalPrice={p.originalPrice} />)}
+          </div>
+        ) : (
+          <div style={{ textAlign:"center", padding:"80px 20px", color:"#94a3b8" }}>
+            <div style={{ fontSize:48, marginBottom:12 }}>📦</div>
+            <div style={{ fontSize:16, fontWeight:600, color:"#374151" }}>Is category mein abhi products nahi hain</div>
+            <div style={{ fontSize:13, marginTop:6, marginBottom:20 }}>WhatsApp par inquiry karein</div>
+            <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer"
+              style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"12px 24px", background:"#25D366", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
+              📱 WhatsApp Inquiry
+            </a>
+          </div>
+        )}
+
+        <div style={{ marginTop:32, display:"flex", gap:10, flexWrap:"wrap" }}>
+          <Link href="/categories" style={{ display:"inline-flex", alignItems:"center", padding:"10px 20px", background:"#fff", color:"#0f172a", border:"1.5px solid #e2e8f0", borderRadius:8, fontSize:13, fontWeight:700, textDecoration:"none" }}>
+            ← Saari Categories
+          </Link>
+          <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer"
+            style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"10px 20px", background:"#25D366", color:"#fff", borderRadius:8, fontSize:13, fontWeight:700, textDecoration:"none" }}>
+            📱 WhatsApp Order
+          </a>
         </div>
       </div>
+
       <Footer />
     </main>
   );

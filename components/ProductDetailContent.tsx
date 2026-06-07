@@ -35,7 +35,7 @@ export default function ProductDetailContent({ product }: { product: Product }) 
         }}>
           <Image
             src={product.image}
-            alt={`${product.name} price in Pakistan — buy at zeko.pk`}
+            alt={`${product.name} price in Pakistan — buy at batterymaster.pk`}
             fill priority
             style={{ objectFit:"contain", padding:36 }}
             sizes="(max-width:768px) 100vw, 50vw"
@@ -58,7 +58,7 @@ export default function ProductDetailContent({ product }: { product: Product }) 
 
           {/* SEO subtitle */}
           <p style={{ fontSize:13, color:"#64748b", marginBottom:20 }}>
-            {product.name} price in Pakistan — buy online at zeko.pk, Karachi
+            {product.name} price in Pakistan — buy online at batterymaster.pk, Karachi
           </p>
 
           {/* Price */}
@@ -101,7 +101,7 @@ export default function ProductDetailContent({ product }: { product: Product }) 
               🛒 {isOut ? "Out of Stock" : "Add to Cart"}
             </button>
             <a
-              href={`https://wa.me/923150220243?text=Assalam%20alaikum%2C%20I%20want%20to%20order%20${encodeURIComponent(product.name)}%20(Rs.%20${priceNum})%20from%20zeko.pk`}
+              href={`https://wa.me/923329891510?text=Assalam%20alaikum%2C%20I%20want%20to%20order%20${encodeURIComponent(product.name)}%20(Rs.%20${priceNum})%20from%20batterymaster.pk`}
               target="_blank" rel="noopener noreferrer"
               style={{ background:"#25D366", color:"#fff", border:"none", borderRadius:9, padding:"12px 22px", fontSize:14, fontWeight:700, cursor:"pointer", display:"flex", alignItems:"center", gap:8, textDecoration:"none" }}
             >

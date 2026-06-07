@@ -9,9 +9,9 @@ export default function ProductSchema({ product }: { product: Product }) {
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: `https://zeko.pk${product.image}`,
-    sku: `ZEKO-${product.id}`,
-    brand: { "@type": "Brand", name: "zeko.pk" },
+    image: `https://batterymaster.pk${product.image}`,
+    sku: `BATTERYMASTER-${product.id}`,
+    brand: { "@type": "Brand", name: "batterymaster.pk" },
     category: product.category,
     offers: {
       "@type": "Offer",
@@ -20,11 +20,11 @@ export default function ProductSchema({ product }: { product: Product }) {
       availability: isOut
         ? "https://schema.org/OutOfStock"
         : "https://schema.org/InStock",
-      url: `https://zeko.pk/shop/${product.id}`,
+      url: `https://batterymaster.pk/shop/${product.id}`,
       seller: {
         "@type": "Organization",
-        name: "zeko.pk",
-        url: "https://zeko.pk",
+        name: "batterymaster.pk",
+        url: "https://batterymaster.pk",
       },
       priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1))
         .toISOString().split("T")[0],

@@ -6,55 +6,44 @@ import { OrderProvider } from "@/context/OrderContext";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1a56e8",
+  themeColor: "#1e40af",
 };
 
 export const metadata: Metadata = {
   title: {
-    default: "zeko.pk — Arduino, Electronics Components & Modules in Pakistan",
-    template: "%s | zeko.pk",
+    default: "Battery Master — JK BMS, LiFePO4 Cells, E-Bike Kits | Karachi Pakistan",
+    template: "%s | Battery Master",
   },
-  description: "Buy Arduino Uno, Arduino Nano, NodeMCU, sensors, ICs, transistors, resistors & tools in Pakistan. Best prices, fast delivery in Karachi. Cash on Delivery available.",
+  description: "Battery Master — Karachi ka trusted battery store. JK BMS, LiFePO4 cells, lithium battery packs, e-bike kits, chargers, LCD displays & more. Shop No 78, Saddar Karachi.",
   keywords: [
-    "arduino pakistan", "buy arduino online pakistan", "electronics components karachi",
-    "NodeMCU ESP8266 pakistan", "NE555 IC pakistan", "BC547 transistor pakistan",
-    "breadboard karachi", "soldering iron pakistan", "electronics shop karachi",
-    "zeko.pk", "digital multimeter pakistan", "jumper wires pakistan",
+    "JK BMS Pakistan", "LiFePO4 cell Karachi", "lithium battery pack Pakistan",
+    "e-bike kit Karachi", "EVE LF280K Pakistan", "CATL cell Pakistan",
+    "battery charger Karachi", "18650 cell Pakistan", "silicon wire Karachi",
+    "Battery Master Karachi", "EV parts Pakistan", "electric bike battery",
+    "BMS Pakistan", "solar battery Karachi", "lithium ion cell Pakistan",
   ],
-  authors: [{ name: "zeko.pk", url: "https://zeko.pk" }],
-  creator: "zeko.pk",
-  publisher: "zeko.pk",
-  metadataBase: new URL("https://zeko.pk"),
-  alternates: { canonical: "https://zeko.pk" },
-  category: "Electronics Store",
+  authors: [{ name: "Battery Master Karachi" }],
+  creator: "Battery Master",
+  publisher: "Battery Master",
+  category: "Battery & EV Parts Store",
   icons: {
     icon: [
-      { url: "/favicon.ico",    sizes: "any" },
-      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
     apple: "/apple-touch-icon.png",
-    shortcut: "/favicon.ico",
   },
   openGraph: {
     type: "website",
     locale: "en_PK",
-    url: "https://zeko.pk",
-    siteName: "zeko.pk",
-    title: "zeko.pk — Arduino & Electronics in Pakistan",
-    description: "Pakistan ka best electronics store. Arduino, sensors, ICs, tools. Fast Karachi delivery, Cash on Delivery.",
-    images: [{ url: "https://zeko.pk/logo-512.png", width: 512, height: 512, alt: "zeko.pk logo" }],
-  },
-  twitter: {
-    card: "summary",
-    title: "zeko.pk — Arduino & Electronics in Pakistan",
-    description: "Buy Arduino, sensors, ICs, transistors, tools. Fast Karachi delivery, COD.",
-    images: ["https://zeko.pk/logo-512.png"],
+    siteName: "Battery Master",
+    title: "Battery Master — JK BMS, LiFePO4 Cells & EV Parts Karachi",
+    description: "Karachi ka trusted battery store. JK BMS, LiFePO4 cells, e-bike kits, chargers. Shop No 78, Saddar.",
+    images: [{ url: "/logo-512.png", width: 512, height: 512, alt: "Battery Master logo" }],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+    googleBot: { index: true, follow: true },
   },
 };
 
@@ -63,10 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" data-theme="light">
       <head>
         <meta name="color-scheme" content="light" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body style={{ overflowX: "hidden", maxWidth: "100vw" }}>

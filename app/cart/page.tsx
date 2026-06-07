@@ -23,7 +23,7 @@ export default function CartPage() {
 
       <div style={{ background: "#fff", borderBottom: "1.5px solid var(--border)", padding: "36px 0 32px" }}>
         <div className="wrap">
-          <div className="sec-label">zeko.pk Cart</div>
+          <div className="sec-label">batterymaster.pk Cart</div>
           <h1 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 800, letterSpacing: "-.02em", color: "var(--t1)", marginTop: 8 }}>
             Your Shopping Cart
           </h1>

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Contact zeko.pk for support, product inquiries, and order assistance in Pakistan.",
+  description: "Contact batterymaster.pk for support, product inquiries, and order assistance in Pakistan.",
 };
 
 export default function ContactPage() {
@@ -19,7 +19,7 @@ export default function ContactPage() {
       <div style={{ background:"#fff", borderBottom:"1.5px solid #dde3f0", padding:"36px 0 32px" }}>
         <div className="wrap">
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:8 }}>
-            Contact zeko.pk
+            Contact batterymaster.pk
           </div>
           <h1 style={{ fontSize:"clamp(24px,4vw,38px)", fontWeight:800, letterSpacing:"-.02em", color:"#0f172a", marginBottom:8 }}>
             Get in Touch

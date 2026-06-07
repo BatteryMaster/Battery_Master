@@ -4,15 +4,15 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Read the Privacy Policy of zeko.pk to understand how customer information is handled.",
+  description: "Read the Privacy Policy of batterymaster.pk to understand how customer information is handled.",
 };
 
 const PARAS = [
-  "zeko.pk respects your privacy and is committed to protecting your personal information.",
+  "batterymaster.pk respects your privacy and is committed to protecting your personal information.",
   "We may collect customer information such as name, phone number, email address, delivery address, and order details to process and fulfill orders.",
   "Your information is used only for order processing, customer communication, service improvement, and related business purposes.",
   "We do not sell customer personal information to third parties.",
-  "By using zeko.pk, you agree to the collection and use of information as described in this policy.",
+  "By using batterymaster.pk, you agree to the collection and use of information as described in this policy.",
 ];
 
 export default function PrivacyPolicyPage() {

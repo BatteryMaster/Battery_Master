@@ -4,11 +4,17 @@ import { useSearchParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import { allProducts, categories } from "@/data/products";
 
+const CAT_ICONS: Record<string, string> = {
+  "All": "🔋", "JK BMS": "🛡️", "Lithium Battery Packed": "🔌",
+  "Battery Box": "📦", "Lithium Ion Cell": "⚡", "LiFePO4 Cell": "🌱",
+  "LCD Display": "📺", "EVE Bike Kits": "🛵", "Chargers": "🔌",
+  "EVE Bike Display": "🖥️", "Meter Tools": "🔧",
+};
+
 export default function ShopPageContent() {
   const searchParams = useSearchParams();
   const urlQ = searchParams.get("q") || "";
-
-  const [cat, setCat]     = useState("All");
+  const [cat, setCat]       = useState("All");
   const [search, setSearch] = useState(urlQ);
 
   useEffect(() => { setSearch(urlQ); }, [urlQ]);
@@ -23,105 +29,69 @@ export default function ShopPageContent() {
 
   return (
     <>
-      {/* ── Search bar ── */}
-      <div style={{ position: "relative", marginBottom: 14 }}>
-        <svg
-          style={{ position:"absolute", left:14, top:"50%", transform:"translateY(-50%)", color:"#94a3b8", pointerEvents:"none" }}
-          width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-        >
+      {/* Search bar */}
+      <div style={{ position:"relative", marginBottom:14 }}>
+        <svg style={{ position:"absolute", left:14, top:"50%", transform:"translateY(-50%)", color:"#94a3b8", pointerEvents:"none" }}
+          width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
         <input
           type="text"
-          placeholder="Search products... e.g. Arduino, IC, Multimeter"
+          placeholder="Search... e.g. JK BMS, LiFePO4, Charger, XT60"
           value={search}
           onChange={e => setSearch(e.target.value)}
           onFocus={e => { e.target.style.borderColor="#2563eb"; e.target.style.boxShadow="0 0 0 3px rgba(37,99,235,0.08)"; }}
           onBlur={e  => { e.target.style.borderColor="#e2e8f0"; e.target.style.boxShadow="none"; }}
-          style={{
-            width:"100%", background:"#fff", border:"1.5px solid #e2e8f0",
-            borderRadius:10, padding:"13px 44px 13px 42px",
-            fontSize:14, color:"#0f172a", outline:"none",
-            fontFamily:"inherit", transition:"border-color .18s, box-shadow .18s",
-          }}
+          style={{ width:"100%", background:"#fff", border:"1.5px solid #e2e8f0", borderRadius:10, padding:"13px 44px 13px 42px", fontSize:14, color:"#0f172a", outline:"none", fontFamily:"inherit", transition:"border-color .18s, box-shadow .18s" }}
         />
         {search && (
-          <button
-            onClick={() => setSearch("")}
-            style={{
-              position:"absolute", right:12, top:"50%", transform:"translateY(-50%)",
-              background:"#e2e8f0", border:"none", borderRadius:"50%",
-              width:22, height:22, cursor:"pointer",
-              display:"flex", alignItems:"center", justifyContent:"center",
-              color:"#64748b", fontSize:11, fontWeight:700,
-            }}
-          >✕</button>
+          <button onClick={() => setSearch("")}
+            style={{ position:"absolute", right:12, top:"50%", transform:"translateY(-50%)", background:"#e2e8f0", border:"none", borderRadius:"50%", width:22, height:22, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", color:"#64748b", fontSize:11, fontWeight:700 }}>
+            ✕
+          </button>
         )}
       </div>
 
-      {/* ── Filter bar — horizontally scrollable on mobile ── */}
-      <div style={{ marginBottom: 20 }}>
-        {/* Count */}
+      {/* Filter bar */}
+      <div style={{ marginBottom:20 }}>
         <div style={{ fontSize:13, color:"#64748b", fontWeight:500, marginBottom:10 }}>
-          <span style={{ fontWeight:800, color:"#0f172a" }}>{filtered.length}</span> products found
+          <span style={{ fontWeight:800, color:"#0f172a" }}>{filtered.length}</span> products
           {search && <span style={{ color:"#2563eb", marginLeft:6 }}>for &quot;{search}&quot;</span>}
         </div>
-
-        {/* Category buttons — scroll on mobile */}
-        <div style={{
-          display: "flex", gap: 6, flexWrap: "wrap",
-          overflowX: "auto", paddingBottom: 4,
-          // Hide scrollbar but keep scroll
-          msOverflowStyle: "none", scrollbarWidth: "none",
-        }}>
+        <div style={{ display:"flex", gap:8, overflowX:"auto", paddingBottom:6, msOverflowStyle:"none", scrollbarWidth:"none" }}>
           {categories.map(c => (
-            <button
-              key={c}
-              onClick={() => setCat(c)}
+            <button key={c} onClick={() => setCat(c)}
               style={{
-                padding:"7px 16px", fontSize:13, fontWeight:600,
-                border: cat===c ? "none" : "1.5px solid #e2e8f0",
-                borderRadius:8, flexShrink: 0,
-                background: cat===c ? "#2563eb" : "#fff",
-                color:       cat===c ? "#fff"    : "#374151",
-                cursor:"pointer", transition:"all .15s",
-                boxShadow: cat===c ? "0 2px 8px rgba(37,99,235,0.25)" : "none",
-              }}
-            >{c}</button>
+                flexShrink:0, padding:"8px 16px", borderRadius:50,
+                border: cat === c ? "2px solid #2563eb" : "1.5px solid #e2e8f0",
+                background: cat === c ? "#2563eb" : "#fff",
+                color: cat === c ? "#fff" : "#374151",
+                fontSize:12, fontWeight:700, cursor:"pointer",
+                display:"flex", alignItems:"center", gap:5,
+                boxShadow: cat === c ? "0 2px 10px rgba(37,99,235,0.3)" : "none",
+                transition:"all .15s",
+              }}>
+              <span>{CAT_ICONS[c] || "📦"}</span>
+              <span>{c}</span>
+            </button>
           ))}
         </div>
       </div>
 
-      {/* ── Product grid ── */}
+      {/* Grid */}
       {filtered.length > 0 ? (
-        <div
-          className="prod-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(min(210px, 100%), 1fr))",
-            gap: 16,
-          }}
-        >
-          {filtered.map(p => (
-            <ProductCard
-              key={p.id} id={p.id} name={p.name} category={p.category}
-              price={p.price} stock={p.stock} image={p.image}
-              badge={p.badge} originalPrice={p.originalPrice}
-            />
-          ))}
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(210px,1fr))", gap:16 }}>
+          {filtered.map(p => <ProductCard key={p.id} product={p} />)}
         </div>
       ) : (
-        <div style={{
-          background:"#fff", border:"1.5px solid #e2e8f0",
-          borderRadius:16, padding:"60px 24px", textAlign:"center",
-        }}>
-          <div style={{ fontSize:44, marginBottom:16 }}>🔍</div>
-          <h3 style={{ fontSize:18, fontWeight:700, color:"#0f172a", marginBottom:8 }}>No products found</h3>
-          <p style={{ fontSize:14, color:"#64748b", marginBottom:20 }}>Try a different category or search keyword.</p>
-          <button
-            onClick={() => { setSearch(""); setCat("All"); }}
-            style={{ background:"#2563eb", color:"#fff", border:"none", borderRadius:8, padding:"10px 24px", fontSize:14, fontWeight:700, cursor:"pointer" }}
-          >Reset Search</button>
+        <div style={{ textAlign:"center", padding:"64px 20px", color:"#94a3b8" }}>
+          <div style={{ fontSize:48, marginBottom:12 }}>🔍</div>
+          <div style={{ fontSize:16, fontWeight:600, color:"#374151" }}>Koi product nahi mila</div>
+          <div style={{ fontSize:13, marginTop:6 }}>Alag search ya category try karein</div>
+          <button onClick={() => { setSearch(""); setCat("All"); }}
+            style={{ marginTop:16, padding:"10px 20px", background:"#2563eb", color:"#fff", border:"none", borderRadius:8, fontSize:13, fontWeight:700, cursor:"pointer" }}>
+            Sab Dekhein
+          </button>
         </div>
       )}
     </>

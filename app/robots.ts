@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin", "/order-success"],
       },
     ],
-    sitemap: "https://zeko.pk/sitemap.xml",
-    host: "https://zeko.pk",
+    sitemap: "https://batterymaster.pk/sitemap.xml",
+    host: "https://batterymaster.pk",
   };
 }

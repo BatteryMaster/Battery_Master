@@ -4,11 +4,11 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Return & Refund Policy",
-  description: "Read the Return and Refund Policy of zeko.pk for order returns and refunds.",
+  description: "Read the Return and Refund Policy of batterymaster.pk for order returns and refunds.",
 };
 
 const PARAS = [
-  "zeko.pk aims to provide quality products and a reliable shopping experience.",
+  "batterymaster.pk aims to provide quality products and a reliable shopping experience.",
   "If you receive a damaged, incorrect, or defective product, you may contact us within 7 days of delivery for assistance.",
   "Returned products should be unused where applicable and in original condition with packaging, unless the issue is related to defect or shipping damage.",
   "Refunds or replacements may be processed after review and approval according to the product issue and company policy.",

@@ -119,7 +119,7 @@ function SliderCard({ p, onAdd, cardWidth }: { p: Product; onAdd: () => void; ca
       }}>
         <Image
           src={p.image}
-          alt={`${p.name} | zeko.pk`}
+          alt={`${p.name} | batterymaster.pk`}
           fill
           sizes="(max-width:540px) 100vw, (max-width:900px) 50vw, 25vw"
           style={{ objectFit: "contain", padding: 12 }}

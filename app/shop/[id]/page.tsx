@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const catSlug  = product.category.toLowerCase();
 
   return {
-    title: `${product.name} Price in Pakistan — Buy Online Rs. ${priceNum} | zeko.pk`,
-    description: `Buy ${product.name} in Pakistan at Rs. ${priceNum}. ${product.description} Fast delivery in Karachi, Cash on Delivery. Shop at zeko.pk.`,
+    title: `${product.name} Price in Pakistan — Buy Online Rs. ${priceNum} | batterymaster.pk`,
+    description: `Buy ${product.name} in Pakistan at Rs. ${priceNum}. ${product.description} Fast delivery in Karachi, Cash on Delivery. Shop at batterymaster.pk.`,
     keywords: [
       `${product.name.toLowerCase()} pakistan`,
       `${product.name.toLowerCase()} price pakistan`,
@@ -27,11 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `${product.name.toLowerCase()} karachi`,
       `${product.category.toLowerCase()} pakistan`,
     ],
-    alternates: { canonical: `https://zeko.pk/shop/${product.id}` },
+    alternates: { canonical: `https://batterymaster.pk/shop/${product.id}` },
     openGraph: {
-      title: `${product.name} — Rs. ${priceNum} | zeko.pk`,
+      title: `${product.name} — Rs. ${priceNum} | batterymaster.pk`,
       description: `${product.description} Available in Pakistan. Fast Karachi delivery, COD.`,
-      url: `https://zeko.pk/shop/${product.id}`,
+      url: `https://batterymaster.pk/shop/${product.id}`,
       type: "website",
     },
   };
