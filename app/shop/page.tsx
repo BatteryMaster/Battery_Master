@@ -23,7 +23,7 @@ export default function ShopPage() {
             Battery Master
           </div>
           <h1 style={{ fontSize:"clamp(24px,4vw,38px)", fontWeight:900, color:"#fff", marginBottom:10 }}>
-            Saare Products
+            All Products
           </h1>
           <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", maxWidth:480, lineHeight:1.7 }}>
             JK BMS · LiFePO4 Cells · Lithium Packs · E-Bike Kits · Chargers · LCD Displays · Silicon Wires — sab kuch yahan

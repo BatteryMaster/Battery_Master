@@ -49,7 +49,7 @@ export default function Header() {
           <span style={{ opacity:0.4 }}>·</span>
           <span>📞 <strong>03329891510</strong></span>
           <span style={{ opacity:0.4 }}>·</span>
-          <span>❌ No Online Payment</span>
+          <span>✅  Online Services Available</span>
         </span>
       </div>
 

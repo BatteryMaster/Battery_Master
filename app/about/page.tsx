@@ -85,13 +85,13 @@ export default function AboutPage() {
 
         {/* COD notice */}
         <div style={{ background:"#fef2f2", border:"1.5px solid #fecaca", borderRadius:12, padding:"16px 20px", marginBottom:24 }}>
-          <div style={{ fontSize:14, fontWeight:700, color:"#dc2626", marginBottom:4 }}>❌ Online Payment Available Nahi</div>
+          <div style={{ fontSize:14, fontWeight:700, color:"#dc2626", marginBottom:4 }}> Online Payment Available </div>
           <div style={{ fontSize:13, color:"#64748b" }}>Hum sirf <strong>bank transfer, Easypaisa, ya JazzCash</strong> accept karte hain. Order ke liye pehle WhatsApp karein.</div>
         </div>
 
         <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
           <Link href="/shop" style={{ display:"inline-flex", alignItems:"center", padding:"12px 24px", background:"#2563eb", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
-            🛒 Products Dekhein →
+            🛒 See All Products  →
           </Link>
           <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer"
             style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"12px 24px", background:"#25D366", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>

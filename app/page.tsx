@@ -58,7 +58,7 @@ export default function Home() {
 
           <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
             <a href="#products" style={{ background:"#f97316", color:"#fff", borderRadius:10, padding:"14px 32px", fontSize:15, fontWeight:800, textDecoration:"none", boxShadow:"0 4px 20px rgba(249,115,22,0.4)" }}>
-              🛒 Products Dekhein
+              🛒 See All Products 
             </a>
             <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer" style={{ background:"#25D366", color:"#fff", borderRadius:10, padding:"14px 32px", fontSize:15, fontWeight:800, textDecoration:"none", boxShadow:"0 4px 20px rgba(37,211,102,0.3)" }}>
               📱 WhatsApp Order
@@ -85,7 +85,7 @@ export default function Home() {
       {/* NO COD NOTICE */}
       <div style={{ background:"#fef2f2", borderBottom:"2px solid #fecaca" }}>
         <div className="wrap" style={{ padding:"12px 0", display:"flex", alignItems:"center", gap:10, flexWrap:"wrap" }}>
-          <span style={{ fontSize:13, fontWeight:700, color:"#dc2626" }}>❌ Online Payment Available Nahi</span>
+          <span style={{ fontSize:13, fontWeight:700, color:"#008000" }}> Online Payment Available </span>
           <span style={{ fontSize:13, color:"#64748b" }}>— Hum sirf Bank Transfer / Online Payment accept karte hain. Order ke liye WhatsApp karein.</span>
           <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer" style={{ marginLeft:"auto", background:"#25D366", color:"#fff", padding:"6px 16px", borderRadius:6, fontSize:12, fontWeight:700, textDecoration:"none", flexShrink:0 }}>
             📱 WhatsApp Karein
@@ -114,7 +114,7 @@ export default function Home() {
           <div style={{ marginBottom:24 }}>
             <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#2563eb" }}>🛒 Browse All</div>
             <h2 style={{ fontSize:"clamp(20px,3vw,28px)", fontWeight:800, color:"#0f172a", marginTop:4, letterSpacing:"-.02em" }}>
-              {selectedCat === "All" ? "Saare Products" : selectedCat}
+              {selectedCat === "All" ? "All Products" : selectedCat}
             </h2>
           </div>
 

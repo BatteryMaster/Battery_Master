@@ -91,7 +91,7 @@ export default function Footer() {
             </div>
           </div>
           <div style={{ marginTop:12, background:"rgba(239,68,68,0.12)", border:"1px solid rgba(239,68,68,0.25)", borderRadius:8, padding:"10px 12px" }}>
-            <div style={{ fontSize:11, fontWeight:700, color:"#fca5a5" }}>❌ Online Payment Nahi</div>
+            <div style={{ fontSize:11, fontWeight:700, color:"#fca5a5" }}> Online Payment Available</div>
             <div style={{ fontSize:10, color:"rgba(255,255,255,0.35)", marginTop:3 }}>Bank transfer ya online payment</div>
           </div>
         </div>
