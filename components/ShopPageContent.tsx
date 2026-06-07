@@ -90,7 +90,7 @@ export default function ShopPageContent() {
           <div style={{ fontSize:13, marginTop:6 }}>Alag search ya category try karein</div>
           <button onClick={() => { setSearch(""); setCat("All"); }}
             style={{ marginTop:16, padding:"10px 20px", background:"#2563eb", color:"#fff", border:"none", borderRadius:8, fontSize:13, fontWeight:700, cursor:"pointer" }}>
-            Sab Dekhein
+            All views
           </button>
         </div>
       )}

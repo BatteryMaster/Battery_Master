@@ -11,10 +11,10 @@ html, body { color-scheme: light only; overflow-x: hidden !important; max-width:
   --bg:           #f0f4ff;
   --bg2:          #e4eaff;
   --card:         #ffffff;
-  --primary:      #2563eb;
-  --primary-h:    #1d4ed8;
-  --primary-dim:  rgba(37,99,235,0.07);
-  --primary-bdr:  rgba(37,99,235,0.18);
+  --primary:      #16a34a;
+  --primary-h:    #15803d;
+  --primary-dim:  rgba(22,163,74,0.07);
+  --primary-bdr:  rgba(22,163,74,0.20);
   --accent:       #f97316;
   --green:        #16a34a;
   --red:          #dc2626;
@@ -104,7 +104,7 @@ img, video, iframe { max-width: 100%; }
 
 /* ── INPUT ── */
 .inp { width:100%; background:#fff; border:1.5px solid var(--border); border-radius:var(--r-sm); padding:13px 16px; color:var(--t1); font-size:14px; outline:none; transition:border-color var(--t),box-shadow var(--t); font-family:var(--font); }
-.inp:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,0.08); }
+.inp:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(22,163,74,0.08); }
 .inp::placeholder { color:#94a3b8; }
 
 /* ── LABELS ── */

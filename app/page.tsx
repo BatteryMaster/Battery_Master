@@ -53,7 +53,7 @@ export default function Home() {
           </h1>
 
           <p style={{ fontSize:16, color:"rgba(255,255,255,0.62)", lineHeight:1.8, maxWidth:520, margin:"0 auto 36px" }}>
-            JK BMS · LiFePO4 Cells · E-Bike Kits · Lithium Packs · Chargers · LCD Displays · Silicon Wires & Terminals — sab kuch ek jagah
+            JK BMS · LiFePO4 Cells · E-Bike Kits · Lithium Packs · Chargers · LCD Displays · Silicon Wires & Terminals — Everything in one place
           </p>
 
           <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
@@ -86,7 +86,7 @@ export default function Home() {
       <div style={{ background:"#fef2f2", borderBottom:"2px solid #fecaca" }}>
         <div className="wrap" style={{ padding:"12px 0", display:"flex", alignItems:"center", gap:10, flexWrap:"wrap" }}>
           <span style={{ fontSize:13, fontWeight:700, color:"#008000" }}> Online Payment Available </span>
-          <span style={{ fontSize:13, color:"#64748b" }}>— Hum sirf Bank Transfer / Online Payment accept karte hain. Order ke liye WhatsApp karein.</span>
+          <span style={{ fontSize:13, color:"#64748b" }}>— We only accept Bank Transfer / Online Payment. WhatsApp for orders.</span>
           <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer" style={{ marginLeft:"auto", background:"#25D366", color:"#fff", padding:"6px 16px", borderRadius:6, fontSize:12, fontWeight:700, textDecoration:"none", flexShrink:0 }}>
             📱 WhatsApp Karein
           </a>
@@ -171,15 +171,15 @@ export default function Home() {
       <section style={{ padding:"64px 0", background:"#fff", borderTop:"1.5px solid #e2e8f0" }}>
         <div className="wrap">
           <div style={{ textAlign:"center", marginBottom:40 }}>
-            <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316" }}>Simple Process</div>
-            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", fontWeight:800, color:"#0f172a", marginTop:4 }}>Order Kaise Karein</h2>
+            <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316" }}>OrderProcess</div>
+            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", fontWeight:800, color:"#0f172a", marginTop:4 }}>How to place an order</h2>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))", gap:16 }}>
             {[
-              { n:"01", t:"Product Choose Karein", d:"Apni zaroorat ka product select karein — BMS, cells, charger ya bike kit." },
-              { n:"02", t:"WhatsApp Karein",        d:"03329891510 par WhatsApp karein product name aur quantity ke saath." },
-              { n:"03", t:"Payment Karein",          d:"Bank transfer ya Easypaisa/JazzCash se payment karein. COD available nahi." },
-              { n:"04", t:"Delivery Receive Karein", d:"Karachi mein 1-2 din mein delivery. Pakistan bhar mein courier available." },
+              { n:"01", t:"Choose Product", d:"Select the product you need — BMS, cells, charger, or bike kit." },
+              { n:"02", t:"Send WhatsApp",        d:"WhatsApp on 03329891510 with the product name and quantity." },
+              { n:"03", t:"Payment Transfer",          d:"Make payment via bank transfer or Easypaisa/JazzCash. COD is not available." },
+              { n:"04", t:"Delivery Receive", d:"Delivery in Karachi within 1-2 days. Courier available throughout Pakistan." },
             ].map(h => (
               <div key={h.n} style={{ background:"#f8fafc", border:"1.5px solid #e2e8f0", borderRadius:14, padding:"28px 22px" }}>
                 <div style={{ fontSize:36, fontWeight:900, color:"#dde3f0", lineHeight:1, marginBottom:14 }}>{h.n}</div>
@@ -198,10 +198,10 @@ export default function Home() {
             <div style={{ position:"absolute", top:-60, right:100, width:300, height:300, borderRadius:"50%", background:"radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%)", pointerEvents:"none" }}/>
             <div style={{ position:"relative" }}>
               <h2 style={{ fontSize:"clamp(18px,3vw,26px)", fontWeight:800, color:"#fff", marginBottom:10 }}>
-                Abhi Order Karein — Fast Delivery!
+                Order Now — Fast Delivery!
               </h2>
               <p style={{ color:"rgba(255,255,255,0.55)", lineHeight:1.75, fontSize:14, maxWidth:480 }}>
-                Karachi mein 1–2 din, Pakistan bhar mein courier. WhatsApp par message karein ya website se order dein.
+                1–2 days in Karachi, courier across Pakistan. Send a message on WhatsApp or place an order through the website.
               </p>
             </div>
             <div style={{ display:"flex", flexDirection:"column", gap:12, flexShrink:0, position:"relative" }}>

@@ -26,7 +26,7 @@ export default function ShopPage() {
             All Products
           </h1>
           <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", maxWidth:480, lineHeight:1.7 }}>
-            JK BMS · LiFePO4 Cells · Lithium Packs · E-Bike Kits · Chargers · LCD Displays · Silicon Wires — sab kuch yahan
+            JK BMS · LiFePO4 Cells · Lithium Packs · E-Bike Kits · Chargers · LCD Displays · Silicon Wires — Everything in one place
           </p>
         </div>
       </div>

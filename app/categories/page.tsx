@@ -31,7 +31,7 @@ export default function CategoriesPage() {
       <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"48px 0 44px" }}>
         <div className="wrap">
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:8 }}>Browse</div>
-          <h1 style={{ fontSize:"clamp(24px,4vw,38px)", fontWeight:900, color:"#fff", marginBottom:10 }}>Tamam Categories</h1>
+          <h1 style={{ fontSize:"clamp(24px,4vw,38px)", fontWeight:900, color:"#fff", marginBottom:10 }}>All Categories</h1>
           <p style={{ fontSize:15, color:"rgba(255,255,255,0.6)" }}>10 categories · 44+ products · Saddar Karachi</p>
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function CategoriesPage() {
                     <span style={{ fontSize:11, fontWeight:700, color:c.accent, background:`${c.color}`, border:`1px solid ${c.border}`, padding:"3px 10px", borderRadius:20 }}>
                       {c.count} products
                     </span>
-                    <span style={{ fontSize:12, color:c.accent, fontWeight:700 }}>Dekhein →</span>
+                    <span style={{ fontSize:12, color:c.accent, fontWeight:700 }}>View →</span>
                   </div>
                 </div>
               </div>

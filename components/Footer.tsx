@@ -32,16 +32,16 @@ export default function Footer() {
           <Link href="/" style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16, textDecoration:"none" }}>
             <img src="/logo.png" alt="Battery Master" width={38} height={38} style={{ borderRadius:"50%", objectFit:"cover", flexShrink:0, border:"2px solid rgba(255,255,255,0.15)" }} />
             <span style={{ fontSize:17, fontWeight:800, color:"#fff", letterSpacing:"-.02em" }}>
-              Battery<span style={{ color:"#60a5fa" }}>Master</span>
+              Battery<span style={{ color:"#4ade80" }}>Master</span>
             </span>
           </Link>
           <p style={{ fontSize:13, color:"rgba(255,255,255,0.40)", lineHeight:1.85, maxWidth:240 }}>
-            Karachi ka trusted battery aur EV parts store. JK BMS, LiFePO4 cells, e-bike kits aur bohat kuch ek jagah.
+            Karachi trusted battery and EV parts store. JK BMS, LiFePO4 cells, e-bike kits, and much more in one place
           </p>
           <div style={{ marginTop:16, fontSize:13, color:"rgba(255,255,255,0.45)", lineHeight:2.2 }}>
             <div>📍 Shop No 78, Cooperative Electronics Market</div>
             <div style={{ paddingLeft:22, fontSize:11, color:"rgba(255,255,255,0.28)" }}>Saddar, Karachi, Pakistan</div>
-            <div>📞 <span style={{ color:"#60a5fa", fontWeight:700 }}>03329891510</span></div>
+            <div>📞 <span style={{ color:"#4ade80", fontWeight:700 }}>03329891510</span></div>
             <div>📧 batterymasterofficial78@outlook.com</div>
           </div>
           <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer"
@@ -85,14 +85,14 @@ export default function Footer() {
             <Link key={h} href={h} className="foot-a">{l}</Link>
           ))}
           <div style={{ marginTop:20, background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.08)", borderRadius:10, padding:14 }}>
-            <div style={{ fontSize:10, fontWeight:700, color:"#60a5fa", marginBottom:8, letterSpacing:".05em", textTransform:"uppercase" }}>Working Hours</div>
+            <div style={{ fontSize:10, fontWeight:700, color:"#4ade80", marginBottom:8, letterSpacing:".05em", textTransform:"uppercase" }}>Working Hours</div>
             <div style={{ fontSize:12, color:"rgba(255,255,255,0.40)", lineHeight:2.1 }}>
-              Mon – Sat: 10am – 8pm<br/>Sunday: 12pm – 6pm
+              Mon – Sat: 10am – 10pm<br/>
             </div>
           </div>
           <div style={{ marginTop:12, background:"rgba(239,68,68,0.12)", border:"1px solid rgba(239,68,68,0.25)", borderRadius:8, padding:"10px 12px" }}>
-            <div style={{ fontSize:11, fontWeight:700, color:"#fca5a5" }}> Online Payment Available</div>
-            <div style={{ fontSize:10, color:"rgba(255,255,255,0.35)", marginTop:3 }}>Bank transfer ya online payment</div>
+            <div style={{ fontSize:11, fontWeight:700, color:"#fca5a5" }}>✅ Online Services Available</div>
+            <div style={{ fontSize:10, color:"rgba(255,255,255,0.35)", marginTop:3 }}>Bank transfer & online payment only</div>
           </div>
         </div>
       </div>

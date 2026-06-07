@@ -20,7 +20,7 @@ export default function AboutPage() {
         <div className="wrap">
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:8 }}>Hamara Ta'aruf</div>
           <h1 style={{ fontSize:"clamp(24px,4vw,40px)", fontWeight:900, letterSpacing:"-.02em", color:"#fff", marginTop:0, marginBottom:10 }}>
-            Battery Master ke Bare Mein
+            About Battery Master
           </h1>
           <p style={{ fontSize:15, color:"rgba(255,255,255,0.6)" }}>
             Karachi ka trusted battery & EV parts store
@@ -33,16 +33,16 @@ export default function AboutPage() {
         {/* Main about card */}
         <div style={{ background:"#fff", border:"1.5px solid #dde3f0", borderRadius:16, padding:"40px 36px", marginBottom:20 }}>
           <h2 style={{ fontSize:20, fontWeight:800, color:"#0f172a", marginBottom:16, letterSpacing:"-.01em" }}>
-            🔋 Hum Kaun Hain?
+            🔋 Who Are We?
           </h2>
           <p style={{ fontSize:15, color:"#475569", lineHeight:1.9, marginBottom:16 }}>
-            <strong>Battery Master</strong> Karachi ki ek trusted online aur physical store hai jo lithium batteries, JK BMS, LiFePO4 cells, e-bike kits, chargers aur tamam EV accessories provide karta hai. Hamara shop <strong>Shop No 78, Cooperative Electronics Market, Saddar Karachi</strong> mein hai.
+            <strong>Battery Master</strong> It is a trusted online and physical store in Karachi that provides lithium batteries, JK BMS, LiFePO4 cells, e-bike kits, chargers, and all EV accessories. Our shop<strong>Shop No 78, Cooperative Electronics Market, Saddar Karachi</strong> .
           </p>
           <p style={{ fontSize:15, color:"#475569", lineHeight:1.9, marginBottom:16 }}>
-            Hum un logon ke liye kaam karte hain jo apni gadiyan, solar systems, ya electronics ke liye best quality batteries aur EV parts chahte hain — aur woh bhi sahi daam par. Hamare paas Grade-A LiFePO4 cells (EVE, CATL), JK BMS, Samsung/LG 18650 cells, aur e-bike conversion kits hamesha available hote hain.
+            We work for people who want the best quality batteries and EV parts for their cars, solar systems, or electronics — and that too at the right price. We always have Grade-A LiFePO4 cells (EVE, CATL), JK BMS, Samsung/LG 18650 cells, and e-bike conversion kits available.
           </p>
           <p style={{ fontSize:15, color:"#475569", lineHeight:1.9 }}>
-            Hum apne customers ko fast service, honest advice, aur quality products dene ka wada karte hain. Chahe aap solar battery build kar rahe hon, e-bike convert kar rahe hon, ya sirf ek reliable charger chahiye — Battery Master aapka pehla stop hai.
+            We promise to provide fast service, honest advice, and quality products to our customers. Whether your building a solar battery, converting an e-bike, or just need a reliable charger — Battery Master is your first stop.
           </p>
         </div>
 
@@ -72,7 +72,7 @@ export default function AboutPage() {
               { icon:"📍", label:"Address",  val:"Shop No 78, Cooperative Electronics Market, Saddar, Karachi" },
               { icon:"📞", label:"WhatsApp", val:"03329891510" },
               { icon:"📧", label:"Email",    val:"batterymasterofficial78@outlook.com" },
-              { icon:"🕐", label:"Hours",    val:"Mon–Sat 10am–8pm | Sun 12pm–6pm" },
+              { icon:"🕐", label:"Hours",    val:"Mon–Sat 10am–10pm " },
             ].map(x => (
               <div key={x.label}>
                 <div style={{ fontSize:22, marginBottom:6 }}>{x.icon}</div>

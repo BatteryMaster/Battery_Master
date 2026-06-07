@@ -41,7 +41,7 @@ export default function Header() {
   return (
     <>
       {/* Announcement bar */}
-      <div style={{ background:"#1e40af", color:"#fff", fontSize:12, fontWeight:600, textAlign:"center", padding:"8px 12px", letterSpacing:".01em", width:"100%" }}>
+      <div style={{ background:"#14532d", color:"#fff", fontSize:12, fontWeight:600, textAlign:"center", padding:"8px 12px", letterSpacing:".01em", width:"100%" }}>
         <span style={{ display:"inline-flex", flexWrap:"wrap", justifyContent:"center", alignItems:"center", gap:"4px 10px" }}>
           <span>🚚 Karachi Delivery <strong>1–2 Days</strong></span>
           <span style={{ opacity:0.4 }}>·</span>
@@ -49,7 +49,7 @@ export default function Header() {
           <span style={{ opacity:0.4 }}>·</span>
           <span>📞 <strong>03329891510</strong></span>
           <span style={{ opacity:0.4 }}>·</span>
-          <span>✅  Online Services Available</span>
+          <span>✅ Online Services Available</span>
         </span>
       </div>
 
@@ -62,7 +62,7 @@ export default function Header() {
             <img src="/logo.png" alt="Battery Master" width={42} height={42} style={{ borderRadius:"50%", objectFit:"cover", flexShrink:0, border:"2px solid #e2e8f0" }} />
             <div>
               <div style={{ fontSize:18, fontWeight:800, lineHeight:1.1, letterSpacing:"-.025em", color:"#0f172a" }}>
-                Battery<span style={{ color:"#2563eb" }}>Master</span>
+                Battery<span style={{ color:"#16a34a" }}>Master</span>
               </div>
               <div style={{ fontSize:9, color:"#94a3b8", letterSpacing:".12em", textTransform:"uppercase", marginTop:1 }}>
                 Saddar · Karachi
@@ -85,7 +85,7 @@ export default function Header() {
           </a>
 
           {/* Cart */}
-          <Link href="/cart" style={{ display:"flex", alignItems:"center", gap:8, background:"#2563eb", borderRadius:8, padding:"9px 20px", fontSize:14, fontWeight:700, color:"#fff", position:"relative", whiteSpace:"nowrap", flexShrink:0, boxShadow:"0 2px 10px rgba(37,99,235,0.22)", textDecoration:"none" }}>
+          <Link href="/cart" style={{ display:"flex", alignItems:"center", gap:8, background:"#16a34a", borderRadius:8, padding:"9px 20px", fontSize:14, fontWeight:700, color:"#fff", position:"relative", whiteSpace:"nowrap", flexShrink:0, boxShadow:"0 2px 10px rgba(22,163,74,0.25)", textDecoration:"none" }}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
@@ -98,7 +98,7 @@ export default function Header() {
 
           {/* Hamburger */}
           <button className="show-mob" onClick={() => setOpen(!open)}
-            style={{ display:"none", background:"rgba(37,99,235,0.07)", border:"1.5px solid rgba(37,99,235,0.18)", borderRadius:8, width:40, height:40, alignItems:"center", justifyContent:"center", color:"#2563eb", marginLeft:8, flexShrink:0, cursor:"pointer" }}>
+            style={{ display:"none", background:"rgba(22,163,74,0.07)", border:"1.5px solid rgba(22,163,74,0.25)", borderRadius:8, width:40, height:40, alignItems:"center", justifyContent:"center", color:"#16a34a", marginLeft:8, flexShrink:0, cursor:"pointer" }}>
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
               {open ? <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></> : <><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></>}
             </svg>
@@ -106,7 +106,7 @@ export default function Header() {
         </div>
 
         {/* Category strip */}
-        <div style={{ borderTop:"1.5px solid #dde3f0", background:"#f5f7ff" }}>
+        <div style={{ borderTop:"1.5px solid #dde3f0", background:"#f0fdf4" }}>
           <div className="wrap" style={{ height:40, display:"flex", alignItems:"center", gap:4, overflowX:"auto" }}>
             {CATS.map(c => <Link key={c.href} href={c.href} className="cat-link">{c.label}</Link>)}
           </div>
@@ -124,7 +124,7 @@ export default function Header() {
               <div style={{ fontSize:10, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#94a3b8", marginBottom:10, paddingLeft:8 }}>Categories</div>
               <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
                 {CATS.map(c => (
-                  <Link key={c.href} href={c.href} onClick={() => setOpen(false)} style={{ padding:"7px 14px", fontSize:13, fontWeight:600, background:"rgba(37,99,235,0.07)", color:"#2563eb", borderRadius:8, textDecoration:"none" }}>
+                  <Link key={c.href} href={c.href} onClick={() => setOpen(false)} style={{ padding:"7px 14px", fontSize:13, fontWeight:600, background:"rgba(22,163,74,0.07)", color:"#16a34a", borderRadius:8, textDecoration:"none" }}>
                     {c.label}
                   </Link>
                 ))}
@@ -132,7 +132,7 @@ export default function Header() {
             </div>
             <div style={{ padding:"0 16px 16px" }}>
               <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer"
-                style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, padding:"12px", background:"#25D366", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
+                style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, padding:"12px", background:"#3178C6", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
                 📱 WhatsApp: 03329891510
               </a>
             </div>
