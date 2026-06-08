@@ -30,8 +30,8 @@ export default function CartPage() {
       {/* ❌ NO COD Notice */}
       <div style={{ background:"#fef2f2", borderBottom:"2px solid #fecaca" }}>
         <div className="wrap" style={{ padding:"11px 0", display:"flex", alignItems:"center", gap:10, flexWrap:"wrap" }}>
-          <span style={{ fontSize:13, fontWeight:700, color:"#dc2626" }}>❌ Cash on Delivery not available </span>
-          <span style={{ fontSize:13, color:"#64748b" }}>—After the order, we will send the payment details on WhatsApp</span>
+          <span style={{ fontSize:13, fontWeight:700, color:"#dc2626" }}>❌ Cash on Delivery not available</span>
+          <span style={{ fontSize:13, color:"#64748b" }}>— Order ke baad hum WhatsApp par payment details bhejenge</span>
         </div>
       </div>
 
@@ -88,25 +88,25 @@ export default function CartPage() {
               <div style={{ background:"#f0fdf4", border:"1.5px solid #bbf7d0", borderRadius:10, padding:"12px 14px", marginBottom:16 }}>
                 <div style={{ fontSize:12, fontWeight:700, color:"#15803d", marginBottom:4 }}>💳 Payment Process</div>
                 <div style={{ fontSize:11, color:"#374151", lineHeight:1.7 }}>
-                  Place the order → We will send bank account details on WhatsApp → Make the payment → Delivery!
+                  Place order → We send bank details via WhatsApp → Make payment → Delivery!
                 </div>
               </div>
 
               <Link href="/checkout" style={{ display:"flex", alignItems:"center", justifyContent:"center", padding:"13px", background:"#16a34a", color:"#fff", borderRadius:10, fontSize:14, fontWeight:800, textDecoration:"none", marginBottom:10 }}>
-                Checkout →
+                Proceed to Checkout →
               </Link>
               <Link href="/shop" style={{ display:"flex", alignItems:"center", justifyContent:"center", padding:"11px", background:"#f1f5f9", color:"#374151", borderRadius:10, fontSize:13, fontWeight:700, textDecoration:"none", border:"1.5px solid #e2e8f0" }}>
-                Continue Shopping 
+                Continue Shopping
               </Link>
             </div>
           </div>
         ) : (
           <div style={{ background:"#fff", border:"1.5px solid #e2e8f0", borderRadius:14, padding:"64px 32px", textAlign:"center", maxWidth:440, margin:"0 auto" }}>
             <div style={{ fontSize:52, marginBottom:16 }}>🛒</div>
-            <h2 style={{ fontSize:20, fontWeight:800, color:"#0f172a", marginBottom:8 }}>Cart Empty</h2>
-            <p style={{ fontSize:13, color:"#64748b", marginBottom:24 }}>Add some products and then checkout.</p>
+            <h2 style={{ fontSize:20, fontWeight:800, color:"#0f172a", marginBottom:8 }}>Cart khali hai</h2>
+            <p style={{ fontSize:13, color:"#64748b", marginBottom:24 }}>Add some products to cart then checkout.</p>
             <Link href="/shop" style={{ display:"inline-flex", padding:"11px 28px", background:"#16a34a", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
-              See Products  →
+              View Products →
             </Link>
           </div>
         )}

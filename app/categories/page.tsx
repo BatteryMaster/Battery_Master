@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const CATS = [
-  { name:"JK BMS",               slug:"jk-bms",                icon:"🛡️", desc:"4S to 24S active balancing BMS. Bluetooth, RS485, Karachi mein available.",        count:5,  color:"#eff6ff", border:"#bfdbfe", accent:"#2563eb" },
+  { name:"JK BMS",               slug:"jk-bms",                icon:"🛡️", desc:"4S to 24S active balancing BMS. Bluetooth, RS485, Available in Karachi.",        count:5,  color:"#eff6ff", border:"#bfdbfe", accent:"#2563eb" },
   { name:"Lithium Battery Packed",slug:"lithium-battery-packed", icon:"🔋", desc:"12V to 72V ready-made lithium packs with BMS. E-bike, solar, UPS ke liye.",        count:4,  color:"#f0fdf4", border:"#bbf7d0", accent:"#16a34a" },
   { name:"Battery Box",           slug:"battery-box",            icon:"📦", desc:"Plastic & aluminum enclosures. 12V to 72V, waterproof & lockable options.",         count:4,  color:"#fff7ed", border:"#fed7aa", accent:"#f97316" },
   { name:"Lithium Ion Cell",      slug:"lithium-ion-cell",       icon:"⚡", desc:"Samsung, LG, Panasonic 18650 Grade-A cells. DIY battery pack ke liye.",              count:4,  color:"#fefce8", border:"#fde68a", accent:"#ca8a04" },
@@ -28,7 +28,7 @@ export default function CategoriesPage() {
       <Header />
       <WhatsAppButton />
 
-      <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"48px 0 44px" }}>
+      <div style={{ background:"linear-gradient(135deg,#052e16,#14532d)", padding:"48px 0 44px" }}>
         <div className="wrap">
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:8 }}>Browse</div>
           <h1 style={{ fontSize:"clamp(24px,4vw,38px)", fontWeight:900, color:"#fff", marginBottom:10 }}>All Categories</h1>

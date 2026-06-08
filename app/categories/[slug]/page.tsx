@@ -44,7 +44,7 @@ export default function CategoryDetailPage({ params }: Props) {
       <WhatsAppButton />
 
       {/* Page Header */}
-      <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"36px 0 32px" }}>
+      <div style={{ background:"linear-gradient(135deg,#052e16,#14532d)", padding:"36px 0 32px" }}>
         <div className="wrap">
           <nav style={{ display:"flex", alignItems:"center", gap:6, fontSize:12, color:"rgba(255,255,255,0.5)", marginBottom:16, flexWrap:"wrap" }}>
             <Link href="/" style={{ color:"rgba(255,255,255,0.5)", textDecoration:"none" }}>Home</Link>

@@ -17,7 +17,7 @@ export default function ShopPage() {
       <WhatsAppButton />
 
       {/* Page header */}
-      <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"40px 0 36px" }}>
+      <div style={{ background:"linear-gradient(135deg,#052e16,#14532d)", padding:"40px 0 36px" }}>
         <div className="wrap">
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:10 }}>
             Battery Master
@@ -26,7 +26,7 @@ export default function ShopPage() {
             All Products
           </h1>
           <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", maxWidth:480, lineHeight:1.7 }}>
-            JK BMS · LiFePO4 Cells · Lithium Packs · E-Bike Kits · Chargers · LCD Displays · Silicon Wires — Everything in one place
+            JK BMS · LiFePO4 Cells · Lithium Packs · E-Bike Kits · Chargers · LCD Displays · Silicon Wires — all in one place
           </p>
         </div>
       </div>

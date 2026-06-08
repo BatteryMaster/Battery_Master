@@ -86,11 +86,11 @@ export default function ShopPageContent() {
       ) : (
         <div style={{ textAlign:"center", padding:"64px 20px", color:"#94a3b8" }}>
           <div style={{ fontSize:48, marginBottom:12 }}>🔍</div>
-          <div style={{ fontSize:16, fontWeight:600, color:"#374151" }}>Koi product nahi mila</div>
-          <div style={{ fontSize:13, marginTop:6 }}>Alag search ya category try karein</div>
+          <div style={{ fontSize:16, fontWeight:600, color:"#374151" }}>No products found</div>
+          <div style={{ fontSize:13, marginTop:6 }}>Try a different search or category</div>
           <button onClick={() => { setSearch(""); setCat("All"); }}
             style={{ marginTop:16, padding:"10px 20px", background:"#2563eb", color:"#fff", border:"none", borderRadius:8, fontSize:13, fontWeight:700, cursor:"pointer" }}>
-            All views
+            View All
           </button>
         </div>
       )}
