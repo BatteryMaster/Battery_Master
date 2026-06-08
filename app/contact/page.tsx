@@ -74,11 +74,11 @@ export default function ContactPage() {
           <div style={{ background:"#fff", border:"1.5px solid #dde3f0", borderRadius:16, padding:"28px 22px", borderTop:"4px solid #8b5cf6" }}>
             <div style={{ fontSize:32, marginBottom:14 }}>🕐</div>
             <div style={{ fontSize:10, fontWeight:700, letterSpacing:".08em", textTransform:"uppercase", color:"#94a3b8", marginBottom:6 }}>Kaam ke Auqaat</div>
-            <div style={{ fontSize:14, fontWeight:700, color:"#0f172a", marginBottom:8 }}>Somwar – Shanbe: 10am – 8pm</div>
-            <div style={{ fontSize:13, color:"#64748b" }}>Itwar: 12pm – 6pm</div>
+            <div style={{ fontSize:14, fontWeight:700, color:"#0f172a", marginBottom:8 }}>Monday – Saturday: 10am – 10pm</div>
+            {/* <div style={{ fontSize:13, color:"#64748b" }}>Itwar: 12pm – 6pm</div> */}
             <div style={{ marginTop:14, padding:"10px 12px", background:"#fef2f2", borderRadius:8, border:"1px solid #fecaca" }}>
-              <div style={{ fontSize:12, fontWeight:700, color:"#dc2626" }}>❌ COD Not Available</div>
-              <div style={{ fontSize:11, color:"#64748b", marginTop:2 }}>Online payment ya bank transfer zaroor</div>
+              {/* <div style={{ fontSize:12, fontWeight:700, color:"#dc2626" }}>❌ COD Not Available</div> */}
+              <div style={{ fontSize:11, color:"#64748b", marginTop:2 }}>Online payment ya bank transfer</div>
             </div>
           </div>
         </div>

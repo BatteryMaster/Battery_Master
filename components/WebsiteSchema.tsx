@@ -9,7 +9,7 @@ export default function WebsiteSchema() {
         url: "https://batterymaster.pk",
         logo: "https://batterymaster.pk/favicon.svg",
         description: "Pakistan's Trusted Electronics Store. Arduino, Modules, ICs, Transistors, Resistors, Tools. Fast Delivery In Karachi, Cash on Delivery.",
-        telephone: "+923150220243",
+        telephone: "+923329891510",
         email: "hussamm621@gmail.com",
         address: {
           "@type": "PostalAddress",

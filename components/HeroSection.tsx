@@ -63,7 +63,7 @@ export default function HeroSection() {
             }}>
               Browse Products →
             </Link>
-            <a href="https://wa.me/923150220243" target="_blank" rel="noopener noreferrer" style={{
+            <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer" style={{
               background: "var(--bg-card)", color: "var(--text-primary)",
               border: "1px solid var(--border)",
               borderRadius: "var(--radius-sm)",
