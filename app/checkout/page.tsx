@@ -35,17 +35,20 @@ export default function CheckoutPage() {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setLoading(true);
+
     const orderId = "ORD-" + Date.now();
     const itemsList = cartItems.map(i => `• ${i.name} x${i.quantity} = Rs. ${(toNum(i.price)*i.quantity).toLocaleString()}`).join("\n");
     const waMsg = encodeURIComponent(
       `🔋 *Battery Master — New Order*\nOrder ID: ${orderId}\n\n*Customer:*\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email||"N/A"}\nCity: ${form.city}\nAddress: ${form.address}\n${form.notes?`Notes: ${form.notes}\n`:""}\n*Products:*\n${itemsList}\n\n*Total: Rs. ${subtotal.toLocaleString()}*\nPayment: Online/Bank Transfer`
     );
-    clearCart();
     const waUrl = `https://wa.me/923329891510?text=${waMsg}`;
-    const newTab = window.open(waUrl, "_blank");
-    // Fallback if popup blocked (e.g. localhost)
-    if (!newTab) window.location.href = waUrl;
-    setTimeout(() => { router.push(`/order-success?id=${orderId}`); }, 300);
+
+    // Open WhatsApp in a new tab (does NOT navigate away from current page)
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+
+    // Clear cart and go straight to the success page
+    clearCart();
+    router.push(`/order-success?id=${orderId}`);
   };
 
   const inp = (label: string, key: keyof typeof form, ph: string, req=false) => (
@@ -76,7 +79,6 @@ export default function CheckoutPage() {
 
   const checkoutForm = (
     <div style={{ display:"grid", gridTemplateColumns:"1.4fr 1fr", gap:20, alignItems:"start" }} className="checkout-grid">
-      {/* LEFT */}
       <div style={{ background:"#fff", border:"1.5px solid #e2e8f0", borderRadius:14, padding:26 }}>
         <h2 style={{ fontSize:16, fontWeight:800, color:"#0f172a", marginBottom:20 }}>📋 Delivery Details</h2>
         <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
@@ -116,7 +118,6 @@ export default function CheckoutPage() {
             <div style={{ fontSize:12, color:"#374151", lineHeight:1.8 }}>
               <div>✅ Bank Transfer (Meezan, HBL, UBL)</div>
               <div>✅ Easypaisa / JazzCash</div>
-              <div style={{ color:"#dc2626", fontWeight:600 }}>❌ Cash on Delivery not available</div>
             </div>
             <div style={{ fontSize:11, color:"#64748b", marginTop:8 }}>
               After order, we will send payment details via <strong>WhatsApp</strong>
@@ -132,7 +133,6 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      {/* RIGHT */}
       <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
         <div style={{ background:"#fff", border:"1.5px solid #e2e8f0", borderRadius:14, padding:20 }}>
           <h3 style={{ fontSize:15, fontWeight:800, marginBottom:14, color:"#0f172a" }}>Order Summary</h3>
@@ -183,7 +183,9 @@ export default function CheckoutPage() {
         </div>
       </div>
       <div className="wrap" style={{ paddingTop:28, paddingBottom:80 }}>
-        {cartItems.length === 0 ? emptyCart : checkoutForm}
+        {cartItems.length === 0 ? emptyCart : (
+          <form onSubmit={handleSubmit}>{checkoutForm}</form>
+        )}
       </div>
       <Footer />
     </main>

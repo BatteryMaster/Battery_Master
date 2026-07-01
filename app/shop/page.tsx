@@ -17,7 +17,7 @@ export default function ShopPage() {
       <WhatsAppButton />
 
       {/* Page header */}
-      <div style={{ background:"linear-gradient(135deg,#052e16,#14532d)", padding:"40px 0 36px" }}>
+      <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"40px 0 36px" }}>
         <div className="wrap">
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:10 }}>
             Battery Master
