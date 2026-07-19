@@ -11,78 +11,57 @@ type Props = {
   originalPrice?: string;
 };
 
-export default function ProductCard({ id, name, category, price, stock, image, badge = null, originalPrice }: Props) {
+export default function ProductCard({ id, name, category, price, stock, image, badge=null, originalPrice }: Props) {
   const { addToCart } = useCart();
-  const [imgError, setImgError] = useState(false);
-  const stockStr  = (stock ?? "In Stock").toLowerCase();
-  const isLimited = stockStr.includes("limited");
-  const isOut     = stockStr.includes("out");
+  const [imgErr, setImgErr] = useState(false);
+  const s = (stock ?? "In Stock").toLowerCase();
+  const isOut = s.includes("out");
+  const isLtd = s.includes("limited");
 
   return (
     <div className="prod-card">
-      {/* Image area */}
-      <Link
-        href={`/shop/${id}`}
-        className="prod-card-img"
-        style={{ position:"relative", display:"flex", alignItems:"center", justifyContent:"center", height:190, background:"#f0fdf4", flexShrink:0, overflow:"hidden" }}
-      >
-        {!imgError ? (
+      {/* Image */}
+      <Link href={`/shop/${id}`} className="prod-card-img">
+        {!imgErr ? (
           <Image
             src={image || "/placeholder.jpg"}
-            alt={`${name} — ${category} | Battery Master`}
+            alt={name}
             fill
-            sizes="(max-width:480px) 50vw, (max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw"
-            style={{ objectFit:"contain", padding:14 }}
-            onError={() => setImgError(true)}
-            suppressHydrationWarning
+            sizes="(max-width:480px) 50vw, (max-width:768px) 50vw, 25vw"
+            style={{ objectFit:"contain", padding:12 }}
+            onError={() => setImgErr(true)}
           />
         ) : (
-          <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:6, color:"#86efac" }}>
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <rect x="3" y="7" width="14" height="10" rx="2"/><path d="M17 10h2.5a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5H17"/><line x1="7" y1="7" x2="7" y2="4"/><line x1="13" y1="7" x2="13" y2="4"/>
+          <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:4, color:"#bbf7d0", padding:12 }}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+              <rect x="3" y="7" width="14" height="10" rx="2"/><path d="M17 10h2.5a1.5 1.5 0 0 1 0 4H17"/><line x1="7" y1="7" x2="7" y2="5"/><line x1="13" y1="7" x2="13" y2="5"/>
             </svg>
-            <span style={{ fontSize:10, fontWeight:600, color:"#86efac" }}>Battery Master</span>
+            <span style={{ fontSize:9, fontWeight:700, letterSpacing:".06em", textTransform:"uppercase" }}>Battery Master</span>
           </div>
         )}
-        {badge === "hot"  && <span className="bdg bdg-hot"  style={{ position:"absolute", top:10, left:10 }}>HOT</span>}
-        {badge === "new"  && <span className="bdg bdg-new"  style={{ position:"absolute", top:10, left:10 }}>NEW</span>}
-        {badge === "sale" && <span className="bdg bdg-sale" style={{ position:"absolute", top:10, left:10 }}>SALE</span>}
+        {badge && <span className={`bdg bdg-${badge}`}>{badge.toUpperCase()}</span>}
       </Link>
 
       {/* Body */}
       <div className="prod-card-body">
-        <div style={{ fontSize:10, fontWeight:700, letterSpacing:".06em", textTransform:"uppercase", color:"#16a34a" }}>
-          {category}
-        </div>
-
+        <div className="prod-card-cat">{category}</div>
         <Link href={`/shop/${id}`}>
-          <h3 className="prod-card-title">{name}</h3>
+          <div className="prod-card-name">{name}</div>
         </Link>
-
-        <div style={{ fontSize:11, fontWeight:600, color: isOut ? "#dc2626" : isLimited ? "#d97706" : "#16a34a" }}>
-          {isOut ? "● Out of stock" : isLimited ? "● Limited stock" : "● In stock"}
+        <div className="prod-card-stock" style={{ color: isOut ? "#dc2626" : isLtd ? "#d97706" : "#16a34a" }}>
+          {isOut ? "● Out of stock" : isLtd ? "● Limited stock" : "● In stock"}
         </div>
-
         <div style={{ display:"flex", alignItems:"baseline", gap:6, flexWrap:"wrap" }}>
           <span className="prod-card-price">{price}</span>
-          {originalPrice && (
-            <span style={{ fontSize:11, color:"#94a3b8", textDecoration:"line-through" }}>{originalPrice}</span>
-          )}
+          {originalPrice && <span style={{ fontSize:11, color:"#94a3b8", textDecoration:"line-through" }}>{originalPrice}</span>}
         </div>
-
-        <div style={{ display:"flex", gap:7, marginTop:"auto", paddingTop:8 }}>
-          <button
-            className="add-btn"
-            disabled={isOut}
-            onClick={() => !isOut && addToCart({ id, name, category, price, stock: stock ?? "In Stock" })}
-          >
+        <div className="prod-card-btns">
+          <button className="add-btn" disabled={isOut}
+            onClick={() => !isOut && addToCart({ id, name, category, price, stock: stock ?? "In Stock" })}>
             {isOut ? "Out of Stock" : "Add to Cart"}
           </button>
-          <Link
-            href={`/shop/${id}`}
-            style={{ display:"flex", alignItems:"center", justifyContent:"center", width:38, height:38, background:"#f0fdf4", border:"1.5px solid #d1fae5", borderRadius:7, color:"#475569", flexShrink:0 }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <Link href={`/shop/${id}`} className="view-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
             </svg>
           </Link>

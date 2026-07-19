@@ -80,7 +80,7 @@ export default function ShopPageContent() {
 
       {/* Grid */}
       {filtered.length > 0 ? (
-        <div className="prod-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(210px,1fr))", gap:16 }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(210px,1fr))", gap:16 }}>
           {filtered.map(p => <ProductCard key={p.id} id={p.id} name={p.name} category={p.category} price={p.price} stock={p.stock} image={p.image} badge={p.badge} originalPrice={p.originalPrice} />)}
         </div>
       ) : (
@@ -90,7 +90,7 @@ export default function ShopPageContent() {
           <div style={{ fontSize:13, marginTop:6 }}>Try a different search or category</div>
           <button onClick={() => { setSearch(""); setCat("All"); }}
             style={{ marginTop:16, padding:"10px 20px", background:"#2563eb", color:"#fff", border:"none", borderRadius:8, fontSize:13, fontWeight:700, cursor:"pointer" }}>
-            View All
+            Sab Dekhein
           </button>
         </div>
       )}

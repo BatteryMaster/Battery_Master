@@ -15,7 +15,7 @@ export default function ContactPage() {
       <WhatsAppButton />
 
       {/* Page header */}
-      <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", borderBottom:"1.5px solid #dde3f0", padding:"48px 0 44px" }}>
+      <div style={{ background:"linear-gradient(135deg,#052e16,#14532d)", borderBottom:"1.5px solid #dde3f0", padding:"48px 0 44px" }}>
         <div className="wrap">
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:8 }}>
             Get In Touch
@@ -56,15 +56,15 @@ export default function ContactPage() {
             <div style={{ fontSize:14, fontWeight:700, color:"#0f172a", marginBottom:4, wordBreak:"break-all" }}>batterymasterofficial78@outlook.com</div>
             <div style={{ fontSize:13, color:"#64748b", marginBottom:18, lineHeight:1.5 }}>Email us — we reply within 24 hours.</div>
             <a href="mailto:batterymasterofficial78@outlook.com"
-              style={{ display:"inline-flex", alignItems:"center", padding:"10px 20px", background:"rgba(37,99,235,0.08)", color:"#2563eb", borderRadius:8, fontSize:13, fontWeight:700, textDecoration:"none", border:"1.5px solid rgba(37,99,235,0.2)" }}>
-              Send Email
+              style={{ display:"inline-flex", alignItems:"center", padding:"10px 20px", background:"rgba(37,99,235,0.08)", color:"#16a34a", borderRadius:8, fontSize:13, fontWeight:700, textDecoration:"none", border:"1.5px solid rgba(37,99,235,0.2)" }}>
+              Email Bhejein
             </a>
           </div>
 
           {/* Location */}
           <div style={{ background:"#fff", border:"1.5px solid #dde3f0", borderRadius:16, padding:"28px 22px", borderTop:"4px solid #f97316" }}>
             <div style={{ fontSize:32, marginBottom:14 }}>📍</div>
-            <div style={{ fontSize:10, fontWeight:700, letterSpacing:".08em", textTransform:"uppercase", color:"#94a3b8", marginBottom:6 }}>Hamara Pata</div>
+            <div style={{ fontSize:10, fontWeight:700, letterSpacing:".08em", textTransform:"uppercase", color:"#94a3b8", marginBottom:6 }}>Our Address</div>
             <div style={{ fontSize:15, fontWeight:800, color:"#0f172a", marginBottom:4 }}>Shop No 78</div>
             <div style={{ fontSize:13, fontWeight:600, color:"#374151", marginBottom:4 }}>Cooperative Electronics Market</div>
             <div style={{ fontSize:13, color:"#64748b", lineHeight:1.6 }}>Saddar, Karachi, Pakistan</div>
@@ -73,9 +73,13 @@ export default function ContactPage() {
           {/* Hours */}
           <div style={{ background:"#fff", border:"1.5px solid #dde3f0", borderRadius:16, padding:"28px 22px", borderTop:"4px solid #8b5cf6" }}>
             <div style={{ fontSize:32, marginBottom:14 }}>🕐</div>
-            <div style={{ fontSize:10, fontWeight:700, letterSpacing:".08em", textTransform:"uppercase", color:"#94a3b8", marginBottom:6 }}>Working Hours</div>
-            <div style={{ fontSize:14, fontWeight:700, color:"#0f172a", marginBottom:8 }}>Mon – Sat: 10am – 8pm</div>
-            <div style={{ fontSize:13, color:"#64748b" }}>Sunday: Closed</div>
+            <div style={{ fontSize:10, fontWeight:700, letterSpacing:".08em", textTransform:"uppercase", color:"#94a3b8", marginBottom:6 }}>Kaam ke Auqaat</div>
+            <div style={{ fontSize:14, fontWeight:700, color:"#0f172a", marginBottom:8 }}>Somwar – Shanbe: 10am – 8pm</div>
+            <div style={{ fontSize:13, color:"#64748b" }}>Itwar: 12pm – 6pm</div>
+            <div style={{ marginTop:14, padding:"10px 12px", background:"#fef2f2", borderRadius:8, border:"1px solid #fecaca" }}>
+              <div style={{ fontSize:12, fontWeight:700, color:"#dc2626" }}></div>
+              
+            </div>
           </div>
         </div>
 
@@ -90,7 +94,7 @@ export default function ContactPage() {
             <div style={{ fontSize:13, color:"#64748b", marginBottom:16 }}>Saddar, Karachi — Electronics Market ke andar</div>
             <a href="https://maps.google.com/?q=Cooperative+Electronics+Market+Saddar+Karachi" target="_blank" rel="noopener noreferrer"
               style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"10px 20px", background:"#2563eb", color:"#fff", borderRadius:8, fontSize:13, fontWeight:700, textDecoration:"none" }}>
-              🗺️ View on Google Maps
+              🗺️ Google Maps Par Dekhein
             </a>
           </div>
         </div>
@@ -98,7 +102,7 @@ export default function ContactPage() {
         {/* CTA banner */}
         <div style={{ background:"linear-gradient(135deg,#1e40af,#0f172a)", borderRadius:16, padding:"28px 24px", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:16 }}>
           <div>
-            <div style={{ fontSize:18, fontWeight:800, color:"#fff", marginBottom:6 }}>Order karne ke liye tayyar hain?</div>
+            <div style={{ fontSize:18, fontWeight:800, color:"#fff", marginBottom:6 }}>Ready to place an order?</div>
             <div style={{ fontSize:13, color:"rgba(255,255,255,0.6)" }}>WhatsApp us or browse our products.</div>
           </div>
           <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>

@@ -16,14 +16,14 @@ export default function AboutPage() {
       <WhatsAppButton />
 
       {/* Hero */}
-      <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"48px 0 44px" }}>
+      <div style={{ background:"linear-gradient(135deg,#052e16,#14532d)", padding:"48px 0 44px" }}>
         <div className="wrap">
-          <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:8 }}>Hamara Ta'aruf</div>
+          <div style={{ fontSize:11, fontWeight:700, letterSpacing:".1em", textTransform:"uppercase", color:"#f97316", marginBottom:8 }}>About Us</div>
           <h1 style={{ fontSize:"clamp(24px,4vw,40px)", fontWeight:900, letterSpacing:"-.02em", color:"#fff", marginTop:0, marginBottom:10 }}>
-            Battery Master ke Bare Mein
+            About Battery Master
           </h1>
           <p style={{ fontSize:15, color:"rgba(255,255,255,0.6)" }}>
-            Karachi ka trusted battery & EV parts store
+            Karachi's trusted battery & EV parts store
           </p>
         </div>
       </div>
@@ -33,16 +33,16 @@ export default function AboutPage() {
         {/* Main about card */}
         <div style={{ background:"#fff", border:"1.5px solid #dde3f0", borderRadius:16, padding:"40px 36px", marginBottom:20 }}>
           <h2 style={{ fontSize:20, fontWeight:800, color:"#0f172a", marginBottom:16, letterSpacing:"-.01em" }}>
-            🔋 Hum Kaun Hain?
+            🔋 Who We Are
           </h2>
           <p style={{ fontSize:15, color:"#475569", lineHeight:1.9, marginBottom:16 }}>
-            <strong>Battery Master</strong> Karachi ki ek trusted online aur physical store hai jo lithium batteries, JK BMS, LiFePO4 cells, e-bike kits, chargers aur tamam EV accessories provide karta hai. Hamara shop <strong>Shop No 78, Cooperative Electronics Market, Saddar Karachi</strong> mein hai.
+            <strong>Battery Master</strong> is a trusted online and physical store based in Karachi, providing lithium batteries, JK BMS, LiFePO4 cells, e-bike kits, chargers, and all EV accessories. Our shop is at <strong>Shop No 78, Cooperative Electronics Market, Saddar Karachi</strong>.
           </p>
           <p style={{ fontSize:15, color:"#475569", lineHeight:1.9, marginBottom:16 }}>
-            We work for people who want the best quality batteries and EV parts for their vehicles, solar systems, or electronics — at the right price. We always have Grade-A LiFePO4 cells (EVE, CATL), JK BMS, Samsung/LG 18650 cells, and e-bike conversion kits in stock.
+            We work for people who need the best quality batteries and EV parts for their vehicles, solar systems, or electronics — at the right price. We always stock Grade-A LiFePO4 cells (EVE, CATL), JK BMS, Samsung/LG 18650 cells, and e-bike conversion kits.
           </p>
           <p style={{ fontSize:15, color:"#475569", lineHeight:1.9 }}>
-            We are committed to providing fast service, honest advice, and quality products. Whether you are building a solar battery, converting an e-bike, or just need a reliable charger — Battery Master is your first stop.
+            We are committed to fast service, honest advice, and quality products. Whether you are building a solar battery, converting an e-bike, or just need a reliable charger — Battery Master is your first stop.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export default function AboutPage() {
             { icon:"🛵", title:"E-Bike Kits",           desc:"48V se 72V tak complete conversion kits." },
             { icon:"🔌", title:"Smart Chargers",         desc:"12V se 72V tak CC/CV auto-cutoff chargers." },
             { icon:"🔧", title:"Silicon Wires & Tools", desc:"High-quality wiring, terminals, testers." },
-            { icon:"💬", title:"WhatsApp Support",       desc:"Order aur advice ke liye seedha contact." },
+            { icon:"💬", title:"WhatsApp Support",       desc:"Direct contact for orders and advice." },
           ].map(f => (
             <div key={f.title} style={{ background:"#fff", border:"1.5px solid #dde3f0", borderRadius:14, padding:"22px 18px" }}>
               <div style={{ fontSize:28, marginBottom:10 }}>{f.icon}</div>
@@ -83,9 +83,15 @@ export default function AboutPage() {
           </div>
         </div>
 
+        
+        
+          
+          <div style={{ fontSize:13, color:"#64748b" }}>We accept bank transfer, Easypaisa, or JazzCash. Please WhatsApp us before ordering.</div>
+        
+
         <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
-          <Link href="/shop" style={{ display:"inline-flex", alignItems:"center", padding:"12px 24px", background:"#16a34a", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
-            🛒 View Products →
+          <Link href="/shop" style={{ display:"inline-flex", alignItems:"center", padding:"12px 24px", background:"#2563eb", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
+            🛒 Products Dekhein →
           </Link>
           <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer"
             style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"12px 24px", background:"#25D366", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>

@@ -11,11 +11,11 @@ type Props = { params: Promise<{ slug: string }> };
 
 // Map URL slug → category name in products.ts
 const SLUG_TO_CAT: Record<string, { name: string; icon: string; desc: string }> = {
-  "jk-bms":                { name:"JK BMS",                icon:"🛡️", desc:"4S to 24S JK Active Balancing BMS — Bluetooth, RS485, solar & EV ke liye" },
-  "lithium-battery-packed": { name:"Lithium Battery Packed", icon:"🔋", desc:"12V to 72V ready-made lithium packs with BMS — solar, e-bike, UPS ke liye" },
+  "jk-bms":                { name:"JK BMS",                icon:"🛡️", desc:"4S to 24S JK Active Balancing BMS — Bluetooth, RS485, for solar & EV" },
+  "lithium-battery-packed": { name:"Lithium Battery Packed", icon:"🔋", desc:"12V to 72V ready-made lithium packs with BMS — for solar, e-bike, UPS" },
   "battery-box":            { name:"Battery Box",            icon:"📦", desc:"12V to 72V plastic & aluminum battery enclosures — waterproof & lockable" },
-  "lithium-ion-cell":       { name:"Lithium Ion Cell",       icon:"⚡", desc:"Samsung, LG, Panasonic Grade-A 18650 cells — DIY battery packs ke liye" },
-  "lifepo4-cell":           { name:"LiFePO4 Cell",           icon:"🌱", desc:"EVE LF105, LF280K, CATL 200Ah, 304Ah Grade-A — solar & EV ke liye best" },
+  "lithium-ion-cell":       { name:"Lithium Ion Cell",       icon:"⚡", desc:"Samsung, LG, Panasonic Grade-A 18650 cells — for DIY battery packs" },
+  "lifepo4-cell":           { name:"LiFePO4 Cell",           icon:"🌱", desc:"EVE LF105, LF280K, CATL 200Ah, 304Ah Grade-A — for solar & EV best" },
   "lcd-display":            { name:"LCD Display",            icon:"📺", desc:"Battery level indicators, coulometers, e-bike S866 & 72V dashboards" },
   "eve-bike-kits":          { name:"EVE Bike Kits",          icon:"🛵", desc:"48V 1000W to 72V 3000W complete e-bike conversion kits with motor & controller" },
   "chargers":               { name:"Chargers",               icon:"🔌", desc:"12V to 72V smart CC/CV lithium chargers — auto cutoff, LED indicator" },
@@ -44,7 +44,7 @@ export default function CategoryDetailPage({ params }: Props) {
       <WhatsAppButton />
 
       {/* Page Header */}
-      <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"36px 0 32px" }}>
+      <div style={{ background:"linear-gradient(135deg,#052e16,#14532d)", padding:"36px 0 32px" }}>
         <div className="wrap">
           <nav style={{ display:"flex", alignItems:"center", gap:6, fontSize:12, color:"rgba(255,255,255,0.5)", marginBottom:16, flexWrap:"wrap" }}>
             <Link href="/" style={{ color:"rgba(255,255,255,0.5)", textDecoration:"none" }}>Home</Link>
@@ -71,14 +71,14 @@ export default function CategoryDetailPage({ params }: Props) {
         </div>
 
         {products.length > 0 ? (
-          <div className="prod-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(min(210px,100%),1fr))", gap:16 }}>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(min(210px,100%),1fr))", gap:16 }}>
             {products.map(p => <ProductCard key={p.id} id={p.id} name={p.name} category={p.category} price={p.price} stock={p.stock} image={p.image} badge={p.badge} originalPrice={p.originalPrice} />)}
           </div>
         ) : (
           <div style={{ textAlign:"center", padding:"80px 20px", color:"#94a3b8" }}>
             <div style={{ fontSize:48, marginBottom:12 }}>📦</div>
-            <div style={{ fontSize:16, fontWeight:600, color:"#374151" }}>Is category mein abhi products nahi hain</div>
-            <div style={{ fontSize:13, marginTop:6, marginBottom:20 }}>WhatsApp par inquiry karein</div>
+            <div style={{ fontSize:16, fontWeight:600, color:"#374151" }}>No products in this category yet</div>
+            <div style={{ fontSize:13, marginTop:6, marginBottom:20 }}>Send a WhatsApp inquiry</div>
             <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer"
               style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"12px 24px", background:"#25D366", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
               📱 WhatsApp Inquiry
