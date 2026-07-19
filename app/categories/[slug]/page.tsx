@@ -88,7 +88,7 @@ export default function CategoryDetailPage({ params }: Props) {
 
         <div style={{ marginTop:32, display:"flex", gap:10, flexWrap:"wrap" }}>
           <Link href="/categories" style={{ display:"inline-flex", alignItems:"center", padding:"10px 20px", background:"#fff", color:"#0f172a", border:"1.5px solid #e2e8f0", borderRadius:8, fontSize:13, fontWeight:700, textDecoration:"none" }}>
-            ← Saari Categories
+            ← All Categories
           </Link>
           <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer"
             style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"10px 20px", background:"#25D366", color:"#fff", borderRadius:8, fontSize:13, fontWeight:700, textDecoration:"none" }}>
