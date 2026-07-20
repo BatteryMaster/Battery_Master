@@ -28,6 +28,5 @@ export function useProducts() {
   }, []);
 
   const categories = ["All", ...Array.from(new Set(products.map(p => p.category)))];
-
   return { products, categories, ready };
 }
