@@ -221,14 +221,28 @@ export default function AdminPage() {
               <label style={{ fontSize:12, fontWeight:700, color:"#374151", display:"block", marginBottom:5 }}>
                 Price <span style={{ color:"#dc2626" }}>*</span>
               </label>
-              <input value={p.price} onChange={e => setP({ ...p, price:e.target.value })}
-                placeholder="Rs. 4,500"
+              <input
+                value={p.price.replace(/^Rs\.\s*/,"")}
+                onChange={e => {
+                  const raw = e.target.value.replace(/[^0-9]/g,"");
+                  const fmt = raw ? "Rs. " + Number(raw).toLocaleString("en-PK") : "";
+                  setP({ ...p, price: fmt });
+                }}
+                placeholder="499"
+                inputMode="numeric"
                 style={{ width:"100%", padding:"11px 13px", border:"1.5px solid #e2e8f0", borderRadius:9, fontSize:14, outline:"none", fontFamily:"inherit", boxSizing:"border-box" }} />
             </div>
             <div>
-              <label style={{ fontSize:12, fontWeight:700, color:"#374151", display:"block", marginBottom:5 }}>Original Price</label>
-              <input value={p.originalPrice} onChange={e => setP({ ...p, originalPrice:e.target.value })}
-                placeholder="Rs. 5,000 (optional)"
+              <label style={{ fontSize:12, fontWeight:700, color:"#374151", display:"block", marginBottom:5 }}>Original Price (optional)</label>
+              <input
+                value={p.originalPrice.replace(/^Rs\.\s*/,"")}
+                onChange={e => {
+                  const raw = e.target.value.replace(/[^0-9]/g,"");
+                  const fmt = raw ? "Rs. " + Number(raw).toLocaleString("en-PK") : "";
+                  setP({ ...p, originalPrice: fmt });
+                }}
+                placeholder="599"
+                inputMode="numeric"
                 style={{ width:"100%", padding:"11px 13px", border:"1.5px solid #e2e8f0", borderRadius:9, fontSize:14, outline:"none", fontFamily:"inherit", boxSizing:"border-box" }} />
             </div>
           </div>
