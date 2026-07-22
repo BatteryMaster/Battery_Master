@@ -14,6 +14,9 @@ function rowToP(r: Record<string,unknown>): P {
   return { id:Number(r.id), name:String(r.name??""), category:String(r.category??""), price:String(r.price??""), stock:String(r.stock??"In Stock"), description:String(r.description??""), image:String(r.image??""), badge:String(r.badge??"none"), originalPrice:String(r.original_price??"") };
 }
 function pToRow(p: P) {
+  return { name:p.name, category:p.category, price:p.price, stock:p.stock, description:p.description, image:p.image, badge:p.badge==="none"?null:p.badge, original_price:p.originalPrice||null };
+}
+function pToRowWithId(p: P) {
   return { id:p.id, name:p.name, category:p.category, price:p.price, stock:p.stock, description:p.description, image:p.image, badge:p.badge==="none"?null:p.badge, original_price:p.originalPrice||null };
 }
 const blank = (): P => ({ id:0, name:"", category:"JK BMS", price:"", stock:"In Stock", description:"", image:"", badge:"none", originalPrice:"" });
@@ -55,7 +58,7 @@ export default function AdminPage() {
     const { count } = await supabase.from("products").select("*", { count:"exact", head:true });
     if ((count ?? 0) === 0) {
       const rows = SEED.map(p => ({
-        id: p.id, name: p.name, category: p.category, price: p.price,
+        name: p.name, category: p.category, price: p.price,
         stock: p.stock, description: p.description, image: p.image,
         badge: p.badge || null, original_price: p.originalPrice || null,
       }));
@@ -86,8 +89,7 @@ export default function AdminPage() {
   const saveProduct = async (p: P) => {
     setLoading(true);
     if (tab === "add") {
-      const { id: _id, ...rest } = pToRow(p);
-      const { error } = await supabase.from("products").insert([rest]);
+      const { error } = await supabase.from("products").insert([pToRow(p)]);
       if (error) { showToast("❌ " + error.message); setLoading(false); return; }
       showToast("✅ Product added!");
     } else {
