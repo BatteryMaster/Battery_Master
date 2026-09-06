@@ -35,7 +35,7 @@ export default function ProductDetailContent({ product }: { product: Product }) 
         }}>
           <Image
             src={product.image}
-            alt={`${product.name} price in Pakistan — buy at batterymaster.pk`}
+            alt={`${product.name} price in Pakistan — buy at Battery Master`}
             fill priority
             style={{ objectFit:"contain", padding:36 }}
             sizes="(max-width:768px) 100vw, 50vw"
@@ -58,7 +58,7 @@ export default function ProductDetailContent({ product }: { product: Product }) 
 
           {/* SEO subtitle */}
           <p style={{ fontSize:13, color:"#64748b", marginBottom:20 }}>
-            {product.name} price in Pakistan — buy online at batterymaster.pk, Karachi
+            {product.name} price in Pakistan — buy online at Battery Master, Karachi
           </p>
 
           {/* Price */}
@@ -101,7 +101,7 @@ export default function ProductDetailContent({ product }: { product: Product }) 
               🛒 {isOut ? "Out of Stock" : "Add to Cart"}
             </button>
             <a
-              href={`https://wa.me/923329891510?text=Assalam%20alaikum%2C%20I%20want%20to%20order%20${encodeURIComponent(product.name)}%20(Rs.%20${priceNum})%20from%20batterymaster.pk`}
+              href={`https://wa.me/923329891510?text=Assalam%20alaikum%2C%20I%20want%20to%20order%20${encodeURIComponent(product.name)}%20(Rs.%20${priceNum})%20from%20Battery Master`}
               target="_blank" rel="noopener noreferrer"
               style={{ background:"#25D366", color:"#fff", border:"none", borderRadius:9, padding:"12px 22px", fontSize:14, fontWeight:700, cursor:"pointer", display:"flex", alignItems:"center", gap:8, textDecoration:"none" }}
             >
@@ -111,7 +111,7 @@ export default function ProductDetailContent({ product }: { product: Product }) 
 
           {/* Trust chips */}
           <div style={{ display:"flex", flexWrap:"wrap", gap:7, marginBottom:22 }}>
-            {["🚚 Karachi 1–2 days","💳 Cash on Delivery","🔄 7-days returns","✅ Quality checked"].map(t => (
+            {["🚚 Karachi 1–2 days","💳 Online Payment","✅ Quality checked"].map(t => (
               <span key={t} style={{ fontSize:11.5, fontWeight:600, color:"#374151", background:"#f1f5f9", border:"1px solid #e2e8f0", borderRadius:100, padding:"5px 12px" }}>
                 {t}
               </span>
@@ -125,7 +125,7 @@ export default function ProductDetailContent({ product }: { product: Product }) 
               "Quality tested before dispatch",
               "Compatible with Arduino & most microcontrollers",
               "Fast ordering via website or WhatsApp",
-              "Cash on Delivery — Karachi 1–2 days",
+              "Online Payment — Karachi 1–2 days",
             ].map((h, i) => (
               <div key={i} style={{ display:"flex", gap:9, alignItems:"flex-start", marginBottom:8 }}>
                 <span style={{ color:"#16a34a", fontWeight:700, flexShrink:0 }}>✓</span>

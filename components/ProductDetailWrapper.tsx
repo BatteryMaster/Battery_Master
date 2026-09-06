@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
+
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { supabase } from "@/lib/supabase";
@@ -15,7 +15,7 @@ type P = {
 export default function ProductDetailWrapper({ id }: { id: string }) {
   const [product, setProduct] = useState<P | null>(null);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart();
+  const { addToCart } = useCart(); 
 
   useEffect(() => {
     async function load() {
@@ -90,9 +90,8 @@ export default function ProductDetailWrapper({ id }: { id: string }) {
         {/* Image */}
         <div style={{ position: "relative", background: "#f0fdf4", borderRadius: 18, border: "1.5px solid #d1fae5", overflow: "hidden", aspectRatio: "1/1", minHeight: 280 }}>
           {product.image ? (
-            <Image src={product.image} alt={product.name} fill priority
-              style={{ objectFit: "contain", padding: 28 }}
-              sizes="(max-width:768px) 100vw, 50vw"
+            <img src={product.image} alt={product.name}
+              style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"contain", padding:28 }}
             />
           ) : (
             <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, color: "#bbf7d0" }}>
@@ -143,7 +142,7 @@ export default function ProductDetailWrapper({ id }: { id: string }) {
           </div>
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 20 }}>
-            {["🚚 Karachi 1–2 days", "💳 Online Payment", "🔄 7-day returns", "✅ Quality checked"].map(t => (
+            {["🚚 Karachi 1–2 days", "💳 Online Payment", "✅ Quality checked"].map(t => (
               <span key={t} style={{ fontSize: 11, fontWeight: 600, color: "#374151", background: "#f0fdf4", border: "1px solid #d1fae5", borderRadius: 100, padding: "5px 12px" }}>{t}</span>
             ))}
           </div>

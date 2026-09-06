@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 
@@ -14,7 +13,7 @@ type Props = {
 export default function ProductCard({ id, name, category, price, stock, image, badge=null, originalPrice }: Props) {
   const { addToCart } = useCart();
   const [imgErr, setImgErr] = useState(false);
-  const s = (stock ?? "In Stock").toLowerCase();
+  const s     = (stock ?? "In Stock").toLowerCase();
   const isOut = s.includes("out");
   const isLtd = s.includes("limited");
 
@@ -22,21 +21,23 @@ export default function ProductCard({ id, name, category, price, stock, image, b
     <div className="prod-card">
       {/* Image */}
       <Link href={`/shop/${id}`} className="prod-card-img">
-        {!imgErr ? (
-          <Image
-            src={image || "/placeholder.jpg"}
+        {!imgErr && image ? (
+          /* Use regular img tag — works for ALL: base64, URL, any format, NO delay */
+          <img
+            src={image}
             alt={name}
-            fill
-            sizes="(max-width:480px) 50vw, (max-width:768px) 50vw, 25vw"
-            style={{ objectFit:"contain", padding:12 }}
             onError={() => setImgErr(true)}
+            style={{ width:"100%", height:"100%", objectFit:"contain", padding:12, display:"block" }}
           />
         ) : (
-          <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:4, color:"#bbf7d0", padding:12 }}>
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-              <rect x="3" y="7" width="14" height="10" rx="2"/><path d="M17 10h2.5a1.5 1.5 0 0 1 0 4H17"/><line x1="7" y1="7" x2="7" y2="5"/><line x1="13" y1="7" x2="13" y2="5"/>
+          <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:4, color:"#bbf7d0", width:"100%", height:"100%" }}>
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+              <rect x="3" y="7" width="14" height="10" rx="2"/>
+              <path d="M17 10h2.5a1.5 1.5 0 0 1 0 4H17"/>
+              <line x1="7" y1="7" x2="7" y2="5"/>
+              <line x1="13" y1="7" x2="13" y2="5"/>
             </svg>
-            <span style={{ fontSize:9, fontWeight:700, letterSpacing:".06em", textTransform:"uppercase" }}>Battery Master</span>
+            <span style={{ fontSize:9, fontWeight:700, letterSpacing:".05em", textTransform:"uppercase" }}>Battery Master</span>
           </div>
         )}
         {badge && <span className={`bdg bdg-${badge}`}>{badge.toUpperCase()}</span>}
@@ -48,7 +49,7 @@ export default function ProductCard({ id, name, category, price, stock, image, b
         <Link href={`/shop/${id}`}>
           <div className="prod-card-name">{name}</div>
         </Link>
-        <div className="prod-card-stock" style={{ color: isOut ? "#dc2626" : isLtd ? "#d97706" : "#16a34a" }}>
+        <div className="prod-card-stock" style={{ color: isOut?"#dc2626":isLtd?"#d97706":"#16a34a" }}>
           {isOut ? "● Out of stock" : isLtd ? "● Limited stock" : "● In stock"}
         </div>
         <div style={{ display:"flex", alignItems:"baseline", gap:6, flexWrap:"wrap" }}>
