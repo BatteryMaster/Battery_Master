@@ -94,7 +94,7 @@ export default function ContactPage() {
             <div style={{ fontSize:13, color:"#64748b", marginBottom:16 }}>Saddar, Karachi — Electronics Market ke andar</div>
             <a href="https://maps.google.com/?q=Cooperative+Electronics+Market+Saddar+Karachi" target="_blank" rel="noopener noreferrer"
               style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"10px 20px", background:"#2563eb", color:"#fff", borderRadius:8, fontSize:13, fontWeight:700, textDecoration:"none" }}>
-              🗺️ Google Maps Par Dekhein
+              🗺️ View on Google Maps
             </a>
           </div>
         </div>

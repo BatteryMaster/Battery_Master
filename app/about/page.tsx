@@ -91,7 +91,7 @@ export default function AboutPage() {
 
         <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
           <Link href="/shop" style={{ display:"inline-flex", alignItems:"center", padding:"12px 24px", background:"#2563eb", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
-            🛒 Products Dekhein →
+            🛒 Products See Now →
           </Link>
           <a href="https://wa.me/923329891510" target="_blank" rel="noopener noreferrer"
             style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"12px 24px", background:"#25D366", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>

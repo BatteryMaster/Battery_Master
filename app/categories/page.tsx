@@ -50,7 +50,7 @@ export default function CategoriesPage() {
                     <span style={{ fontSize:11, fontWeight:700, color:c.accent, background:`${c.color}`, border:`1px solid ${c.border}`, padding:"3px 10px", borderRadius:20 }}>
                       {c.count} products
                     </span>
-                    <span style={{ fontSize:12, color:c.accent, fontWeight:700 }}>Dekhein →</span>
+                    <span style={{ fontSize:12, color:c.accent, fontWeight:700 }}>See Now →</span>
                   </div>
                 </div>
               </div>

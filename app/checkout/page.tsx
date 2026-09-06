@@ -87,7 +87,7 @@ export default function CheckoutPage() {
             <h2 style={{ fontSize:20, fontWeight:700, marginBottom:8 }}>Cart khali hai</h2>
             <p style={{ color:"#64748b", marginBottom:24, fontSize:13 }}>Please add some products to your cart first.</p>
             <Link href="/shop" style={{ display:"inline-flex", padding:"11px 24px", background:"#16a34a", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
-              Products Dekhein →
+              Products See Now →
             </Link>
           </div>
         ) : (

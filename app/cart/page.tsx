@@ -106,7 +106,7 @@ export default function CartPage() {
             <h2 style={{ fontSize:20, fontWeight:800, color:"#0f172a", marginBottom:8 }}>Cart khali hai</h2>
             <p style={{ fontSize:13, color:"#64748b", marginBottom:24 }}>Add some products to your cart, then checkout.</p>
             <Link href="/shop" style={{ display:"inline-flex", padding:"11px 28px", background:"#16a34a", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
-              Products Dekhein →
+              Products See Now →
             </Link>
           </div>
         )}
