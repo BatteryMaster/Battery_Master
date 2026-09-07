@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
+import HeroSlider from "@/components/HeroSlider";
 
 const CAT_ICONS: Record<string,string> = {
   "All":"🔋","JK BMS":"🛡️","Lithium Battery Packed":"🔌",
@@ -25,6 +26,9 @@ export default function Home() {
     <main style={{ minHeight:"100vh", background:"#f0fdf4" }}>
       <Header />
       <WhatsAppButton />
+
+      {/* SLIDER */}
+      <HeroSlider />
 
       {/* HERO */}
       <section style={{ background:"linear-gradient(135deg,#052e16 0%,#14532d 55%,#166534 100%)", padding:"72px 0 80px", position:"relative", overflow:"hidden" }}>

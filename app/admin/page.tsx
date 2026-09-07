@@ -43,19 +43,24 @@ function fileToBase64(file: File): Promise<string> {
   });
 }
 
+type SliderItem = { id:number; image:string; title:string; subtitle:string; link:string; sort_order:number; active:boolean; };
+const blankSlide = (): Omit<SliderItem,"id"> => ({ image:"", title:"", subtitle:"", link:"", sort_order:0, active:true });
+
 export default function AdminPage() {
   const [auth, setAuth]         = useState(false);
   const [pw, setPw]             = useState("");
   const [pwErr, setPwErr]       = useState(false);
   const [products, setProducts] = useState<P[]>([]);
   const [loading, setLoading]   = useState(false);
-  const [tab, setTab]           = useState<"list"|"edit"|"add">("list");
+  const [tab, setTab]           = useState<"list"|"edit"|"add"|"sliders">("list");
   const [editing, setEditing]   = useState<P|null>(null);
   const [search, setSearch]     = useState("");
   const [catFilter, setCat]     = useState("All");
   const [toast, setToast]       = useState("");
   const [toastType, setToastType] = useState<"ok"|"err">("ok");
   const [delConfirm, setDel]    = useState<number|null>(null);
+  const [sliders, setSliders]   = useState<SliderItem[]>([]);
+  const [sliderLoading, setSL]  = useState(false);
 
   const showToast = (msg: string, type: "ok"|"err" = "ok") => {
     setToast(msg); setToastType(type);
@@ -125,6 +130,13 @@ export default function AdminPage() {
     setDel(null);
     setProducts(prev => prev.filter(x => x.id !== id));
   };
+
+  const loadSliders = useCallback(async () => {
+    setSL(true);
+    const { data } = await supabase.from("sliders").select("*").order("sort_order", { ascending:true });
+    if (data) setSliders(data as SliderItem[]);
+    setSL(false);
+  }, []);
 
   const filtered = products.filter(p =>
     (catFilter==="All" || p.category===catFilter) &&
@@ -391,6 +403,18 @@ export default function AdminPage() {
         {/* Product list */}
         {tab==="list" && (
           <>
+            {/* Tab switcher */}
+            <div style={{ display:"flex", gap:8, marginBottom:16 }}>
+              <button onClick={() => setTab("list")}
+                style={{ padding:"8px 16px", background:"#16a34a", color:"#fff", border:"none", borderRadius:8, fontSize:13, fontWeight:800, cursor:"pointer" }}>
+                📦 Products
+              </button>
+              <button onClick={() => { setTab("sliders"); loadSliders(); }}
+                style={{ padding:"8px 16px", background:"rgba(255,255,255,0.8)", color:"#374151", border:"1.5px solid #d1fae5", borderRadius:8, fontSize:13, fontWeight:700, cursor:"pointer" }}>
+                🖼️ Sliders
+              </button>
+            </div>
+
             <div style={{ display:"flex", gap:10, marginBottom:12, flexWrap:"wrap" }}>
               <input value={search} onChange={e => setSearch(e.target.value)}
                 placeholder="🔍 Search products..."
@@ -465,7 +489,249 @@ export default function AdminPage() {
             )}
           </>
         )}
+
+        {/* ─── SLIDERS TAB ─── */}
+        {tab==="sliders" && (
+          <SliderManager
+            sliders={sliders}
+            loading={sliderLoading}
+            onReload={loadSliders}
+            showToast={showToast}
+          />
+        )}
       </div>
+    </div>
+  );
+}
+
+
+// ─── SLIDER MANAGER ───
+type SliderManagerProps = {
+  sliders: SliderItem[];
+  loading: boolean;
+  onReload: () => void;
+  showToast: (msg: string, type?: "ok"|"err") => void;
+};
+
+function SliderManager({ sliders, loading, onReload, showToast }: SliderManagerProps) {
+  const [editingSlide, setEditingSlide] = useState<(Omit<SliderItem,"id"> & { id?:number })|null>(null);
+  const [saving, setSaving]             = useState(false);
+  const [delSlide, setDelSlide]         = useState<number|null>(null);
+  const imgRef                          = useRef<HTMLInputElement>(null);
+
+  const handleImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !editingSlide) return;
+    if (file.size > 5 * 1024 * 1024) { showToast("❌ Max 5MB", "err"); return; }
+    const reader = new FileReader();
+    reader.onload = ev => setEditingSlide(prev => prev ? { ...prev, image: ev.target?.result as string } : null);
+    reader.readAsDataURL(file);
+  };
+
+  const saveSlide = async () => {
+    if (!editingSlide) return;
+    if (!editingSlide.image) { showToast("❌ Please add an image", "err"); return; }
+    setSaving(true);
+    const row = {
+      image: editingSlide.image, title: editingSlide.title,
+      subtitle: editingSlide.subtitle, link: editingSlide.link,
+      sort_order: editingSlide.sort_order, active: editingSlide.active,
+    };
+    let error;
+    if (editingSlide.id) {
+      ({ error } = await supabase.from("sliders").update(row).eq("id", editingSlide.id));
+    } else {
+      ({ error } = await supabase.from("sliders").insert([row]));
+    }
+    if (error) { showToast("❌ " + error.message, "err"); }
+    else { showToast("✅ Slider saved!"); onReload(); setEditingSlide(null); }
+    setSaving(false);
+  };
+
+  const deleteSlide = async (id: number) => {
+    const { error } = await supabase.from("sliders").delete().eq("id", id);
+    if (error) showToast("❌ " + error.message, "err");
+    else { showToast("🗑️ Deleted"); onReload(); setDelSlide(null); }
+  };
+
+  const toggleActive = async (s: SliderItem) => {
+    await supabase.from("sliders").update({ active: !s.active }).eq("id", s.id);
+    onReload();
+  };
+
+  if (editingSlide !== null) return (
+    <div style={{ background:"#fff", borderRadius:16, border:"1.5px solid #d1fae5", overflow:"hidden" }}>
+      <div style={{ background:"linear-gradient(135deg,#052e16,#14532d)", padding:"16px 20px", display:"flex", alignItems:"center", gap:12 }}>
+        <button onClick={() => setEditingSlide(null)}
+          style={{ background:"rgba(255,255,255,0.15)", border:"none", borderRadius:8, width:34, height:34, color:"#fff", cursor:"pointer", fontSize:18, display:"flex", alignItems:"center", justifyContent:"center" }}>
+          ←
+        </button>
+        <div style={{ fontSize:16, fontWeight:800, color:"#fff" }}>{editingSlide.id ? "Edit Slide" : "Add New Slide"}</div>
+      </div>
+
+      <div style={{ padding:20, display:"flex", flexDirection:"column", gap:14 }}>
+        {/* Image */}
+        <div>
+          <label style={{ fontSize:12, fontWeight:700, color:"#374151", display:"block", marginBottom:8 }}>
+            Slide Image * <span style={{ fontSize:10, color:"#94a3b8", fontWeight:500 }}>Recommended: 1200×500px, any format</span>
+          </label>
+          <div onClick={() => imgRef.current?.click()}
+            style={{ border:"2px dashed #d1fae5", borderRadius:12, minHeight:140, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:8, cursor:"pointer", background:"#f0fdf4", padding:14, overflow:"hidden" }}>
+            {editingSlide.image ? (
+              <img src={editingSlide.image} alt="slide preview"
+                style={{ maxHeight:160, maxWidth:"100%", objectFit:"contain", borderRadius:8 }} />
+            ) : (
+              <>
+                <div style={{ fontSize:36 }}>🖼️</div>
+                <div style={{ fontSize:13, fontWeight:700, color:"#374151" }}>Tap to upload slide image</div>
+                <div style={{ fontSize:11, color:"#94a3b8" }}>JPG, PNG, WebP, AVIF — any format • Max 5MB</div>
+              </>
+            )}
+          </div>
+          <input ref={imgRef} type="file" accept="image/*,.heic,.heif,.avif" style={{ display:"none" }} onChange={handleImg} />
+          <input value={editingSlide.image.startsWith("data:") ? "" : editingSlide.image}
+            onChange={e => setEditingSlide(prev => prev ? { ...prev, image: e.target.value } : null)}
+            placeholder="Or paste image URL"
+            style={{ width:"100%", marginTop:8, padding:"9px 12px", border:"1.5px solid #e2e8f0", borderRadius:8, fontSize:12, outline:"none", fontFamily:"inherit", boxSizing:"border-box" }} />
+        </div>
+
+        {/* Title */}
+        <div>
+          <label style={{ fontSize:12, fontWeight:700, color:"#374151", display:"block", marginBottom:5 }}>Title (optional)</label>
+          <input value={editingSlide.title}
+            onChange={e => setEditingSlide(prev => prev ? { ...prev, title: e.target.value } : null)}
+            placeholder="e.g. JK BMS — Active Balancing"
+            style={{ width:"100%", padding:"11px 13px", border:"1.5px solid #e2e8f0", borderRadius:9, fontSize:14, outline:"none", fontFamily:"inherit", boxSizing:"border-box" }} />
+        </div>
+
+        {/* Subtitle */}
+        <div>
+          <label style={{ fontSize:12, fontWeight:700, color:"#374151", display:"block", marginBottom:5 }}>Subtitle (optional)</label>
+          <input value={editingSlide.subtitle}
+            onChange={e => setEditingSlide(prev => prev ? { ...prev, subtitle: e.target.value } : null)}
+            placeholder="e.g. 4S to 24S • Bluetooth • Best price in Karachi"
+            style={{ width:"100%", padding:"11px 13px", border:"1.5px solid #e2e8f0", borderRadius:9, fontSize:14, outline:"none", fontFamily:"inherit", boxSizing:"border-box" }} />
+        </div>
+
+        {/* Link + Order */}
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12 }}>
+          <div>
+            <label style={{ fontSize:12, fontWeight:700, color:"#374151", display:"block", marginBottom:5 }}>Button Link (optional)</label>
+            <input value={editingSlide.link}
+              onChange={e => setEditingSlide(prev => prev ? { ...prev, link: e.target.value } : null)}
+              placeholder="/categories/jk-bms"
+              style={{ width:"100%", padding:"11px 13px", border:"1.5px solid #e2e8f0", borderRadius:9, fontSize:13, outline:"none", fontFamily:"inherit", boxSizing:"border-box" }} />
+          </div>
+          <div>
+            <label style={{ fontSize:12, fontWeight:700, color:"#374151", display:"block", marginBottom:5 }}>Order (1 = first)</label>
+            <input type="number" value={editingSlide.sort_order}
+              onChange={e => setEditingSlide(prev => prev ? { ...prev, sort_order: Number(e.target.value) } : null)}
+              style={{ width:"100%", padding:"11px 13px", border:"1.5px solid #e2e8f0", borderRadius:9, fontSize:14, outline:"none", fontFamily:"inherit", boxSizing:"border-box" }} />
+          </div>
+        </div>
+
+        <div style={{ display:"flex", gap:10 }}>
+          <button onClick={saveSlide} disabled={saving||!editingSlide.image}
+            style={{ flex:1, padding:"13px", background:(saving||!editingSlide.image)?"#d1fae5":"#16a34a", color:"#fff", border:"none", borderRadius:10, fontSize:14, fontWeight:800, cursor:(saving||!editingSlide.image)?"not-allowed":"pointer" }}>
+            {saving ? "⏳ Saving..." : editingSlide.id ? "💾 Save Slide" : "✅ Add Slide"}
+          </button>
+          <button onClick={() => setEditingSlide(null)}
+            style={{ padding:"13px 18px", background:"#f1f5f9", border:"1.5px solid #e2e8f0", borderRadius:10, fontSize:14, fontWeight:700, cursor:"pointer", color:"#374151" }}>
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div>
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:14, flexWrap:"wrap", gap:10 }}>
+        <div>
+          <div style={{ fontSize:15, fontWeight:800, color:"#0f172a" }}>🖼️ Hero Slider</div>
+          <div style={{ fontSize:12, color:"#64748b", marginTop:2 }}>3 to 7 slides • 4 second auto-play</div>
+        </div>
+        <div style={{ display:"flex", gap:8 }}>
+          <button onClick={onReload} disabled={loading}
+            style={{ padding:"8px 14px", background:"#fff", color:"#374151", border:"1.5px solid #d1fae5", borderRadius:8, fontSize:12, fontWeight:700, cursor:"pointer" }}>
+            {loading ? "⏳" : "🔄 Refresh"}
+          </button>
+          {sliders.length < 7 && (
+            <button onClick={() => setEditingSlide(blankSlide())}
+              style={{ padding:"8px 16px", background:"#16a34a", color:"#fff", border:"none", borderRadius:8, fontSize:13, fontWeight:800, cursor:"pointer" }}>
+              + Add Slide
+            </button>
+          )}
+        </div>
+      </div>
+
+      {sliders.length >= 7 && (
+        <div style={{ background:"#fffbeb", border:"1.5px solid #fde68a", borderRadius:8, padding:"10px 14px", marginBottom:12, fontSize:12, color:"#92400e", fontWeight:600 }}>
+          ⚠️ Maximum 7 slides reached. Delete one to add more.
+        </div>
+      )}
+
+      {loading ? (
+        <div style={{ background:"#fff", borderRadius:14, border:"1.5px solid #d1fae5", padding:"40px 20px", textAlign:"center", color:"#64748b" }}>
+          <div style={{ width:32, height:32, border:"3px solid #d1fae5", borderTop:"3px solid #16a34a", borderRadius:"50%", animation:"spin .8s linear infinite", margin:"0 auto 10px" }} />
+          Loading sliders...
+        </div>
+      ) : sliders.length === 0 ? (
+        <div style={{ background:"#fff", borderRadius:14, border:"2px dashed #d1fae5", padding:"48px 20px", textAlign:"center" }}>
+          <div style={{ fontSize:44, marginBottom:12 }}>🖼️</div>
+          <div style={{ fontSize:15, fontWeight:700, color:"#0f172a", marginBottom:6 }}>No slides yet</div>
+          <div style={{ fontSize:13, color:"#64748b", marginBottom:18 }}>Add 3–7 slides to show on your homepage</div>
+          <button onClick={() => setEditingSlide(blankSlide())}
+            style={{ padding:"10px 24px", background:"#16a34a", color:"#fff", border:"none", borderRadius:8, fontSize:13, fontWeight:700, cursor:"pointer" }}>
+            + Add First Slide
+          </button>
+        </div>
+      ) : (
+        <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+          {sliders.map((s, idx) => (
+            <div key={s.id} style={{ background:"#fff", border:"1.5px solid #d1fae5", borderRadius:14, padding:"12px 14px", display:"flex", alignItems:"center", gap:12 }}>
+              {/* Thumb */}
+              <div style={{ width:80, height:50, flexShrink:0, borderRadius:8, overflow:"hidden", background:"#f0fdf4", border:"1px solid #d1fae5" }}>
+                {s.image
+                  ? <img src={s.image} alt={`Slide ${idx+1}`} style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+                  : <div style={{ width:"100%", height:"100%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:20 }}>🖼️</div>}
+              </div>
+              {/* Info */}
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ fontSize:13, fontWeight:700, color:"#0f172a", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
+                  Slide {idx+1}{s.title ? `: ${s.title}` : " (No title)"}
+                </div>
+                {s.subtitle && <div style={{ fontSize:11, color:"#64748b", marginTop:2, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{s.subtitle}</div>}
+                <div style={{ display:"flex", gap:6, marginTop:4, flexWrap:"wrap", alignItems:"center" }}>
+                  <span style={{ fontSize:10, fontWeight:700, color: s.active?"#16a34a":"#94a3b8", background: s.active?"#f0fdf4":"#f8fafc", border:`1px solid ${s.active?"#bbf7d0":"#e2e8f0"}`, borderRadius:20, padding:"2px 8px" }}>
+                    {s.active ? "● Active" : "○ Hidden"}
+                  </span>
+                  {s.link && <span style={{ fontSize:10, color:"#64748b" }}>→ {s.link}</span>}
+                </div>
+              </div>
+              {/* Actions */}
+              <div style={{ display:"flex", gap:6, flexShrink:0 }}>
+                <button onClick={() => toggleActive(s)}
+                  style={{ padding:"6px 10px", background:s.active?"#fef3c7":"#f0fdf4", border:`1.5px solid ${s.active?"#fde68a":"#bbf7d0"}`, borderRadius:7, fontSize:11, fontWeight:700, color:s.active?"#92400e":"#16a34a", cursor:"pointer" }}>
+                  {s.active ? "Hide" : "Show"}
+                </button>
+                <button onClick={() => setEditingSlide({ ...s })}
+                  style={{ padding:"6px 10px", background:"#eff6ff", border:"1.5px solid #bfdbfe", borderRadius:7, fontSize:11, fontWeight:700, color:"#2563eb", cursor:"pointer" }}>
+                  ✏️
+                </button>
+                {delSlide===s.id ? (
+                  <div style={{ display:"flex", gap:4 }}>
+                    <button onClick={() => deleteSlide(s.id)} style={{ padding:"6px 9px", background:"#dc2626", border:"none", borderRadius:7, fontSize:11, fontWeight:700, color:"#fff", cursor:"pointer" }}>Yes</button>
+                    <button onClick={() => setDelSlide(null)} style={{ padding:"6px 9px", background:"#f1f5f9", border:"1.5px solid #e2e8f0", borderRadius:7, fontSize:11, fontWeight:700, color:"#374151", cursor:"pointer" }}>No</button>
+                  </div>
+                ) : (
+                  <button onClick={() => setDelSlide(s.id)} style={{ padding:"6px 9px", background:"#fef2f2", border:"1.5px solid #fecaca", borderRadius:7, fontSize:11, fontWeight:700, color:"#dc2626", cursor:"pointer" }}>🗑️</button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
