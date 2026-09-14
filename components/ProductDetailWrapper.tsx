@@ -15,7 +15,7 @@ type P = {
 export default function ProductDetailWrapper({ id }: { id: string }) {
   const [product, setProduct] = useState<P | null>(null);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart(); 
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function load() {
