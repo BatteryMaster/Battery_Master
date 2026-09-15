@@ -12,49 +12,43 @@ type Props = {
 
 export default function ProductCard({ id, name, category, price, stock, image, badge=null, originalPrice }: Props) {
   const { addToCart } = useCart();
-  const [imgErr, setImgErr] = useState(false);
+  const [err, setErr]  = useState(false);
   const s     = (stock ?? "In Stock").toLowerCase();
   const isOut = s.includes("out");
   const isLtd = s.includes("limited");
 
   return (
     <div className="prod-card">
-      {/* Image */}
       <Link href={`/shop/${id}`} className="prod-card-img">
-        {!imgErr && image ? (
-          /* Use regular img tag — works for ALL: base64, URL, any format, NO delay */
-          <img
-            src={image}
-            alt={name}
-            onError={() => setImgErr(true)}
-            style={{ width:"100%", height:"100%", objectFit:"contain", padding:12, display:"block" }}
-          />
+        {!err && image ? (
+          <img src={image} alt={name} onError={() => setErr(true)} />
         ) : (
-          <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:4, color:"#bbf7d0", width:"100%", height:"100%" }}>
-            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+          <div style={{ width:"100%", height:"100%", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:4, color:"#bbf7d0" }}>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
               <rect x="3" y="7" width="14" height="10" rx="2"/>
               <path d="M17 10h2.5a1.5 1.5 0 0 1 0 4H17"/>
               <line x1="7" y1="7" x2="7" y2="5"/>
               <line x1="13" y1="7" x2="13" y2="5"/>
             </svg>
-            <span style={{ fontSize:9, fontWeight:700, letterSpacing:".05em", textTransform:"uppercase" }}>Battery Master</span>
+            <span style={{ fontSize:9, fontWeight:700, textTransform:"uppercase", letterSpacing:".05em" }}>No Image</span>
           </div>
         )}
-        {badge && <span className={`bdg bdg-${badge}`}>{badge.toUpperCase()}</span>}
+        {badge && badge !== "none" && (
+          <span className={`bdg bdg-${badge}`}>{badge.toUpperCase()}</span>
+        )}
       </Link>
 
-      {/* Body */}
       <div className="prod-card-body">
         <div className="prod-card-cat">{category}</div>
         <Link href={`/shop/${id}`}>
           <div className="prod-card-name">{name}</div>
         </Link>
         <div className="prod-card-stock" style={{ color: isOut?"#dc2626":isLtd?"#d97706":"#16a34a" }}>
-          {isOut ? "● Out of stock" : isLtd ? "● Limited stock" : "● In stock"}
+          {isOut ? "● Out of stock" : isLtd ? "● Limited" : "● In stock"}
         </div>
         <div style={{ display:"flex", alignItems:"baseline", gap:6, flexWrap:"wrap" }}>
           <span className="prod-card-price">{price}</span>
-          {originalPrice && <span style={{ fontSize:11, color:"#94a3b8", textDecoration:"line-through" }}>{originalPrice}</span>}
+          {originalPrice && <span style={{ fontSize:10.5, color:"#94a3b8", textDecoration:"line-through" }}>{originalPrice}</span>}
         </div>
         <div className="prod-card-btns">
           <button className="add-btn" disabled={isOut}
@@ -63,7 +57,8 @@ export default function ProductCard({ id, name, category, price, stock, image, b
           </button>
           <Link href={`/shop/${id}`} className="view-btn">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
             </svg>
           </Link>
         </div>

@@ -30,7 +30,7 @@ export default function CartPage() {
       
       <div style={{ background:"#fef2f2", borderBottom:"2px solid #fecaca" }}>
         <div className="wrap" style={{ padding:"11px 0", display:"flex", alignItems:"center", gap:10, flexWrap:"wrap" }}>
-          
+          <span style={{ fontSize:13, fontWeight:700, color:"#dc2626" }}></span>
           <span style={{ fontSize:13, color:"#64748b" }}>— Order ke baad hum WhatsApp par payment details bhejenge</span>
         </div>
       </div>
@@ -104,9 +104,9 @@ export default function CartPage() {
           <div style={{ background:"#fff", border:"1.5px solid #e2e8f0", borderRadius:14, padding:"64px 32px", textAlign:"center", maxWidth:440, margin:"0 auto" }}>
             <div style={{ fontSize:52, marginBottom:16 }}>🛒</div>
             <h2 style={{ fontSize:20, fontWeight:800, color:"#0f172a", marginBottom:8 }}>Cart khali hai</h2>
-            <p style={{ fontSize:13, color:"#64748b", marginBottom:24 }}>Add some products to your cart, then checkout.</p>
+            <p style={{ fontSize:13, color:"#64748b", marginBottom:24 }}>Please add some products to your cart first.</p>
             <Link href="/shop" style={{ display:"inline-flex", padding:"11px 28px", background:"#16a34a", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
-              Products See Now →
+              View Products →
             </Link>
           </div>
         )}

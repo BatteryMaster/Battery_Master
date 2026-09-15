@@ -76,7 +76,7 @@ export default function CheckoutPage() {
       <div style={{ background:"linear-gradient(135deg,#0f172a,#1e3a8a)", padding:"36px 0 32px" }}>
         <div className="wrap">
           <h1 style={{ fontSize:"clamp(22px,4vw,36px)", fontWeight:900, color:"#fff" }}>✅ Checkout</h1>
-          <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", marginTop:6 }}>Fill in details — order confirmed via WhatsApp</p>
+          <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", marginTop:6 }}>Fill in your details — order confirmed via WhatsApp</p>
         </div>
       </div>
 
@@ -85,9 +85,9 @@ export default function CheckoutPage() {
           <div style={{ background:"#fff", border:"1.5px solid #e2e8f0", borderRadius:14, padding:48, textAlign:"center", maxWidth:440, margin:"0 auto" }}>
             <div style={{ fontSize:52, marginBottom:16 }}>🛒</div>
             <h2 style={{ fontSize:20, fontWeight:700, marginBottom:8 }}>Cart khali hai</h2>
-            <p style={{ color:"#64748b", marginBottom:24, fontSize:13 }}>Please add some products to your cart first.</p>
+            <p style={{ color:"#64748b", marginBottom:24, fontSize:13 }}>Please add products to your cart first.</p>
             <Link href="/shop" style={{ display:"inline-flex", padding:"11px 24px", background:"#16a34a", color:"#fff", borderRadius:8, fontSize:14, fontWeight:700, textDecoration:"none" }}>
-              Products See Now →
+              View Products →
             </Link>
           </div>
         ) : (
@@ -170,7 +170,7 @@ export default function CheckoutPage() {
                 disabled={loading}
                 style={{ width:"100%", padding:"14px", background: loading ? "#94a3b8" : "#16a34a", color:"#fff", border:"none", borderRadius:10, fontSize:15, fontWeight:800, cursor: loading ? "not-allowed" : "pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:8 }}
               >
-                {loading ? "⏳ Order ja raha hai..." : "✅ Place Order"}
+                {loading ? "⏳ Placing order..." : "✅ Place Order"}
               </button>
             </div>
 

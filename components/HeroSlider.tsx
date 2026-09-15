@@ -9,17 +9,16 @@ type Slide = {
 };
 
 const PLACEHOLDERS = [
-  { bg:"linear-gradient(135deg,#052e16 0%,#14532d 100%)", emoji:"🔋", title:"JK BMS — Active Balancing", subtitle:"4S to 24S • Bluetooth • Best price in Karachi", link:"/categories/jk-bms" },
-  { bg:"linear-gradient(135deg,#0c4a6e 0%,#0369a1 100%)", emoji:"⚡", title:"Grade-A LiFePO4 Cells",     subtitle:"EVE LF280K • CATL 304Ah • 6000+ cycle life",       link:"/categories/lifepo4-cell" },
-  { bg:"linear-gradient(135deg,#3b0764 0%,#7e22ce 100%)", emoji:"🛵", title:"E-Bike Conversion Kits",    subtitle:"48V to 72V • Motor + Controller + LCD",            link:"/categories/eve-bike-kits" },
+  { bg:"linear-gradient(135deg,#052e16,#14532d)", icon:"🔋", h:"JK BMS — Active Balancing", s:"4S to 24S · Bluetooth · Best price in Karachi", l:"/categories/jk-bms" },
+  { bg:"linear-gradient(135deg,#0c4a6e,#0369a1)", icon:"🌱", h:"Grade-A LiFePO4 Cells",     s:"EVE LF280K · CATL 304Ah · 6000+ cycle life",     l:"/categories/lifepo4-cell" },
+  { bg:"linear-gradient(135deg,#3b0764,#7e22ce)", icon:"🛵", h:"E-Bike Conversion Kits",    s:"48V to 72V · Complete kit · Motor + Controller", l:"/categories/eve-bike-kits" },
 ];
 
 export default function HeroSlider() {
   const [slides, setSlides]   = useState<Slide[]>([]);
-  const [current, setCurrent] = useState(0);
+  const [cur, setCur]         = useState(0);
   const [paused, setPaused]   = useState(false);
-  const touchX                = useRef<number | null>(null);
-  const timer                 = useRef<ReturnType<typeof setInterval> | null>(null);
+  const touchX                = useRef<number|null>(null);
 
   useEffect(() => {
     supabase.from("sliders").select("*").eq("active", true)
@@ -27,133 +26,98 @@ export default function HeroSlider() {
       .then(({ data }) => { if (data && data.length > 0) setSlides(data as Slide[]); });
   }, []);
 
-  const total  = slides.length > 0 ? slides.length : PLACEHOLDERS.length;
-  const next   = useCallback(() => setCurrent(c => (c + 1) % total), [total]);
-  const prev   = useCallback(() => setCurrent(c => (c - 1 + total) % total), [total]);
-
-  const go = (i: number) => {
-    setCurrent(i);
-    setPaused(true);
-    setTimeout(() => setPaused(false), 5000);
-  };
+  const total = slides.length > 0 ? slides.length : PLACEHOLDERS.length;
+  const next  = useCallback(() => setCur(c => (c+1)%total), [total]);
+  const prev  = useCallback(() => setCur(c => (c-1+total)%total), [total]);
+  const go    = (i:number) => { setCur(i); setPaused(true); setTimeout(()=>setPaused(false),5000); };
 
   useEffect(() => {
     if (paused) return;
-    timer.current = setInterval(next, 5000);
-    return () => { if (timer.current) clearInterval(timer.current); };
+    const t = setInterval(next, 5000);
+    return () => clearInterval(t);
   }, [next, paused]);
 
-  // Touch swipe
-  const onTouchStart = (e: React.TouchEvent) => { touchX.current = e.touches[0].clientX; };
-  const onTouchEnd   = (e: React.TouchEvent) => {
-    if (touchX.current === null) return;
-    const diff = touchX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); }
+  const onTS = (e:React.TouchEvent) => { touchX.current = e.touches[0].clientX; };
+  const onTE = (e:React.TouchEvent) => {
+    if (touchX.current===null) return;
+    const d = touchX.current - e.changedTouches[0].clientX;
+    if (Math.abs(d)>40) d>0 ? next() : prev();
     touchX.current = null;
   };
 
+  const hasReal = slides.length > 0;
+
   return (
-    <div
-      style={{ position:"relative", width:"100%", overflow:"hidden", lineHeight:0 }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-    >
-      {/* Slides container */}
-      <div style={{ position:"relative", width:"100%", aspectRatio:"16/5", minHeight:200, maxHeight:520 }}>
+    <div style={{ position:"relative", width:"100%", overflow:"hidden", background:"#052e16", lineHeight:0 }}
+      onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)}
+      onTouchStart={onTS} onTouchEnd={onTE}>
 
-        {slides.length > 0 ? (
-          // Real slides from Supabase
-          slides.map((slide, i) => (
+      {/* Slides */}
+      <div style={{ position:"relative", width:"100%", paddingBottom:"31.25%" /* 16:5 ratio */ }}>
+        {(hasReal ? slides : PLACEHOLDERS.map((p,i)=>({id:i, image:"", title:p.h, subtitle:p.s, link:p.l, sort_order:i, active:true, _ph:p}))).map((slide,i) => {
+          const ph = !hasReal ? PLACEHOLDERS[i] : null;
+          return (
             <div key={slide.id}
-              style={{ position:"absolute", inset:0, opacity:i===current?1:0, transition:"opacity .7s ease", pointerEvents:i===current?"auto":"none" }}>
-              {/* Full image - NO overlay, clear and sharp */}
-              <img src={slide.image} alt={slide.title}
-                style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
-
-              {/* Only show text overlay if title/subtitle exists */}
-              {(slide.title || slide.subtitle) && (
-                <div style={{ position:"absolute", inset:0, background:"linear-gradient(90deg,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.15) 50%,transparent 100%)", display:"flex", alignItems:"center" }}>
-                  <div style={{ padding:"0 clamp(16px,5vw,60px)", maxWidth:"55%" }}>
-                    {slide.title && (
-                      <h2 style={{ fontSize:"clamp(13px,2.5vw,34px)", fontWeight:900, color:"#fff", lineHeight:1.2, marginBottom:"clamp(4px,.8vw,12px)", textShadow:"0 2px 12px rgba(0,0,0,0.5)", letterSpacing:"-.02em" }}>
-                        {slide.title}
-                      </h2>
-                    )}
-                    {slide.subtitle && (
-                      <p style={{ fontSize:"clamp(9px,1.2vw,15px)", color:"rgba(255,255,255,0.9)", lineHeight:1.6, marginBottom:"clamp(8px,1.5vw,20px)", textShadow:"0 1px 6px rgba(0,0,0,0.5)" }}>
-                        {slide.subtitle}
-                      </p>
-                    )}
-                    {slide.link && (
-                      <Link href={slide.link}
-                        style={{ display:"inline-flex", alignItems:"center", gap:6, background:"#16a34a", color:"#fff", padding:"clamp(6px,1vw,11px) clamp(12px,2vw,22px)", borderRadius:7, fontSize:"clamp(9px,1.1vw,13px)", fontWeight:800, textDecoration:"none", boxShadow:"0 4px 16px rgba(22,163,74,0.45)", letterSpacing:"-.01em" }}>
-                        Shop Now →
-                      </Link>
-                    )}
+              style={{ position:"absolute", inset:0, opacity:i===cur?1:0, transition:"opacity .6s ease", pointerEvents:i===cur?"auto":"none" }}>
+              {hasReal && slide.image ? (
+                /* Real image — full width, NO dark overlay unless text exists */
+                <>
+                  <img src={slide.image} alt={slide.title||`Slide ${i+1}`}
+                    style={{ width:"100%", height:"100%", objectFit:"cover", display:"block", position:"absolute", inset:0 }} />
+                  {(slide.title||slide.subtitle) && (
+                    <div style={{ position:"absolute", inset:0, background:"linear-gradient(90deg,rgba(0,0,0,0.52) 0%,rgba(0,0,0,0.1) 55%,transparent 100%)", display:"flex", alignItems:"center" }}>
+                      <div style={{ padding:"0 clamp(16px,5vw,56px)", maxWidth:"55%" }}>
+                        {slide.title && <h2 style={{ fontSize:"clamp(13px,2.4vw,32px)", fontWeight:900, color:"#fff", lineHeight:1.2, marginBottom:"clamp(4px,.6vw,10px)", textShadow:"0 2px 8px rgba(0,0,0,0.4)" }}>{slide.title}</h2>}
+                        {slide.subtitle && <p style={{ fontSize:"clamp(9px,1.1vw,15px)", color:"rgba(255,255,255,0.85)", lineHeight:1.55, marginBottom:"clamp(8px,1.4vw,18px)", textShadow:"0 1px 4px rgba(0,0,0,0.4)" }}>{slide.subtitle}</p>}
+                        {slide.link && (
+                          <Link href={slide.link} style={{ display:"inline-flex", alignItems:"center", gap:5, background:"#16a34a", color:"#fff", padding:"clamp(6px,1vw,11px) clamp(12px,2vw,22px)", borderRadius:7, fontSize:"clamp(9px,1.1vw,13px)", fontWeight:800, textDecoration:"none", boxShadow:"0 3px 14px rgba(22,163,74,0.45)" }}>
+                            Shop Now →
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : ph ? (
+                /* Placeholder gradient slide */
+                <div style={{ position:"absolute", inset:0, background:ph.bg, display:"flex", alignItems:"center" }}>
+                  <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(circle at 1px 1px,rgba(255,255,255,0.05) 1px,transparent 0)", backgroundSize:"26px 26px" }}/>
+                  <div style={{ position:"absolute", top:"-20%", right:"-5%", width:"45%", aspectRatio:"1", borderRadius:"50%", background:"radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 65%)" }}/>
+                  <div style={{ position:"relative", padding:"0 clamp(18px,6vw,70px)", maxWidth:"65%" }}>
+                    <div style={{ fontSize:"clamp(24px,5vw,72px)", marginBottom:"clamp(6px,1.2vw,16px)", lineHeight:1 }}>{ph.icon}</div>
+                    <h2 style={{ fontSize:"clamp(13px,2.5vw,36px)", fontWeight:900, color:"#fff", lineHeight:1.15, marginBottom:"clamp(5px,.9vw,12px)", letterSpacing:"-.02em" }}>{ph.h}</h2>
+                    <p style={{ fontSize:"clamp(9px,1.2vw,15px)", color:"rgba(255,255,255,0.75)", lineHeight:1.6, marginBottom:"clamp(9px,1.8vw,22px)" }}>{ph.s}</p>
+                    <Link href={ph.l} style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(255,255,255,0.95)", color:"#14532d", padding:"clamp(6px,1.1vw,11px) clamp(13px,2.2vw,24px)", borderRadius:8, fontSize:"clamp(9px,1.1vw,13px)", fontWeight:800, textDecoration:"none", boxShadow:"0 4px 18px rgba(0,0,0,0.18)" }}>
+                      Shop Now →
+                    </Link>
                   </div>
                 </div>
-              )}
+              ) : null}
             </div>
-          ))
-        ) : (
-          // Placeholder slides (gradient + text) when no Supabase slides yet
-          PLACEHOLDERS.map((ph, i) => (
-            <div key={i}
-              style={{ position:"absolute", inset:0, opacity:i===current?1:0, transition:"opacity .7s ease", pointerEvents:i===current?"auto":"none", background:ph.bg }}>
-              {/* Dot pattern */}
-              <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(circle at 1px 1px,rgba(255,255,255,0.06) 1px,transparent 0)", backgroundSize:"28px 28px" }} />
-              <div style={{ position:"absolute", top:-80, right:-40, width:360, height:360, borderRadius:"50%", background:"radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 65%)" }} />
-
-              <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", padding:"0 clamp(20px,6vw,80px)" }}>
-                <div style={{ maxWidth:"65%" }}>
-                  <div style={{ fontSize:"clamp(28px,6vw,80px)", marginBottom:"clamp(8px,1.5vw,18px)", lineHeight:1 }}>{ph.emoji}</div>
-                  <h2 style={{ fontSize:"clamp(14px,2.8vw,38px)", fontWeight:900, color:"#fff", lineHeight:1.15, marginBottom:"clamp(6px,1vw,14px)", letterSpacing:"-.025em" }}>
-                    {ph.title}
-                  </h2>
-                  <p style={{ fontSize:"clamp(10px,1.3vw,16px)", color:"rgba(255,255,255,0.75)", lineHeight:1.65, marginBottom:"clamp(10px,2vw,26px)" }}>
-                    {ph.subtitle}
-                  </p>
-                  <Link href={ph.link}
-                    style={{ display:"inline-flex", alignItems:"center", gap:6, background:"#fff", color:"#14532d", padding:"clamp(7px,1.2vw,12px) clamp(14px,2.5vw,26px)", borderRadius:8, fontSize:"clamp(10px,1.2vw,14px)", fontWeight:800, textDecoration:"none", boxShadow:"0 4px 20px rgba(0,0,0,0.2)" }}>
-                    Shop Now →
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))
-        )}
+          );
+        })}
       </div>
 
-      {/* Prev / Next arrows */}
-      {[
-        { dir:"prev", icon:<path d="M15 18l-6-6 6-6"/>, style:{ left:10 } },
-        { dir:"next", icon:<path d="M9 18l6-6-6-6"/>,  style:{ right:10 } },
-      ].map(btn => (
-        <button key={btn.dir}
-          onClick={() => { btn.dir==="prev" ? prev() : next(); setPaused(true); setTimeout(()=>setPaused(false),5000); }}
-          style={{ position:"absolute", top:"50%", transform:"translateY(-50%)", ...btn.style, background:"rgba(0,0,0,0.38)", backdropFilter:"blur(6px)", border:"1px solid rgba(255,255,255,0.15)", borderRadius:"50%", width:"clamp(30px,4vw,42px)", height:"clamp(30px,4vw,42px)", color:"#fff", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", zIndex:10, transition:"background .2s" }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">{btn.icon}</svg>
+      {/* Arrows */}
+      {[{d:"prev",left:true},{d:"next",left:false}].map(b=>(
+        <button key={b.d} onClick={()=>{b.d==="prev"?prev():next();setPaused(true);setTimeout(()=>setPaused(false),5000);}}
+          style={{ position:"absolute", top:"50%", transform:"translateY(-50%)", [b.left?"left":"right"]:"clamp(6px,1.5vw,14px)", background:"rgba(0,0,0,0.35)", backdropFilter:"blur(4px)", border:"1px solid rgba(255,255,255,0.15)", borderRadius:"50%", width:"clamp(28px,3.5vw,40px)", height:"clamp(28px,3.5vw,40px)", color:"#fff", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", zIndex:10, transition:"background .2s" }}>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            {b.left ? <path d="M15 18l-6-6 6-6"/> : <path d="M9 18l6-6-6-6"/>}
+          </svg>
         </button>
       ))}
 
-      {/* Bottom dots + progress */}
-      <div style={{ position:"absolute", bottom:0, left:0, right:0, zIndex:10 }}>
-        {/* Progress bar */}
-        <div style={{ height:3, background:"rgba(255,255,255,0.15)" }}>
-          {!paused && (
-            <div key={`${current}-${paused}`}
-              style={{ height:"100%", background:"#4ade80", animation:"sp 5s linear forwards", width:0 }} />
-          )}
+      {/* Dots + progress */}
+      <div style={{ position:"absolute", bottom:0, left:0, right:0, zIndex:10, lineHeight:0 }}>
+        <div style={{ height:"3px", background:"rgba(255,255,255,0.15)" }}>
+          {!paused && <div key={`${cur}-p`} style={{ height:"100%", background:"#4ade80", animation:"slp 5s linear forwards" }}/>}
         </div>
-        <style>{`@keyframes sp{to{width:100%}}`}</style>
-
-        {/* Dots */}
-        <div style={{ display:"flex", justifyContent:"center", gap:6, padding:"8px 0 10px" }}>
-          {Array.from({ length: total }).map((_, i) => (
-            <button key={i} onClick={() => go(i)}
-              style={{ width:i===current?22:7, height:7, borderRadius:4, border:"none", cursor:"pointer", background:i===current?"#4ade80":"rgba(255,255,255,0.45)", padding:0, transition:"all .3s" }} />
+        <style>{`@keyframes slp{from{width:0}to{width:100%}}`}</style>
+        <div style={{ display:"flex", justifyContent:"center", gap:5, padding:"7px 0 9px", background:"linear-gradient(to top,rgba(0,0,0,0.25),transparent)" }}>
+          {Array.from({length:total}).map((_,i)=>(
+            <button key={i} onClick={()=>go(i)}
+              style={{ width:i===cur?20:6, height:6, borderRadius:3, border:"none", cursor:"pointer", background:i===cur?"#4ade80":"rgba(255,255,255,0.4)", padding:0, transition:"all .3s" }}/>
           ))}
         </div>
       </div>

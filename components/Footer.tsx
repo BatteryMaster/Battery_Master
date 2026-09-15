@@ -36,7 +36,7 @@ export default function Footer() {
             </span>
           </Link>
           <p style={{ fontSize:13, color:"rgba(255,255,255,0.38)", lineHeight:1.85, maxWidth:240 }}>
-            Karachi ka trusted battery aur EV parts store. JK BMS, LiFePO4 cells, e-bike kits — sab ek jagah.
+            Karachi's trusted battery and EV parts store. JK BMS, LiFePO4 cells, e-bike kits — all in one place.
           </p>
           <div style={{ marginTop:16, fontSize:13, color:"rgba(255,255,255,0.45)", lineHeight:2.2 }}>
             <div>📍 Shop No 78, Cooperative Electronics Market</div>
@@ -84,12 +84,12 @@ export default function Footer() {
           <div style={{ marginTop:20, background:"rgba(74,222,128,0.06)", border:"1px solid rgba(74,222,128,0.14)", borderRadius:10, padding:14 }}>
             <div style={{ fontSize:10, fontWeight:700, color:"#4ade80", marginBottom:8, letterSpacing:".05em", textTransform:"uppercase" }}>Working Hours</div>
             <div style={{ fontSize:12, color:"rgba(255,255,255,0.40)", lineHeight:2.1 }}>
-              Mon – Sat: 10am – 8pm<br/>Sunday: 12pm – 6pm
+              Mon – Sat: 10am – 8pm<br/>Sunday: Closed
             </div>
           </div>
           <div style={{ marginTop:10, background:"rgba(239,68,68,0.10)", border:"1px solid rgba(239,68,68,0.20)", borderRadius:8, padding:"10px 12px" }}>
-            <div style={{ fontSize:11, fontWeight:700, color:"#fca5a5" }}>❌ Cash on Delivery Nahi</div>
-            <div style={{ fontSize:10, color:"rgba(255,255,255,0.30)", marginTop:2 }}>Online payment only</div>
+            <div style={{ fontSize:11, fontWeight:700, color:"#fca5a5" }}></div>
+            <div style={{ fontSize:10, color:"rgba(255,255,255,0.30)", marginTop:2 }}></div>
           </div>
         </div>
       </div>

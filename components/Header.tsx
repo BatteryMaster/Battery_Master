@@ -53,7 +53,7 @@ export default function Header() {
           <span style={{ opacity:.4 }}>·</span>
           <span>📞 <strong>03329891510</strong></span>
           <span style={{ opacity:.4 }}>·</span>
-          <span>❌ No COD</span>
+          <span></span>
         </span>
       </div>
 
