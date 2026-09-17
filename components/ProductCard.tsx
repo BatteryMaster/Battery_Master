@@ -33,7 +33,7 @@ export default function ProductCard({ id, name, category, price, stock, image, b
             <span style={{ fontSize:9, fontWeight:700, textTransform:"uppercase", letterSpacing:".05em" }}>No Image</span>
           </div>
         )}
-        {badge && badge !== "none" && (
+        {badge && (
           <span className={`bdg bdg-${badge}`}>{badge.toUpperCase()}</span>
         )}
       </Link>
